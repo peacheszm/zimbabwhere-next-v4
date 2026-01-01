@@ -1,0 +1,17 @@
+.featured_business_banner {
+  background: #000;
+  padding-bottom: 10px;
+
+  a {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+  }
+
+  img {
+    @include media-breakpoint-up(lg) {
+      max-height: 80vh;
+    }
+  }
+}

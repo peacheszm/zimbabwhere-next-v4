@@ -26,6 +26,8 @@ export const metadata = {
       "We offer Zimbabwe's first free online Quoting Service and free Business Advertising for all local businesses",
     images: ["img/zimbabwhere-logo.png"],
   },
+  manifest: "/manifest.json",
+  themeColor: "#86b953",
 };
 
 export default function RootLayout({ children }) {

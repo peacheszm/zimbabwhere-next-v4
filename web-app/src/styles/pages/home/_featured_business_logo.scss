@@ -1,0 +1,21 @@
+.featured_business_logo {
+  position: relative;
+  background: #fff;
+
+  .featured_business_slide {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .swiper-slide {
+    max-width: 80px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      object-fit: cover;
+    }
+  }
+}

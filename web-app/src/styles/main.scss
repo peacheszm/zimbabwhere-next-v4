@@ -10,10 +10,10 @@
 @import "global/variables";
 @import "global/global";
 // @import "global/form";
-// @import "global/loader";
+@import "global/loader";
 // @import "global/message_notice";
 // @import "global/modal";
-// @import "global/button_component";
+@import "global/button_component";
 // @import "global/not_found";
 
 @import "global/navigation";
@@ -26,6 +26,10 @@
 // Blocks
 
 // Pages
+// Home
+@import "pages/home/featured_business_banner";
+@import "pages/home/featured_business_logo";
+@import "pages/home/quotes";
 
 // @import "pages/my_account";
 
