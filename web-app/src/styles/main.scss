@@ -1,0 +1,34 @@
+/*!
+ * Main Stylesheet
+ * Compiled from SCSS with Webpack
+ */
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "global/fonts";
+@import "global/colors";
+@import "global/typography";
+@import "global/variables";
+@import "global/global";
+// @import "global/form";
+// @import "global/loader";
+// @import "global/message_notice";
+// @import "global/modal";
+// @import "global/button_component";
+// @import "global/not_found";
+
+@import "global/navigation";
+// @import "global/site_filter";
+
+@import "global/footer";
+
+// Layout components
+
+// Blocks
+
+// Pages
+
+// @import "pages/my_account";
+
+// @import "auth/auth_pages_main";
+
+// Components

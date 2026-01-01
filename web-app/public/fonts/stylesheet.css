@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'BankGothic';
+    src: url('BankGothic.woff2') format('woff2'),
+        url('BankGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bell Gothic Std';
+    src: url('BellGothicStd-Black.woff2') format('woff2'),
+        url('BellGothicStd-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Chalkduster';
+    src: url('Chalkduster.woff2') format('woff2'),
+        url('Chalkduster.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

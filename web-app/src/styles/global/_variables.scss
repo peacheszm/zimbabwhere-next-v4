@@ -1,0 +1,61 @@
+// Core variables
+
+// Animation
+$transition-base: all 0.2s ease-in-out;
+$transition-base-slow: all 0.5s ease-in-out;
+$transition-fade: opacity 0.15s linear;
+
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xlg: 1200px,
+  xl: 1440px,
+  xxl: 1600px,
+);
+
+// Common mixins
+@mixin transition($transition...) {
+  transition: $transition;
+}
+
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+}
+
+@mixin screen-reader-only() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Media queries
+@mixin media-breakpoint-up($breakpoint) {
+  $min: map-get($grid-breakpoints, $breakpoint);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  $max: map-get($grid-breakpoints, $breakpoint);
+  @if $max {
+    @media (max-width: ($max - 0.02)) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

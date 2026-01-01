@@ -1,0 +1,35 @@
+// Font Families
+
+@mixin robot($fw: normal, $fz: 16px, $lh: 100%, $fontStyle: normal) {
+  font-family: "Roboto";
+  font-style: $fontStyle;
+  font-display: swap;
+  font-weight: $fw;
+  font-size: $fz + px;
+  line-height: $lh;
+}
+
+@mixin bank($fw: normal, $fz: 16px, $lh: 100%, $fontStyle: normal) {
+  font-family: "BankGothic";
+  font-style: $fontStyle;
+  font-display: swap;
+  font-weight: $fw;
+  font-size: $fz + px;
+  line-height: $lh;
+}
+@mixin bell($fw: normal, $fz: 16px, $lh: 100%, $fontStyle: normal) {
+  font-family: "Bell Gothic Std";
+  font-style: $fontStyle;
+  font-display: swap;
+  font-weight: $fw;
+  font-size: $fz + px;
+  line-height: $lh;
+}
+@mixin chalk($fw: normal, $fz: 16px, $lh: 100%, $fontStyle: normal) {
+  font-family: "Chalkduster";
+  font-style: $fontStyle;
+  font-display: swap;
+  font-weight: $fw;
+  font-size: $fz + px;
+  line-height: $lh;
+}

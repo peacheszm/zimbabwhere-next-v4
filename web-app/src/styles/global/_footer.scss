@@ -1,0 +1,109 @@
+.site_footer {
+  .footer_top {
+    padding: 20px 0;
+    background: #86b953;
+  }
+  .footer_wrapper {
+    @include media-breakpoint-up(lg) {
+      display: flex;
+    }
+  }
+  .footer_logo_body {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0;
+      max-width: 33%;
+      margin-right: auto;
+    }
+
+    .footer_logo {
+      width: 100%;
+      max-width: 54px;
+      margin-right: 20px;
+      @include media-breakpoint-up(lg) {
+        max-width: 66px;
+      }
+    }
+
+    .footer_desc {
+      font-size: 14px;
+      color: #000;
+      line-height: 18px;
+      @include media-breakpoint-up(lg) {
+        font-size: 18px;
+        line-height: 120%;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    color: #000;
+    margin-bottom: 5px;
+
+    a {
+      color: #000;
+      display: flex;
+    }
+  }
+
+  .icon_group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-right: 8px;
+
+    .call,
+    whatsapp {
+      width: 100%;
+      max-width: 24px;
+    }
+  }
+
+  .footer_bottom {
+    padding: 20px 0;
+    background: #1d1d1d;
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      font-size: 14px;
+      margin: 0 10px;
+    }
+  }
+
+  .footer_copyright {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 10px;
+    padding: 10px 0;
+    @include media-breakpoint-up(lg) {
+      font-size: 14px;
+    }
+
+    a {
+      color: #32cd32;
+    }
+  }
+}

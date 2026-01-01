@@ -1,0 +1,103 @@
+// Reset and base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  @include robot(normal, 16, 26px);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #1d1d1d;
+}
+
+// Basic layout container
+.container {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 24px;
+  margin: 0 auto;
+  position: relative;
+}
+
+// Links
+a {
+  color: #fff;
+  text-decoration: none;
+  @include transition($transition-base);
+
+  // &:hover {
+  //   color: $dark-blue;
+  // }
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+// Images
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.icon {
+  width: 100%;
+  max-width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+// h1 {
+//   @include h1();
+// }
+// h2 {
+//   @include h2();
+// }
+// h3 {
+//   @include h3();
+// }
+// h4 {
+//   @include h4();
+// }
+// h5 {
+//   @include h5();
+// }
+// h6 {
+//   @include h6();
+// }

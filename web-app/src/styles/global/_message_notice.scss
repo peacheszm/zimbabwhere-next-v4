@@ -1,0 +1,45 @@
+.message_notice {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 16px;
+  margin-bottom: 24px;
+
+  &.success {
+    border-color: $green;
+    background: #ecfdf3;
+    .icon {
+      color: $green;
+    }
+  }
+
+  &.error {
+    border-color: $red;
+    background: #fef3f2;
+    .icon {
+      color: $red;
+    }
+  }
+
+  &.notice {
+    border-color: $noticeblue;
+    background: #f0f9ff;
+    .icon {
+      color: $noticeblue;
+    }
+  }
+
+  .message_body_wrapper {
+    margin-left: 16px;
+  }
+
+  .message_title {
+    @include mont(600, 16, 120%);
+    margin-bottom: 4px;
+  }
+
+  .message_body {
+    font-size: 14px;
+  }
+}
