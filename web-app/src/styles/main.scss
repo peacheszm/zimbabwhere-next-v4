@@ -9,7 +9,7 @@
 @import "global/typography";
 @import "global/variables";
 @import "global/global";
-// @import "global/form";
+@import "global/form";
 @import "global/loader";
 // @import "global/message_notice";
 // @import "global/modal";
@@ -33,6 +33,6 @@
 
 // @import "pages/my_account";
 
-// @import "auth/auth_pages_main";
+@import "auth/auth_pages_main";
 
 // Components

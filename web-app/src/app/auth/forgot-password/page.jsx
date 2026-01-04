@@ -4,10 +4,7 @@ import Image from "next/image";
 export default function ForgotPasswordPage() {
   return (
     <div className="auth_pages_main">
-      <div className="col col_left">
-        <img src="/images/focus.jpg" alt="" />
-      </div>
-      <div className="col col_right">
+      <div className="container">
         <div className="title_area">
           <h2>Forgot Password</h2>
           <p>

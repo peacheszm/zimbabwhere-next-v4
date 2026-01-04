@@ -190,14 +190,14 @@ export default function RegisterForm() {
                 required
                 disabled={isLoading}
               />
-              <button
+              {/* <button
                 type="button"
                 className="password_toggle_link"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? "Hide" : "Show"}
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -213,7 +213,7 @@ export default function RegisterForm() {
                 required
                 disabled={isLoading}
               />
-              <button
+              {/* <button
                 type="button"
                 className="password_toggle_link"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -222,7 +222,7 @@ export default function RegisterForm() {
                 }
               >
                 {showConfirmPassword ? "Hide" : "Show"}
-              </button>
+              </button> */}
             </div>
           </div>
 

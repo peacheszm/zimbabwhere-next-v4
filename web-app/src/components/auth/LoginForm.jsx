@@ -3,7 +3,6 @@ import { useState } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-// Removed large eye icons in favor of a simple text toggle
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
@@ -90,14 +89,14 @@ export default function LoginForm() {
                 required
                 disabled={isLoading}
               />
-              <button
+              {/* <button
                 type="button"
                 className="password_toggle_link"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? "Hide" : "Show"}
-              </button>
+              </button> */}
             </div>
           </div>
 

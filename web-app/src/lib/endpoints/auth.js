@@ -19,7 +19,7 @@ export async function registerUser(userData) {
         first_name: userData.first_name,
         last_name: userData.last_name,
         phone_number: userData.phone_number || "",
-        AUTH_KEY: process.env.NEXT_PUBLIC_AUTH_KEY,
+        AUTH_KEY: process.env.NEXTAUTH_SECRET,
       }),
     });
 
@@ -51,6 +51,8 @@ export async function authenticateUser(login, password) {
     const wordpressUrl = process.env.NEXT_PUBLIC_WP_SITE_URL;
     const authUrl = `${wordpressUrl}/?rest_route=/simple-jwt-login/v1/auth`;
 
+    console.log(authUrl);
+
     const response = await fetch(authUrl, {
       method: "POST",
       headers: {
@@ -59,7 +61,7 @@ export async function authenticateUser(login, password) {
       body: JSON.stringify({
         login: login,
         password: password,
-        AUTH_KEY: process.env.NEXT_PUBLIC_AUTH_KEY,
+        AUTH_KEY: process.env.NEXTAUTH_SECRET,
       }),
     });
 
@@ -120,7 +122,7 @@ export async function requestPasswordReset(email) {
         },
         body: JSON.stringify({
           email: email,
-          AUTH_KEY: process.env.NEXT_PUBLIC_AUTH_KEY,
+          AUTH_KEY: process.env.NEXTAUTH_SECRET,
         }),
       }
     );
@@ -153,7 +155,7 @@ export async function resetPasswordWithCode(email, code, newPassword) {
           email: email,
           code: code,
           new_password: newPassword,
-          AUTH_KEY: process.env.NEXT_PUBLIC_AUTH_KEY,
+          AUTH_KEY: process.env.NEXTAUTH_SECRET,
         }),
       }
     );
@@ -186,7 +188,7 @@ export async function resetPasswordWithJWT(email, newPassword, jwtToken) {
         body: JSON.stringify({
           email: email,
           new_password: newPassword,
-          AUTH_KEY: process.env.NEXT_PUBLIC_AUTH_KEY,
+          AUTH_KEY: process.env.NEXTAUTH_SECRET,
         }),
       }
     );
