@@ -35,7 +35,7 @@ export default function Dropzone({
           onFilesChange(acceptedFiles);
         } else {
           // Otherwise append (default behavior for multiple files)
-          onFilesChange((prev) => [...(prev || []), ...acceptedFiles]);
+          onFilesChange([...(files || []), ...acceptedFiles]);
         }
       }
     },
@@ -51,7 +51,7 @@ export default function Dropzone({
 
   const removeFile = (index) => {
     if (onFilesChange) {
-      onFilesChange((prev) => (prev || []).filter((_, i) => i !== index));
+      onFilesChange((files || []).filter((_, i) => i !== index));
     }
   };
 

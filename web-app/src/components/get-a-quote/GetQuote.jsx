@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import Dropzone from "@/components/ui/Dropzone";
+import { createQuote } from "@/lib/endpoints/quotes";
 
 export default function GetQuote({ cats, towns }) {
   const {
@@ -15,7 +16,7 @@ export default function GetQuote({ cats, towns }) {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      files: [],
+      quote_files: [],
     },
   });
 
@@ -29,6 +30,42 @@ export default function GetQuote({ cats, towns }) {
 
   const onSubmit = async (data) => {
     console.log(data);
+    
+    const formData = new FormData();
+    
+    // Basic fields
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("phone", data.phone);
+    formData.append("email", data.email);
+    formData.append("name", data.name);
+    formData.append("terms", data.terms);
+    
+    // Object fields - stringify for backend
+    if (data.town_city) {
+      formData.append("town_city", JSON.stringify(data.town_city));
+    }
+    
+    if (data.quote_from_category) {
+      formData.append("quote_from_category", JSON.stringify(data.quote_from_category));
+    }
+    
+    if (data.ideal_start) {
+      formData.append("ideal_start", JSON.stringify(data.ideal_start));
+    }
+    
+    if (data.start_date) {
+      formData.append("start_date", data.start_date.toISOString());
+    }
+
+    // Files handling
+    if (data.quote_files && data.quote_files.length > 0) {
+      Array.from(data.quote_files).forEach((file) => {
+        formData.append("quote_files[]", file);
+      });
+    }
+
+    const result = await createQuote(formData);
   };
 
   return (
@@ -45,23 +82,23 @@ export default function GetQuote({ cats, towns }) {
         </div>
 
         <div className="form_row">
-          <label htmlFor="details">Quote Details</label>
+          <label htmlFor="description">Quote Details</label>
           <textarea
-            id="details"
+            id="description"
             rows="7"
             placeholder="Please give full descriptions and be as accurate as you can be of
             what you need - Including all dimensions, sizes, quantities, types
             …etc, to make sure the quote responses you get from the companies
             listed are as accurate as possible."
-            {...register("details")}
+            {...register("description")}
           ></textarea>
         </div>
 
         <div className="form_row">
-          <label htmlFor="files">File Attachments</label>
+          <label htmlFor="quote_files">File Attachments</label>
 
           <Controller
-            name="files"
+            name="quote_files"
             control={control}
             defaultValue={[]}
             render={({ field }) => (
@@ -76,15 +113,15 @@ export default function GetQuote({ cats, towns }) {
         </div>
 
         <div className="form_row">
-          <label htmlFor="selectedBusinessCategories">I want quotes from</label>
+          <label htmlFor="quote_from_category">I want quotes from</label>
           <Controller
-            name="selectedBusinessCategories"
+            name="quote_from_category"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <Select
                 {...field}
-                inputId="selectedBusinessCategories"
+                inputId="quote_from_category"
                 isMulti
                 options={cats}
                 onChange={(val) => field.onChange(val)}
@@ -95,15 +132,15 @@ export default function GetQuote({ cats, towns }) {
         </div>
 
         <div className="form_row">
-          <label htmlFor="town">Town / City</label>
+          <label htmlFor="town_city">Town / City</label>
           <Controller
-            name="town"
+            name="town_city"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <Select
                 {...field}
-                inputId="town"
+                inputId="town_city"
                 options={towns}
                 onChange={(val) => field.onChange(val)}
                 placeholder="Select your town/city/area coverage for the service you need..."
