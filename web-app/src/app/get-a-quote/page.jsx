@@ -5,7 +5,7 @@ import {
   getBusinessTowns,
 } from "@/lib/endpoints/json/json";
 
-export default async function GetAQuotePage({ params }) {
+export default async function GetAQuotePage() {
   const [businessCats, businessTowns] = await Promise.all([
     getBusinessCategories(),
     getBusinessTowns(),
