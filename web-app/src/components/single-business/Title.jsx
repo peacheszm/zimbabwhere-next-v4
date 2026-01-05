@@ -1,17 +1,5 @@
 import Image from "next/image";
-import {
-  IconMapPin,
-  IconPhone,
-  IconBrandWhatsapp,
-  IconMail,
-  IconBrandFacebook,
-  IconBrandTwitter,
-  IconBrandYoutube,
-  IconEye,
-  IconFileText,
-  IconStar,
-  IconStarFilled,
-} from "@tabler/icons-react";
+import { IconMapPin, IconEye } from "@tabler/icons-react";
 export default function Title({ post }) {
   return (
     <div className="title_area">

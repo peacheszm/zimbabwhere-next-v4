@@ -3,19 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 
 import Image from "next/image";
-import {
-  IconMapPin,
-  IconPhone,
-  IconBrandWhatsapp,
-  IconMail,
-  IconBrandFacebook,
-  IconBrandTwitter,
-  IconBrandYoutube,
-  IconEye,
-  IconFileText,
-  IconStar,
-  IconStarFilled,
-} from "@tabler/icons-react";
+
 export default function Gallery({ post }) {
   return (
     <>

@@ -2,6 +2,10 @@ import { getBusinessBySlug } from "@/lib/endpoints/business";
 
 import Title from "@/components/single-business/Title";
 import Gallery from "@/components/single-business/Gallery";
+import ContactUs from "@/components/single-business/ContactUs";
+import Overview from "@/components/single-business/Overview";
+import WebSocial from "@/components/single-business/WebSocial";
+import Hours from "@/components/single-business/Hours";
 
 export default async function SingleBusiness({ params }) {
   const { slug } = await params;
@@ -23,8 +27,24 @@ export default async function SingleBusiness({ params }) {
 
           {/* Business Gallery */}
           <Gallery post={post} />
+
+          {/* Business Contact */}
+          <ContactUs post={post} />
+
+          {/* Business OverView */}
+          <Overview post={post} />
+
+          {/* Reviews */}
+          {/* <BusinessReviews
+            business_id={post.id}
+            business_title={post.title?.rendered}
+            onRateClick={() => setShowModal(true)}
+          /> */}
         </main>
-        <aside className="aside"></aside>
+        <aside className="aside">
+          <WebSocial post={post} />
+          <Hours post={post} />
+        </aside>
       </div>
     </div>
   );
