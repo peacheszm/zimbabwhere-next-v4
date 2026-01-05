@@ -8,6 +8,7 @@ import {
 import { formatDate } from "@/lib/utils/formatDate";
 
 export default function QuoteList({ quotes }) {
+  console.log(quotes);
   return (
     <>
       {quotes.map((quote, qindex) => (
@@ -19,7 +20,7 @@ export default function QuoteList({ quotes }) {
                   dangerouslySetInnerHTML={{ __html: quote.title.rendered }}
                 />
               </Link>
-              {quote.ACF?.new_quote && <div className="new">new</div>}
+              {quote.acf?.new_quote && <div className="new">new</div>}
             </div>
             <div
               className="quote_description"
@@ -32,7 +33,7 @@ export default function QuoteList({ quotes }) {
                   <div className="icon">
                     <IconEye size={16} />
                   </div>
-                  {quote.ACF?.page_views || 0} Views
+                  {quote.acf?.page_views || 0} Views
                 </div>
                 <div className="meta_item">
                   <div className="icon">
@@ -50,7 +51,7 @@ export default function QuoteList({ quotes }) {
                   <div className="icon">
                     <IconMapPin size={16} />
                   </div>
-                  {quote.ACF?.town_city?.name || "N/A"}
+                  {quote.acf?.town_city?.name || "N/A"}
                 </div>
               </div>
               <div className="quote_cta">

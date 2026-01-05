@@ -1,148 +1,80 @@
-// .page_modal {
-//   position: fixed;
-//   z-index: 90;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100dvh;
-//   overflow: auto;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
+.page_modal {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-//   .modal_underlay {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     z-index: 1;
-//     background: rgba(54, 54, 54, 0.7);
-//   }
-//   // test
-//   .modal_overlay {
-//     position: relative;
-//     z-index: 6;
-//     width: 100%;
-//     max-width: 640px;
-//     height: auto;
-//     max-height: calc(100dvh - 48px);
-//     overflow: auto;
-//     padding: 0 16px;
-//   }
-//   .modal_inner {
-//     // background: $body-bg;
-//     border-radius: 24px;
-//   }
-//   .modal_header {
-//     display: flex;
-//     align-items: center;
-//     margin-bottom: 16px;
-//     padding: 16px;
+  .modal_underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(54, 54, 54, 0.7);
+  }
+  // test
+  .modal_overlay {
+    position: relative;
+    z-index: 6;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    max-height: calc(100dvh - 48px);
+    overflow: auto;
+    padding: 0 16px;
+  }
+  .modal_inner {
+    background: #000;
+    border-radius: 24px;
+  }
+  .modal_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 16px;
 
-//     h4 {
-//       color: $blue;
-//       // font-size: 20px;
+    h5 {
+      color: #2cb75f;
+      font-display: swap;
+      font-family: "BankGothic";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: -1px;
+      line-height: 20px;
+      margin-left: 0;
+      word-spacing: -5px;
+    }
 
-//       width: 100%;
-//     }
+    .close_button {
+      margin-left: auto;
+      width: 100%;
+      max-width: 32px;
+      height: 32px;
+      border-radius: 100px;
+      color: #2cb75f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
 
-//     .close_button {
-//       margin-left: auto;
-//       width: 100%;
-//       max-width: 32px;
-//       height: 32px;
-//       border-radius: 100px;
-//       color: $dark-blue;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       cursor: pointer;
+      svg {
+        max-width: 28px;
+      }
+    }
+  }
+  .modal_body {
+    padding: 0 16px 16px;
+  }
 
-//       svg {
-//         max-width: 28px;
-//       }
-//     }
-//   }
-//   .modal_body {
-//     padding: 0 16px 16px;
-//   }
-//   .search_wrapper {
-//   }
-
-//   // Filters
-//   .filter_modal_content {
-//     .filter_modal_search {
-//       display: flex;
-//       border: 1px solid $dark-blue;
-//       background: $dark-blue;
-//       border-radius: 100px;
-//       width: 100%;
-//       padding: 5px;
-
-//       .filter_modal_search_icon {
-//         width: 34px;
-//         height: 34px;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         background: #fff;
-//         border-radius: 100px;
-//         svg {
-//           max-width: 20px;
-//         }
-//       }
-
-//       input {
-//         width: 100%;
-//         color: #fff;
-//         padding: 0 10px;
-//         outline: none;
-//       }
-//     }
-
-//     .filter_modal_list {
-//       max-height: 400px;
-//       overflow: auto;
-//       padding: 25px 10px;
-//     }
-
-//     .filter_modal_item {
-//       border: 1px solid $dark-blue;
-//       padding: 10px;
-//       border-radius: 10px;
-//       margin-bottom: 12px;
-//       display: flex;
-//       align-items: center;
-//       cursor: pointer;
-
-//       .filter_modal_item_check {
-//         width: 24px;
-//         height: 24px;
-//         border: 1px solid $dark-blue;
-//         border-radius: 100px;
-//         margin-right: 10px;
-//         position: relative;
-
-//         &:before {
-//           content: "";
-//           width: 14px;
-//           height: 14px;
-//           background: $dark-blue;
-//           display: block;
-//           position: absolute;
-//           top: 4px;
-//           left: 4px;
-//           border-radius: 100px;
-//           opacity: 0;
-//         }
-
-//         &.selected {
-//           &:before {
-//             opacity: 1;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+  .btn_group {
+    gap: 16px;
+  }
+}
