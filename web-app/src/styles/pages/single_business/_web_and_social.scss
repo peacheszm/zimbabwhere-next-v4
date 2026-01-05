@@ -1,0 +1,68 @@
+.web_and_social {
+  margin-bottom: 24px;
+  .business_website {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      white-space: nowrap;
+      color: #000;
+      font-family: Roboto;
+      font-style: 14px;
+      text-transform: none;
+
+      .icon {
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .business_social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      color: #fff;
+      border-radius: 100%;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin: 0 5px;
+      display: flex;
+
+      svg {
+        width: 100%;
+        height: auto;
+        max-width: 24px;
+      }
+    }
+
+    .icon_f {
+      background: #3b5998;
+    }
+    .icon_t {
+      background: #1da1f2;
+    }
+    .icon_yt {
+      background: #ff0000;
+    }
+  }
+}

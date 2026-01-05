@@ -1,0 +1,54 @@
+.single_business_page_wrapper {
+  padding: 80px 0;
+  @include media-breakpoint-up(lg) {
+    padding: 120px 0;
+  }
+  .container {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
+  }
+
+  .main {
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+      max-width: 70%;
+      order: 2;
+    }
+  }
+
+  .aside {
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+      max-width: 30%;
+      order: 1;
+    }
+  }
+
+  h4 {
+    letter-spacing: -1px;
+    word-spacing: -5px;
+    color: #b9db96;
+    margin-bottom: 15px;
+    margin-left: -5px;
+    font-family: BankGothic;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  @import "title_area";
+  @import "gallery";
+  @import "contact_method";
+  @import "business_overview";
+
+  @import "web_and_social";
+  @import "business_hours";
+  @import "map_section";
+  @import "business_share";
+  @import "business_categorys";
+}

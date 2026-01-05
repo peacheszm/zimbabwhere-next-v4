@@ -1,0 +1,65 @@
+.gallery {
+  margin-bottom: 24px;
+  .gallery_swiper {
+    position: relative;
+  }
+  .swiper-slide {
+    height: auto;
+  }
+
+  .gallery_item {
+    height: 100%;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  .pagination_wrapper {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 24px;
+
+    button {
+      width: 100%;
+      max-width: 32px;
+      color: #32cd32;
+    }
+
+    .navigation {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      background: #fff;
+    }
+    .swiper-pagination-bullet-active {
+      background: #32cd32;
+    }
+  }
+
+  .pdf_links {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      color: #32cd32;
+    }
+
+    .icon {
+      max-width: 32px;
+      margin-right: 16px;
+      height: auto;
+    }
+  }
+}

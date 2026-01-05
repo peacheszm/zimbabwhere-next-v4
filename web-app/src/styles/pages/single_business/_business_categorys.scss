@@ -1,0 +1,13 @@
+.business_categorys {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    color: #1d1d1d;
+    background: #b9db96;
+    border-radius: 5px;
+    margin: 0 5px 5px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+}

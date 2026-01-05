@@ -1,0 +1,37 @@
+.business_share {
+  margin-bottom: 24px;
+  .share_items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  a {
+    color: #fff;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    display: flex;
+
+    svg {
+      max-width: 22px;
+    }
+  }
+  .icon_w {
+    background: #25d366;
+  }
+  .icon_m {
+    background: #ea4335;
+  }
+  .icon_f {
+    background: #3b5998;
+  }
+
+  .icon_t {
+    background: #1da1f2;
+  }
+}

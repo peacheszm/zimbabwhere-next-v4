@@ -1,0 +1,79 @@
+.title_area {
+  margin-bottom: 24px;
+  .title_area_top {
+    display: flex;
+    margin-bottom: 12px;
+  }
+
+  .col_left {
+    width: 100%;
+    max-width: 70px;
+    margin-right: 10px;
+  }
+
+  .col_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  h1 {
+    letter-spacing: -1px;
+    word-spacing: -5px;
+    color: #2cb75f;
+    margin-left: 0;
+    font-family: BankGothic;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    @include media-breakpoint-up(lg) {
+      font-size: 32px;
+      margin-bottom: 5px;
+      margin-top: 4px;
+    }
+  }
+
+  .views {
+    display: flex;
+    font-size: 12px;
+    color: #54595f;
+
+    .icon {
+      max-width: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #32cd32;
+      margin-right: 4px;
+    }
+  }
+
+  .title_area_mid {
+    margin-bottom: 12px;
+  }
+
+  .motto {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .address {
+    color: #b9db96;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+
+    .icon {
+      max-width: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+    }
+  }
+}

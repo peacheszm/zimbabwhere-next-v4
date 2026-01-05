@@ -1,0 +1,56 @@
+.contact_method {
+  margin-bottom: 24px;
+  background: #2e2e2e;
+  padding: 16px;
+  display: flex;
+
+  .get_a_quote_button {
+    margin-right: auto;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:not(.menu_item) {
+      margin-left: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      color: #fff;
+    }
+  }
+
+  .phone {
+    background: #00f;
+  }
+
+  .whatsapp {
+    background: #25d366;
+  }
+  .email {
+    background: #ff0000;
+  }
+
+  .menu_item {
+    white-space: nowrap;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: #fff;
+    background: #32cd32;
+    padding: 6px 15px;
+    border-radius: 6px;
+
+    .icon {
+      height: auto;
+      max-width: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 6px;
+    }
+  }
+}
