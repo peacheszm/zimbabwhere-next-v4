@@ -1,0 +1,30 @@
+.advertbox {
+  .child {
+    margin-bottom: 24px;
+  }
+
+  .wht_its_free {
+    background: #2cb75f;
+    display: flex;
+    padding: 4px;
+    border-radius: 6px;
+    .col {
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+    p {
+      text-align: center;
+    }
+
+    .col_right {
+      max-width: 50px;
+      background: #000;
+      border-radius: 0 4px 4px 0;
+      padding: 5px;
+    }
+  }
+}

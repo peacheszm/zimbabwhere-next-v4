@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { IconMenu2, IconX } from "@tabler/icons-react";
 
+import BackButton from "@/components/global/BackButton";
 export default function Navigation() {
   const { data: session } = useSession();
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -42,6 +43,7 @@ export default function Navigation() {
   return (
     <nav className={`main_navigation ${scrolled ? "scrolled" : ""}`}>
       <div className="container">
+        <BackButton />
         <div className="logo">
           <Link href="/">
             <div className="logo_img">
@@ -84,7 +86,7 @@ export default function Navigation() {
           </div>
 
           <div className="nav_items">
-            <Link href="/" onClick={closeNav}>
+            <Link href="/get-a-quote" onClick={closeNav}>
               Get A Quote
             </Link>
             <Link href="/" onClick={closeNav}>

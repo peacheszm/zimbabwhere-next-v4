@@ -9,12 +9,17 @@
 
   .form_row {
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   label {
-    @include robot(600, 14, 120%);
+    @include bank(600, 20, 120%);
+    color: #2cb75f;
+    margin-bottom: 4px;
   }
 
+  textarea,
   input[type="text"],
   input[type="email"],
   input[type="tel"],
@@ -28,6 +33,54 @@
     border-radius: 4px;
     width: 100%;
     padding: 10px 12px;
+  }
+
+  .checkbox {
+    position: relative;
+
+    input {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+
+      &:checked {
+        & + label {
+          &:after {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+    label {
+      display: flex;
+      position: relative;
+      cursor: pointer;
+      &:before {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 24px;
+        border: 1px solid #32cd32;
+        margin-right: 16px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 8px;
+        top: 3px;
+        height: 13px;
+        width: 7px;
+        border-bottom: 2px solid #32cd32;
+        border-right: 2px solid #32cd32;
+        transform: rotate(45deg);
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
   }
 
   .btn_group {
@@ -72,6 +125,31 @@
       color: #32cd32;
       margin-left: auto;
       margin-top: 32px;
+    }
+  }
+
+  // React Select
+  .css-b62m3t-container {
+    .css-1cfo1cf {
+      input {
+        color: #fff !important;
+      }
+    }
+    .css-13cymwt-control,
+    .css-t3ipsp-control {
+      background: #1f1f1f;
+      border: 1px solid #3a3a3a;
+      outline: none;
+      box-shadow: none;
+    }
+    .css-1nmdiq5-menu {
+      background: #000;
+    }
+
+    .css-d7l1ni-option {
+      &:hover {
+        background: #1f1f1f;
+      }
     }
   }
 }
