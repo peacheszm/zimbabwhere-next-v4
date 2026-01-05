@@ -142,74 +142,10 @@ export default function SingleBusiness() {
             {/* Business Hours */}
 
             {/* Location */}
-            {mapCenter && (
-              <div className="map_section" id="map_section">
-                <h4>Location</h4>
-                <GoogleMap
-                  center={mapCenter}
-                  zoom={14}
-                  locations={mapLocations}
-                  currentLocation={currentLocation}
-                  onLocationClick={setCurrentLocation}
-                />
-              </div>
-            )}
 
             {/* Share Listing */}
-            <div className="b_share">
-              <h4>Share Listing</h4>
-              <div className="share_items">
-                <a
-                  className="icon_w"
-                  href={`https://wa.me/?text=I found this business on Zimbabwhere that you might be interested in. Check it out at: ${pageurl()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconBrandWhatsapp size={20} />
-                </a>
-                <a
-                  className="icon_m"
-                  href={`mailto:?subject=${
-                    post.title?.rendered
-                  }&body=${pageurl()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconMail size={20} />
-                </a>
-                <a
-                  className="icon_f"
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${pageurl()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconBrandFacebook size={20} />
-                </a>
-                <a
-                  className="icon_t"
-                  href={`https://twitter.com/intent/tweet?text=${
-                    post.title?.rendered
-                  }&url=${pageurl()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconBrandTwitter size={20} />
-                </a>
-              </div>
-            </div>
 
             {/* Headings */}
-            {post._embedded?.["wp:term"] && (
-              <div className="b_categorys">
-                {post._embedded["wp:term"][0]?.map((cat, ct) => (
-                  <Link
-                    key={ct}
-                    href={`/search?category_filter=${cat.id}`}
-                    dangerouslySetInnerHTML={{ __html: cat.name }}
-                  />
-                ))}
-              </div>
-            )}
           </aside>
 
           {/* Modals */}

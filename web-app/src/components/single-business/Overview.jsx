@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { IconMapPin, IconEye } from "@tabler/icons-react";
 export default function OverView({ post }) {
   return (
     <div className="business_overview">
