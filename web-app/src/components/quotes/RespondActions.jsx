@@ -1,8 +1,9 @@
 "use client";
-
-import { useState } from "react";
 import { IconPhone, IconBrandWhatsapp, IconMail } from "@tabler/icons-react";
-import RespondToQuote from "./RespondToQuote";
+
+import { useModal } from "@/contexts/ModalContext";
+
+import RespondToQuote from "@/components/modals/RespondToQuote";
 
 function normalizePhoneForWhatsapp(phone) {
   if (!phone) return "";
@@ -10,8 +11,7 @@ function normalizePhoneForWhatsapp(phone) {
 }
 
 export default function RespondActions({ title, postId, phone, email }) {
-  const [showForm, setShowForm] = useState(false);
-
+  const { openModal, closeModal } = useModal();
   return (
     <div className="inner_container">
       <div className="quote_actions btn_group">
@@ -32,7 +32,18 @@ export default function RespondActions({ title, postId, phone, email }) {
           </span>
           Via Whatsapp
         </a>
-        <a type="button" className="" onClick={() => setShowForm(true)}>
+        <a
+          type="button"
+          className=""
+          onClick={() =>
+            openModal("RespondToQuote", {
+              title: title,
+              postId: postId,
+              phone: phone,
+              email: email,
+            })
+          }
+        >
           <span className="icon">
             <IconMail size={16} />
           </span>
@@ -40,15 +51,7 @@ export default function RespondActions({ title, postId, phone, email }) {
         </a>
       </div>
 
-      {showForm ? (
-        <RespondToQuote
-          title={title}
-          postId={postId}
-          phone={phone}
-          email={email}
-          onClose={() => setShowForm(false)}
-        />
-      ) : null}
+      <RespondToQuote />
     </div>
   );
 }

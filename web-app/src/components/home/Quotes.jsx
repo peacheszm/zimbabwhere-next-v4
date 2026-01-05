@@ -38,15 +38,13 @@ export default async function Quotes({ searchParams }) {
 
   return (
     <div className="quote_list_wrapper">
-      <div className="container">
-        <div className="quotes_total">
-          {pagination && <PaginationTop pagination={pagination} />}
-        </div>
-        <div className="quotes_body">
-          <QuotesList quotes={quotes} />
-        </div>
-        {pagination && <PaginationBottom pagination={pagination} />}
+      <div className="quotes_total">
+        {pagination && <PaginationTop pagination={pagination} />}
       </div>
+      <div className="quotes_body">
+        <QuotesList quotes={quotes} />
+      </div>
+      {pagination && <PaginationBottom pagination={pagination} />}
     </div>
   );
 }

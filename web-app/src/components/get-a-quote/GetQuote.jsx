@@ -96,7 +96,6 @@ export default function GetQuote({ cats, towns }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        
         <div className="form_wrapper">
           <div className="form_row">
             <label htmlFor="title">Quote Title</label>

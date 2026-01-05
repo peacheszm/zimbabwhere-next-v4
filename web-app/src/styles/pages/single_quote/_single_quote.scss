@@ -1,0 +1,139 @@
+.single_quote {
+  .quote_title_area {
+    margin-bottom: 16px;
+  }
+  .quote_meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .meta_item {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #e6e6e6;
+    .icon {
+      width: 100%;
+      max-width: 16px;
+      height: 16px;
+      color: #32cd32;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .quote_body {
+    margin-bottom: 16px;
+  }
+
+  .quote_files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #2e2e2e;
+    margin-bottom: 40px;
+    padding: 20px;
+
+    a {
+      width: 100%;
+      max-width: 33.333%;
+    }
+
+    img {
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+  }
+
+  h4 {
+    letter-spacing: -1px;
+    word-spacing: -5px;
+    color: #2cb75f;
+    margin-bottom: 15px;
+    margin-left: -5px;
+    font-family: BankGothic;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+  }
+
+  .quote_actions {
+    display: flex;
+    align-items: center;
+    background-color: #2e2e2e;
+    margin: 0 0 40px;
+    padding: 20px;
+    font-size: 16px;
+    gap: 16px;
+    flex-direction: column;
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #1d1d1d;
+      background: #b9db96;
+      border-radius: 5px;
+      padding: 6px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .icon {
+      max-width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .share_quote {
+    .share_quote_toggle {
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+
+      .icon {
+        width: 100%;
+        max-width: 20px;
+        margin-right: 16px;
+      }
+    }
+
+    .share_options {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .icon_w {
+      background: #25d366;
+    }
+    .icon_m {
+      background: #ea4335;
+    }
+    .icon_f {
+      background: #3b5998;
+    }
+    .icon_t {
+      background: #000;
+    }
+  }
+}

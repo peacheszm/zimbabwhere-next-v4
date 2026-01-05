@@ -8,7 +8,6 @@ import {
 import { formatDate } from "@/lib/utils/formatDate";
 
 export default function QuoteList({ quotes }) {
-  console.log(quotes);
   return (
     <>
       {quotes.map((quote, qindex) => (

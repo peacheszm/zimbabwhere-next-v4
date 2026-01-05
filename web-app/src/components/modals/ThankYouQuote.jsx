@@ -23,15 +23,13 @@ export default function ThankYouQuoteModal({ clearForm }) {
           }
           onClose={() => closeModal("ThankYouQuoteModal")}
         >
-          <div className="modal_body">
-            <div className="btn_group">
-              <Link href="/" className="btn btn-green">
-                View all quotes
-              </Link>
-              <button onClick={clearForm} className="btn btn-green">
-                Request new quote
-              </button>
-            </div>
+          <div className="btn_group">
+            <Link href="/" className="btn btn-green">
+              View all quotes
+            </Link>
+            <button onClick={clearForm} className="btn btn-green">
+              Request new quote
+            </button>
           </div>
         </Modal>
       )}
