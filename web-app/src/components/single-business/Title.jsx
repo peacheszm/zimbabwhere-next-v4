@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IconMapPin, IconEye } from "@tabler/icons-react";
+import BusinessRatings from "@/components/single-business/BusinessRatings";
 export default function Title({ post }) {
   return (
     <div className="title_area">
@@ -42,7 +43,13 @@ export default function Title({ post }) {
           </div>
         </div>
       </div>
-      <div className="title_area_mid">{/* Ratings */}</div>
+      <div className="title_area_mid">
+        <BusinessRatings
+          business_id={post.id}
+          business_name={post.title.rendered}
+          business_title={post.title.rendered}
+        />
+      </div>
       <div className="title_area_bottom">
         {post.acf?.business_motto && (
           <div className="motto">"{post.acf.business_motto}"</div>

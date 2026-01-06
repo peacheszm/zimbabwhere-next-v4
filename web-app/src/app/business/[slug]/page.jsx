@@ -9,6 +9,7 @@ import Hours from "@/components/single-business/Hours";
 import Map from "@/components/single-business/Map";
 import Share from "@/components/single-business/Share";
 import Categorys from "@/components/single-business/Categorys";
+import BusinessReviews from "@/components/single-business/BusinessReviews";
 
 import { yoastToMetadata } from "@/lib/seo/seo";
 
@@ -43,11 +44,10 @@ export default async function SingleBusiness({ params }) {
           <Overview post={post} />
 
           {/* Reviews */}
-          {/* <BusinessReviews
+          <BusinessReviews
             business_id={post.id}
             business_title={post.title?.rendered}
-            onRateClick={() => setShowModal(true)}
-          /> */}
+          />
         </main>
         <aside className="aside">
           <WebSocial post={post} />

@@ -7,6 +7,7 @@ import { UserProvider } from "@/contexts/UserContext";
 
 import Navigation from "@/components/global/Navigation";
 import Footer from "@/components/global/Footer";
+import CreateBusinessReview from "@/components/modals/CreateBusinessReview";
 
 export default function ClientWrapper({ children }) {
   return (
@@ -17,6 +18,7 @@ export default function ClientWrapper({ children }) {
             <Navigation />
             {children}
             <Footer />
+            <CreateBusinessReview />
           </ModalProvider>
         </SearchProvider>
       </UserProvider>
