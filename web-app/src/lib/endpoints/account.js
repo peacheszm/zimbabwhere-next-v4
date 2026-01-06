@@ -92,13 +92,20 @@ export async function updateCurrentUserBusinesses(
 export async function createUsersBusinesses(token, businessData) {
   const baseWp = process.env.NEXT_PUBLIC_WORDPRESS_ENDPOINT;
 
+  const isFormData = businessData instanceof FormData;
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
+
   const response = await fetch(`${baseWp}/businesses`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer "${token}"`,
-    },
-    body: JSON.stringify(businessData),
+    headers,
+    body: isFormData ? businessData : JSON.stringify(businessData),
   });
 
   if (!response.ok) {

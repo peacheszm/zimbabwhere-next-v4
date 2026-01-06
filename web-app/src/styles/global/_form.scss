@@ -18,11 +18,15 @@
     color: #2cb75f;
     margin-bottom: 4px;
   }
+  .field_desc {
+    font-size: 12px;
+  }
 
   textarea,
   input[type="text"],
   input[type="email"],
   input[type="tel"],
+  input[type="url"],
   input[type="password"] {
     @include robot(400, 16, 120%);
     margin: 0;
