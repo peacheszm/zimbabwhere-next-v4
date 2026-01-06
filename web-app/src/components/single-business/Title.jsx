@@ -23,7 +23,7 @@ export default function Title({ post }) {
               />
             ) : (
               <Image
-                src="/images/placeholder.png"
+                src="/img/placeholder.png"
                 alt="Placeholder"
                 width={200}
                 height={200}

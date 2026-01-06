@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
         />
-        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
       </head>
       <body>
         <noscript>

@@ -38,7 +38,7 @@ export default function FeaturedBusinessbanner({ businesses }) {
                   }}
                 >
                   <Image
-                    src="/images/shims/banner_shim.png"
+                    src="/img/shims/banner_shim.png"
                     alt={bus.meta.business_banner.name}
                     width="1600"
                     height="1000"
