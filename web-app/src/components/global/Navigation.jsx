@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 
 import BackButton from "@/components/global/BackButton";
+
+import SiteFilter from "@/components/global/SiteFilter";
 export default function Navigation() {
   const { data: session } = useSession();
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -115,6 +117,7 @@ export default function Navigation() {
           </div>
         </div>
       </div>
+      <SiteFilter />
     </nav>
   );
 }
