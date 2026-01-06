@@ -40,7 +40,6 @@ export default function SiteFilter() {
   }, []);
 
   if (isLoading) return null; // or a subtle loading bar
-  console.log(initialData)
 
   return <SiteFilterClient initialData={initialData} />;
 }

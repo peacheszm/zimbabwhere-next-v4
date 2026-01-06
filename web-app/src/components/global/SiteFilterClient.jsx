@@ -83,17 +83,19 @@ export default function SiteFilterClient({ initialData }) {
       .slice(0, 15);
   }, [searchTerm, searchData]);
 
+  const triggerSearch = (term = searchTerm, catId = selectedCategory.id, townId = selectedTown.id) => {
+    const params = new URLSearchParams();
+    if (term.trim()) params.set("q", term.trim());
+    if (catId) params.set("category_filter", catId);
+    if (townId) params.set("location_filter", townId);
+
+    router.push(`/search?${params.toString()}`);
+    setActiveDropdown(null);
+  };
+
   const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
-    if (searchTerm.trim() || selectedCategory.id || selectedTown.id) {
-      const params = new URLSearchParams();
-      if (searchTerm) params.set("q", searchTerm);
-      if (selectedCategory.id) params.set("category", selectedCategory.id);
-      if (selectedTown.id) params.set("town", selectedTown.id);
-
-      router.push(`/search?${params.toString()}`);
-      setActiveDropdown(null);
-    }
+    triggerSearch();
   };
 
   const clearSearch = () => {
@@ -138,8 +140,8 @@ export default function SiteFilterClient({ initialData }) {
                       className="dropdown_option"
                       onClick={() => {
                         setSelectedCategory({ id: "", name: "All Categories" });
-                        setActiveDropdown(null);
                         setCategorySearch("");
+                        triggerSearch(searchTerm, "", selectedTown.id);
                       }}
                     >
                       All Categories
@@ -149,12 +151,13 @@ export default function SiteFilterClient({ initialData }) {
                         key={cat.id}
                         className="dropdown_option"
                         onClick={() => {
-                          setSelectedCategory({
+                          const newCat = {
                             id: cat.id,
                             name: cat.label || cat.name,
-                          });
-                          setActiveDropdown(null);
+                          };
+                          setSelectedCategory(newCat);
                           setCategorySearch("");
+                          triggerSearch(searchTerm, newCat.id, selectedTown.id);
                         }}
                       >
                         {cat.label || cat.name}
@@ -200,8 +203,8 @@ export default function SiteFilterClient({ initialData }) {
                       className="dropdown_option"
                       onClick={() => {
                         setSelectedTown({ id: "", name: "All Towns" });
-                        setActiveDropdown(null);
                         setTownSearch("");
+                        triggerSearch(searchTerm, selectedCategory.id, "");
                       }}
                     >
                       All Towns
@@ -211,12 +214,13 @@ export default function SiteFilterClient({ initialData }) {
                         key={town.id}
                         className="dropdown_option"
                         onClick={() => {
-                          setSelectedTown({
+                          const newTown = {
                             id: town.id,
                             name: town.label || town.name,
-                          });
-                          setActiveDropdown(null);
+                          };
+                          setSelectedTown(newTown);
                           setTownSearch("");
+                          triggerSearch(searchTerm, selectedCategory.id, newTown.id);
                         }}
                       >
                         {town.label || town.name}
@@ -257,7 +261,7 @@ export default function SiteFilterClient({ initialData }) {
                     href={
                       item.type === "business"
                         ? `/business/${item.slug}`
-                        : `/search?category=${item.id}`
+                        : `/search?category_filter=${item.id}`
                     }
                     className="dropdown_item"
                     onClick={() => setActiveDropdown(null)}
