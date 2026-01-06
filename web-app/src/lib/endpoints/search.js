@@ -10,10 +10,12 @@ export async function getBusinessesSearch(params = {}) {
   // Convert parameters to match the old API format
   const searchParams = {};
 
-  if (params.search) searchParams.search_term = params.search;
-  if (params.category) searchParams.category_filter = params.category;
-  if (params.area || params.town)
-    searchParams.location_filter = params.area || params.town;
+  if (params.q || params.search) searchParams.search_term = params.q || params.search;
+  if (params.category_filter || params.category)
+    searchParams.category_filter = params.category_filter || params.category;
+  if (params.location_filter || params.area || params.town)
+    searchParams.location_filter =
+      params.location_filter || params.area || params.town;
 
   const queryString = new URLSearchParams(searchParams).toString();
 
