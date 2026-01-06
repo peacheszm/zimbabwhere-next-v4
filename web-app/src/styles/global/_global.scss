@@ -18,7 +18,10 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #1d1d1d;
+  background-color: #1d1d1d;
+  // background-image: url("/img/site_bg.png");
+  // background-repeat: repeat;
+  // background-size: 500px auto;
 }
 
 // Basic layout container
