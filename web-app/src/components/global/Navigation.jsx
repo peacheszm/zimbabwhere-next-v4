@@ -91,7 +91,7 @@ export default function Navigation() {
             <Link href="/get-a-quote" onClick={closeNav}>
               Get A Quote
             </Link>
-            <Link href="/" onClick={closeNav}>
+            <Link href="/add-a-business" onClick={closeNav}>
               Add Your Business
             </Link>
 

@@ -15,6 +15,12 @@ const nextConfig = {
         pathname: "/zimbabwhere21/**",
       },
       {
+        protocol: "https",
+        hostname: "admin.zimbabwhere.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "",

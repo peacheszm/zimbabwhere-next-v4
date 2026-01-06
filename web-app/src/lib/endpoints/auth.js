@@ -51,8 +51,6 @@ export async function authenticateUser(login, password) {
     const wordpressUrl = process.env.NEXT_PUBLIC_WP_SITE_URL;
     const authUrl = `${wordpressUrl}/?rest_route=/simple-jwt-login/v1/auth`;
 
-    console.log(authUrl);
-
     const response = await fetch(authUrl, {
       method: "POST",
       headers: {
