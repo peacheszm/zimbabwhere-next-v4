@@ -18,7 +18,7 @@ export default async function SearchPage({ searchParams }) {
           </div>
           <div className="search_listings">
             {featuredResults.map((item) => (
-              <BusinessCard key={item.id} item={item} />
+              <BusinessCard key={item.id} item={item} premium={true} />
             ))}
 
             {normalResults.map((item) => (

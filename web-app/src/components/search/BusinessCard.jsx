@@ -11,36 +11,31 @@ import "swiper/css/pagination";
 
 import {
   IconMapPin,
-  IconPhone,
+  IconChevronRight,
   IconFileText,
-  IconStar,
-  IconStarFilled,
+  IconChevronLeft,
 } from "@tabler/icons-react";
 
 import BusinessRatings from "@/components/single-business/BusinessRatings";
 
-export default function BusinessCard({ item }) {
+export default function BusinessCard({ item, premium = false }) {
   return (
-    <div key={`item-${item.id}`} className="business_listing_item premium">
+    <div
+      key={`item-${item.id}`}
+      className={`business_listing_item ${premium ? "premium" : ""}`}
+    >
       <div className="col col_left">
         <Link href={`/business/${item.slug}`}>
           <Image
             src={item.logo || "/img/placeholder.png"}
             alt={item.title}
             width={200}
-            height={150}
+            height={200}
           />
         </Link>
       </div>
 
       <div className="col col_middle">
-        <Image
-          src={item.logo || "/img/placeholder.png"}
-          alt={item.title}
-          width={200}
-          height={150}
-          className="mobile_image"
-        />
         <h3>
           <Link
             href={`/business/${item.slug}`}
@@ -49,9 +44,7 @@ export default function BusinessCard({ item }) {
         </h3>
 
         {/* Business Ratings */}
-        <div style={{ marginTop: "0.5rem" }}>
-          <BusinessRatings business_id={item.id} business_title={item.title} />
-        </div>
+        <BusinessRatings business_id={item.id} business_title={item.title} />
 
         {item.business_motto && (
           <div className="motto">{item.business_motto}</div>
@@ -72,46 +65,6 @@ export default function BusinessCard({ item }) {
               __html: item.business_overview,
             }}
           />
-        </div>
-      </div>
-
-      {/* Mobile Footer */}
-      <div className="card_footer_mobile">
-        {item.hasattachments && (
-          <div className="attachment">
-            {item.attachments.map((att, index) => (
-              <>
-                {att.type != "Image" && (
-                  <Link href={att.file.link} target="_blank" key={index}>
-                    <span>{att.type}</span>
-                  </Link>
-                )}
-              </>
-            ))}
-          </div>
-        )}
-        <Link
-          href={`/get-a-quote?bid=${item.id}`}
-          className="btn get_a_quote_button"
-        >
-          <div className="icon">
-            <IconFileText size={20} />
-          </div>
-          Get A Quote
-        </Link>
-
-        <div className="card_footer_mobile_row">
-          <Link
-            href={`/business/${item.slug}`}
-            className="btn btn-green more-details"
-          >
-            <Image
-              src="/images/read_more_btn.png"
-              alt="Read more"
-              width={100}
-              height={30}
-            />
-          </Link>
         </div>
       </div>
 
@@ -144,12 +97,9 @@ export default function BusinessCard({ item }) {
             Get A Quote
           </Link>
 
-          <Link
-            href={`/business/${item.slug}`}
-            className="btn btn-green more-details"
-          >
+          <Link href={`/business/${item.slug}`} className="btn more-details">
             <Image
-              src="/images/read_more_btn.png"
+              src="/img/read_more_btn.png"
               alt="Read more"
               width={100}
               height={30}
@@ -168,8 +118,14 @@ export default function BusinessCard({ item }) {
           <div className="gallery_swiper_container">
             <Swiper
               modules={[Navigation, Pagination, Thumbs]}
-              navigation={true}
-              pagination={{ clickable: true }}
+              navigation={{
+                nextEl: `.slider-button-next-${item.id}`,
+                prevEl: `.slider-button-prev-${item.id}`,
+              }}
+              pagination={{
+                el: `.slider-pagination-${item.id}`,
+                clickable: true,
+              }}
               spaceBetween={10}
               slidesPerView={3}
               breakpoints={{
@@ -196,17 +152,28 @@ export default function BusinessCard({ item }) {
                         }
                         width={200}
                         height={150}
-                        style={{
-                          width: "100%",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                        }}
                       />
                     </div>
                   </SwiperSlide>
                 ))}
             </Swiper>
+
+            <div className="slider_nav">
+              <div
+                className={`slider-button-prev slider-button-prev-${item.id}`}
+              >
+                <IconChevronLeft />
+              </div>
+
+              <div
+                className={`slider-pagination slider-pagination-${item.id}`}
+              ></div>
+              <div
+                className={`slider-button-next slider-button-next-${item.id}`}
+              >
+                <IconChevronRight />
+              </div>
+            </div>
           </div>
         )}
     </div>
