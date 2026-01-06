@@ -39,8 +39,6 @@ export default function GetQuote({ cats, towns }) {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     const formData = new FormData();
 
     // Basic fields
