@@ -162,7 +162,7 @@
       width: 100%;
       max-width: 50%;
       @include media-breakpoint-up(lg) {
-        max-width: 100%;
+        max-width: 140px;
       }
     }
   }

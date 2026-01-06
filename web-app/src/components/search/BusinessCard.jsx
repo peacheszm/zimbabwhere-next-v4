@@ -109,7 +109,8 @@ export default function BusinessCard({ item, premium = false }) {
       </div>
 
       {/* Premium Gallery */}
-      {item.attachments &&
+      {premium &&
+        item.attachments &&
         item.attachments.filter(
           (attachment) =>
             attachment.file.type === "image" &&
