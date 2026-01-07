@@ -5,7 +5,9 @@ import { updateCurrentUserNotifications } from "@/lib/endpoints/account";
 import NoticeMessage from "@/components/global/Notice";
 
 export default function PaidCategories({ cats = [], userData = {}, token }) {
-  const [orders, setOrders] = useState(userData.data?.sign_up_to_notifications || []);
+  const [orders, setOrders] = useState(
+    userData.data?.sign_up_to_notifications || []
+  );
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null); // Will store order ID on success
   const [isUpdating, setIsUpdating] = useState(null); // Will store order ID being updated
@@ -64,13 +66,14 @@ export default function PaidCategories({ cats = [], userData = {}, token }) {
       // 4. Update local state
       setOrders(updatedOrders);
       setSubmitSuccess(orderId);
-      
+
       // Clear success message after 3 seconds
       setTimeout(() => setSubmitSuccess(null), 3000);
     } catch (error) {
       console.error("❌ Notification update failed:", error);
       setSubmitError(
-        `Order #${orderId} update failed: ` + (error.message || "Please try again.")
+        `Order #${orderId} update failed: ` +
+          (error.message || "Please try again.")
       );
     } finally {
       setIsUpdating(null);
@@ -82,12 +85,16 @@ export default function PaidCategories({ cats = [], userData = {}, token }) {
       {orders.map((order) => {
         const expired = isExpired(order.expire_date);
         const limit = parseInt(order.number_of_categories) || 0;
-        
+
         // Initial values for the select
-        const initialValue = (Array.isArray(order.paid_categories) ? order.paid_categories : [])
+        const initialValue = (
+          Array.isArray(order.paid_categories) ? order.paid_categories : []
+        )
           .map((cat) => {
             const catId = typeof cat === "object" ? cat.term_id : cat;
-            return cats.find((c) => c.value === catId || c.value === String(catId));
+            return cats.find(
+              (c) => c.value === catId || c.value === String(catId)
+            );
           })
           .filter(Boolean);
 
@@ -115,7 +122,16 @@ export default function PaidCategories({ cats = [], userData = {}, token }) {
   );
 }
 
-function OrderRow({ order, cats, initialValue, expired, limit, isUpdating, isSuccess, onUpdate }) {
+function OrderRow({
+  order,
+  cats,
+  initialValue,
+  expired,
+  limit,
+  isUpdating,
+  isSuccess,
+  onUpdate,
+}) {
   const [selected, setSelected] = useState(initialValue);
 
   return (
@@ -123,9 +139,11 @@ function OrderRow({ order, cats, initialValue, expired, limit, isUpdating, isSuc
       <div className="section_title">
         <h2>Select headings for Order #{order.order_id}</h2>
         <p>
-          {expired 
-            ? `This order expired on ${order.expire_date.split(" ")[0]}` 
-            : `You can select up to ${limit} headings. Expires on ${order.expire_date.split(" ")[0]}`}
+          {expired
+            ? `This order expired on ${order.expire_date.split(" ")[0]}`
+            : `You can select up to ${limit} headings. Expires on ${
+                order.expire_date.split(" ")[0]
+              }`}
         </p>
       </div>
 
@@ -156,7 +174,11 @@ function OrderRow({ order, cats, initialValue, expired, limit, isUpdating, isSuc
               onClick={() => onUpdate(selected)}
               style={isSuccess ? { background: "#2cb75f", color: "#fff" } : {}}
             >
-              {isUpdating ? "Updating..." : isSuccess ? "Saved!" : "Update Headings"}
+              {isUpdating
+                ? "Updating..."
+                : isSuccess
+                ? "Saved!"
+                : "Update Headings"}
             </button>
           </div>
         </div>
