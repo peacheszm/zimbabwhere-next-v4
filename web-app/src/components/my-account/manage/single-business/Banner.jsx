@@ -1,12 +1,13 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 
 // Modal Stuff
 import { useModal } from "@/contexts/ModalContext";
 import EditBanner from "@/components/modals/single-business/EditBanner";
 
 export default function Banner({ data }) {
+  const { data: session } = useSession();
   const { openModal } = useModal();
   const currentBanner = data?.acf?.business_banner;
   const bannerUrl = currentBanner?.url || currentBanner;
@@ -15,11 +16,22 @@ export default function Banner({ data }) {
     openModal("EditBanner", data);
   };
 
+  const autologinUrl = session?.jwt
+    ? `/api/auth/autologin-url?token=${encodeURIComponent(session.jwt)}`
+    : "#";
+
   return (
     <div className="manage_section banner">
       <div className="ms_title">
         <h3>Business Banner</h3>
-        <Link href="/google.com">Buy Home Page Billboard</Link>
+        <a
+          href={autologinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="buy_link"
+        >
+          Buy Home Page Billboard
+        </a>
       </div>
       <div className="ms_desc">
         <h4>Home Page Banner</h4>

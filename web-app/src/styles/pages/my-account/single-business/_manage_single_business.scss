@@ -76,9 +76,27 @@
       padding: 10px 15px;
       color: #fff;
       margin: 0px;
-      font-size: 0.95rem;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
+    }
+  }
+
+  //   Sections
+
+  .categories {
+    .categories_list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .category_tag {
+      color: #1d1d1d;
+      background: #b9db96;
+      border-radius: 5px;
+      margin: 0 5px 5px;
+      padding: 0 6px;
+      font-size: 12px;
     }
   }
 }

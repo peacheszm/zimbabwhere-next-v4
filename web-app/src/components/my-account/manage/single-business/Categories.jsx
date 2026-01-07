@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import { useSession } from "next-auth/react";
 
 // Modal Stuff
 import { useModal } from "@/contexts/ModalContext";
 import EditCategories from "@/components/modals/single-business/EditCategories";
 
 export default function Categories({ data, cats }) {
+  const { data: session } = useSession();
   const { openModal } = useModal();
 
   // Find the category labels from the IDs
@@ -22,10 +23,17 @@ export default function Categories({ data, cats }) {
     openModal("EditCategories", { business: data, cats });
   };
 
+  const autologinUrl = session?.jwt 
+    ? `/api/auth/autologin-url?token=${encodeURIComponent(session.jwt)}`
+    : "#";
+
   return (
     <div className="manage_section categories">
       <div className="ms_title">
         <h3>Business Categories</h3>
+        <a href={autologinUrl} target="_blank" rel="noopener noreferrer" className="buy_link">
+          Buy Extra Headings
+        </a>
       </div>
       <div className="ms_desc">
         <h4>Discoverability</h4>
