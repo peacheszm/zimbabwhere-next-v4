@@ -1,4 +1,4 @@
-import { getBusinessBySlug } from "@/lib/endpoints/business";
+import { getBusinessBySlug, getAllBusinesses } from "@/lib/endpoints/business";
 
 import Title from "@/components/single-business/Title";
 import Gallery from "@/components/single-business/Gallery";
@@ -12,6 +12,13 @@ import Categorys from "@/components/single-business/Categorys";
 import BusinessReviews from "@/components/single-business/BusinessReviews";
 
 import { yoastToMetadata } from "@/lib/seo/seo";
+
+export async function generateStaticParams() {
+  const businesses = await getAllBusinesses();
+  return businesses.map((business) => ({
+    slug: business.slug,
+  }));
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

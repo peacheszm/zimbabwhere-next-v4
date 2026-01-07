@@ -118,3 +118,26 @@ export async function createBusinessReview(business_id, formData) {
     throw error;
   }
 }
+export async function getAllBusinesses() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_ENDPOINT}/all-businesses`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Failed: ${response.status} - ${text}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching all businesses:", error);
+    throw error;
+  }
+}
