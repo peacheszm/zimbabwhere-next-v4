@@ -23,7 +23,11 @@ const AD_TYPE_INFO = {
   },
 };
 
-export default function PaidAdverts({ purchases = {}, businesses = [], token }) {
+export default function PaidAdverts({
+  purchases = {},
+  businesses = [],
+  token,
+}) {
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null); // Stores order_id on success
   const [isUpdating, setIsUpdating] = useState(null); // Stores order_id being updated
@@ -75,13 +79,14 @@ export default function PaidAdverts({ purchases = {}, businesses = [], token }) 
       };
 
       await selectBusinessForAdvertisement(adData, token);
-      
+
       setSubmitSuccess(orderId);
       setTimeout(() => setSubmitSuccess(null), 3000);
     } catch (error) {
       console.error("❌ Advert update failed:", error);
       setSubmitError(
-        `Failed to update Advert #${orderId}: ` + (error.message || "Please try again.")
+        `Failed to update Advert #${orderId}: ` +
+          (error.message || "Please try again.")
       );
     } finally {
       setIsUpdating(null);
@@ -96,8 +101,8 @@ export default function PaidAdverts({ purchases = {}, businesses = [], token }) 
 
         return (
           <div key={key} className="advert_category_section">
-            <div className="section_title" style={{ marginBottom: "20px" }}>
-              <h2>{info.title}</h2>
+            <div className="section_title">
+              <h3>{info.title}</h3>
               <p>{info.description}</p>
             </div>
 
@@ -110,7 +115,9 @@ export default function PaidAdverts({ purchases = {}, businesses = [], token }) 
                 expired={isExpired(purchase.expire_date)}
                 isUpdating={isUpdating === purchase.order_id}
                 isSuccess={submitSuccess === purchase.order_id}
-                onUpdate={(bizId) => handleUpdateAdvert(key, purchase.order_id, bizId)}
+                onUpdate={(bizId) =>
+                  handleUpdateAdvert(key, purchase.order_id, bizId)
+                }
               />
             ))}
           </div>
@@ -126,22 +133,33 @@ export default function PaidAdverts({ purchases = {}, businesses = [], token }) 
   );
 }
 
-function AdvertOrderRow({ type, purchase, businessOptions, expired, isUpdating, isSuccess, onUpdate }) {
+function AdvertOrderRow({
+  type,
+  purchase,
+  businessOptions,
+  expired,
+  isUpdating,
+  isSuccess,
+  onUpdate,
+}) {
   // Handle featured_business being an ID or an object
-  const initialBusinessId = typeof purchase.featured_business === "object" 
-    ? purchase.featured_business?.ID 
-    : purchase.featured_business;
-    
-  const initialOption = businessOptions.find(opt => opt.value === initialBusinessId);
+  const initialBusinessId =
+    typeof purchase.featured_business === "object"
+      ? purchase.featured_business?.ID
+      : purchase.featured_business;
+
+  const initialOption = businessOptions.find(
+    (opt) => opt.value === initialBusinessId
+  );
   const [selected, setSelected] = useState(initialOption);
 
   return (
-    <div className={`account_selector ${expired ? "expired" : ""}`} style={{ marginBottom: "16px" }}>
+    <div className={`account_selector ${expired ? "expired" : ""}`}>
       <div className="section_title">
-        <h3 style={{ fontSize: "18px", color: "#32cd32" }}>Order #{purchase.order_id}</h3>
+        <h3>Order #{purchase.order_id}</h3>
         <p>
-          {expired 
-            ? `Expired on ${purchase.expire_date.split(" ")[0]}` 
+          {expired
+            ? `Expired on ${purchase.expire_date.split(" ")[0]}`
             : `Active until ${purchase.expire_date.split(" ")[0]}`}
         </p>
       </div>
@@ -168,7 +186,11 @@ function AdvertOrderRow({ type, purchase, businessOptions, expired, isUpdating, 
               onClick={() => onUpdate(selected?.value)}
               style={isSuccess ? { background: "#2cb75f", color: "#fff" } : {}}
             >
-              {isUpdating ? "Updating..." : isSuccess ? "Saved!" : "Update Advert"}
+              {isUpdating
+                ? "Updating..."
+                : isSuccess
+                ? "Saved!"
+                : "Update Advert"}
             </button>
           </div>
         </div>
