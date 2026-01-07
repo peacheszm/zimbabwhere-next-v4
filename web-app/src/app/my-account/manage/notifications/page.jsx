@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 
 import FreeCategories from "@/components/my-account/manage/notifications/FreeCategories";
+import PaidCategories from "@/components/my-account/manage/notifications/PaidCategories";
 
 export default async function ManageNotifications() {
   const session = await getServerSession(authOptions);
@@ -25,8 +26,17 @@ export default async function ManageNotifications() {
           <div className="page_title">
             <h1>Manage my Independent section headings</h1>
           </div>
-
-          <FreeCategories cats={businessCats} userData={userData} token={session.jwt} />
+          {/* Free Headings  */}
+          <FreeCategories
+            cats={businessCats}
+            userData={userData}
+            token={session.jwt}
+          />
+          <PaidCategories
+            cats={businessCats}
+            userData={userData}
+            token={session.jwt}
+          />
         </main>
         <aside className="aside">
           <SiteSideBar />
