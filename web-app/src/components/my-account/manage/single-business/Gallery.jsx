@@ -36,7 +36,9 @@ export default function Gallery({ data }) {
             <div className="gallery_grid">
               {uploads.map((item, index) => {
                 const fileUrl = item.file?.url || item.file;
-                const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl);
+                const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(
+                  fileUrl
+                );
 
                 return (
                   <div key={index} className="gallery_item">
@@ -45,8 +47,8 @@ export default function Gallery({ data }) {
                         <Image
                           src={fileUrl}
                           alt={item.upload_type || "Gallery Image"}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
+                          width={500}
+                          height={500}
                         />
                       </div>
                     ) : (
