@@ -1,0 +1,72 @@
+.my_business_list {
+  .my_business_listings {
+    margin-top: 40px;
+  }
+  .card_main {
+    display: flex;
+    width: 100%;
+    background: #000;
+    margin-bottom: 16px;
+  }
+
+  .card_image {
+    width: 100%;
+    max-width: 90px;
+    height: 100px;
+    display: flex;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card_body {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .card_title {
+    h5 {
+      font-size: 15px;
+    }
+
+    .address {
+      display: flex;
+      font-size: 12px;
+      .icon {
+        height: auto;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          max-width: 18px;
+        }
+      }
+    }
+  }
+
+  .card_actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: #32cd32;
+    }
+
+    .icon {
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+  }
+}
