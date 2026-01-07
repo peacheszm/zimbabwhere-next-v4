@@ -26,9 +26,9 @@ export default function PaidCategories({ cats = [], userData = {}, token }) {
   const isExpired = (expiryStr) => {
     if (!expiryStr) return true;
     try {
-      // Expected format: "MM/DD/YYYY h:mm am/pm"
+      // Expected format: "DD/MM/YYYY h:mm am/pm"
       const [datePart] = expiryStr.split(" ");
-      const [month, day, year] = datePart.split("/");
+      const [day, month, year] = datePart.split("/");
       // Set to end of day to be safe, or exact time if desired
       const expiryDate = new Date(year, month - 1, day, 23, 59, 59);
       return expiryDate < new Date();
