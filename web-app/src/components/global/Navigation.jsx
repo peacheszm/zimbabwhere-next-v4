@@ -4,14 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
 
 import BackButton from "@/components/global/BackButton";
 
 import SiteFilter from "@/components/global/SiteFilter";
+
 export default function Navigation() {
   const { data: session } = useSession();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isAccountNavOpen, setIsAccountNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropRef = useRef(null);
   const pathname = usePathname();
@@ -21,6 +23,7 @@ export default function Navigation() {
     function handleClickOutside(event) {
       if (dropRef.current && !dropRef.current.contains(event.target)) {
         setIsNavOpen(false);
+        setIsAccountNavOpen(false);
       }
     }
 
@@ -40,7 +43,9 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const closeNav = () => setIsNavOpen(false);
+  const closeNav = () => {
+    setIsNavOpen(false), setIsAccountNavOpen(false);
+  };
 
   return (
     <nav className={`main_navigation ${scrolled ? "scrolled" : ""}`}>
@@ -106,12 +111,37 @@ export default function Navigation() {
               </>
             ) : (
               <>
-                <Link href="/my-account" onClick={closeNav}>
-                  Account
-                </Link>
-                <Link href="/" onClick={() => signOut()}>
-                  Logout
-                </Link>
+                <div className="user_menu">
+                  <div
+                    className="my_account"
+                    onClick={() => setIsAccountNavOpen(true)}
+                  >
+                    Account
+                    <div className="icon">
+                      <IconChevronDown />
+                    </div>
+                  </div>
+
+                  <div
+                    className={`account_menu ${isAccountNavOpen ? "open" : ""}`}
+                  >
+                    <Link href="/my-account" onClick={closeNav}>
+                      My Businesses
+                    </Link>
+                    <Link href="/my-account/manage/adverts" onClick={closeNav}>
+                      Manage my Paid for Advertising
+                    </Link>
+                    <Link
+                      href="/my-account/manage/notifications"
+                      onClick={closeNav}
+                    >
+                      Manage my Independent section
+                    </Link>
+                    <Link href="/" onClick={() => signOut()}>
+                      Logout
+                    </Link>
+                  </div>
+                </div>
               </>
             )}
           </div>
