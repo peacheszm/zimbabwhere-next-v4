@@ -215,4 +215,20 @@
       }
     }
   }
+
+  .see_more_links {
+    display: flex;
+    margin-bottom: 60px;
+    gap: 16px;
+
+    a {
+      color: #fff;
+      text-transform: uppercase;
+      background: #2cb75f;
+      margin: 0;
+      padding: 10px 15px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
 }

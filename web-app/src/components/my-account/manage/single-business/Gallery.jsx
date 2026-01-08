@@ -22,11 +22,12 @@ export default function Gallery({ data }) {
         <h3>Menu, Price List & Gallery</h3>
       </div>
       <div className="ms_desc">
-        <h4>Business Assets</h4>
+        <h4>Business window shop - FREE UPLOADS</h4>
         <p>
-          Upload your menu, price lists, brochures, or general business images.
-          These files help customers understand your offerings and see your
-          business in action.
+          Images and Photos go a long way in showing what you do or how you
+          look. Please add as many of these and use the other options provided
+          to best represent your business. These will be seen on your business
+          page. Images & Photos / Flyer / Brochure / Menu / Price List
         </p>
       </div>
 

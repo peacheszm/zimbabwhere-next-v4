@@ -69,7 +69,11 @@ export default function Social({ data }) {
               })}
             </div>
           ) : (
-            <p>No social profiles added</p>
+            <p>
+              No social profiles provided yet. Please add all the social links
+              you use for your business. These will be accessible through your
+              business page.
+            </p>
           )}
         </div>
       </div>

@@ -12,10 +12,10 @@ export default function Categories({ data, cats }) {
   // Find the category labels from the IDs
   // WordPress usually provides categories as an array of IDs in 'business-listing'
   const currentCategoryIds = data?.["business_cat"] || [];
-  
+
   // If 'cats' is available, we can map IDs to labels
-  const currentCategories = currentCategoryIds.map(id => {
-    const cat = cats.find(c => c.value === id || c.id === id);
+  const currentCategories = currentCategoryIds.map((id) => {
+    const cat = cats.find((c) => c.value === id || c.id === id);
     return cat ? cat.label : `Category ${id}`;
   });
 
@@ -23,7 +23,7 @@ export default function Categories({ data, cats }) {
     openModal("EditCategories", { business: data, cats });
   };
 
-  const autologinUrl = session?.jwt 
+  const autologinUrl = session?.jwt
     ? `/api/auth/autologin-url?token=${encodeURIComponent(session.jwt)}`
     : "#";
 
@@ -31,16 +31,20 @@ export default function Categories({ data, cats }) {
     <div className="manage_section categories">
       <div className="ms_title">
         <h3>Business Categories</h3>
-        <a href={autologinUrl} target="_blank" rel="noopener noreferrer" className="buy_link">
+        <a
+          href={autologinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="buy_link"
+        >
           Buy Extra Headings
         </a>
       </div>
       <div className="ms_desc">
-        <h4>Discoverability</h4>
+        <h4>Business Categories</h4>
         <p>
-          Select the categories that best describe your business. This helps
-          customers find you when searching for specific services or products.
-          You can select up to 3 categories.
+          Below are your listed free headings. You can purchase more headings to
+          increase your chances of receiving quotes and being found on our site.
         </p>
       </div>
 

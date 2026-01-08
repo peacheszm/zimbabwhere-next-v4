@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getBusinessBySlug } from "@/lib/endpoints/business";
 
 import SiteSideBar from "@/components/global/Sidebar";
@@ -26,13 +27,21 @@ export default async function ManageSingleBusiness({ params }) {
       <div className="container">
         <main className="main">
           <Logo data={business} />
-          <Banner data={business} />
-          <Categories data={business} cats={businessCats} />
-          <Info data={business} />
+          <Gallery data={business} />
+
           <Hours data={business} />
           <Social data={business} />
           <Videos data={business} />
-          <Gallery data={business} />
+
+          <Categories data={business} cats={businessCats} />
+          <Banner data={business} />
+
+          <Info data={business} />
+
+          <div className="see_more_links">
+            <Link href={`/add-a-business`}>Add New Business</Link>
+            <Link href={`/business/${business.slug}`}>View Business</Link>
+          </div>
         </main>
         <aside className="aside">
           <SiteSideBar />

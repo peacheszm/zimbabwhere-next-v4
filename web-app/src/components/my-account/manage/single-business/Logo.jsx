@@ -19,12 +19,12 @@ export default function Logo({ data }) {
         <h3>Business Logo</h3>
       </div>
       <div className="ms_desc">
-        <h4>Business Identity</h4>
+        <h4>Business Identity - FREE LOGO UPLOAD</h4>
         <p>
-          Your logo represents your business across the platform and appears on
-          your business listing, in search results, and throughout your business
-          profile. Upload a clear, professional logo that works well at
-          different sizes.
+          Your logo represents your business identity across the platform and
+          appears on your business listing, in search results, and throughout
+          your business profile. Upload a clear, professional logo that works
+          well at different sizes.
         </p>
       </div>
 

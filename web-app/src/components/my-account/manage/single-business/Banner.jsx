@@ -36,9 +36,11 @@ export default function Banner({ data }) {
       <div className="ms_desc">
         <h4>Home Page Banner</h4>
         <p>
-          This banner image will be used as a featured banner on the home page
-          when your business is selected for promotion. Choose an eye-catching,
-          high-quality image that represents your business well.
+          This is a PAID for option. Upgrade to advertise your business with a
+          banner image that will be displayed on the home page of our website
+          every time the website opens. Once you have a billboard banner optoin
+          you can Choose an eye-catching, high-quality image that represents
+          your business well and apply it here.
         </p>
       </div>
 
@@ -52,7 +54,7 @@ export default function Banner({ data }) {
             style={{ objectFit: "cover", width: "100%", height: "auto" }}
           />
         ) : (
-          <div className="placeholder_banner">No banner uploaded</div>
+          <div className="placeholder_banner">No uploads provided yet.</div>
         )}
       </div>
 
