@@ -63,9 +63,9 @@ export default function PaidBusinessCategories({
         return order;
       });
 
-      // 2. Prepare payload (backend expects the whole sign_up_to_notifications array)
+      // 2. Prepare payload (backend expects the specific array we are updating)
       const payload = {
-        sign_up_to_notifications: updatedOrders,
+        additional_business_categories: updatedOrders,
       };
 
       // 3. Call API
