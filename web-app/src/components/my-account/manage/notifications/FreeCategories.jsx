@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import Link from "next/link";
 import Select from "react-select";
 import { updateCurrentUserNotifications } from "@/lib/endpoints/account";
 
@@ -88,7 +89,12 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
                 )}
               />
               {selectedCategories.length === 3 && (
-                <p className="info_msg">Maximum 3 categories reached.</p>
+                <p className="info_msg category_cta_message">
+                  Maximum 3 headings reached. Three headings not enough?{" "}
+                  <Link href="/premium-services">Buy Extra Headings</Link> or
+                  Contact us for Advertising Options. 0776404936 / 0776404936 /
+                  0773 765 485
+                </p>
               )}
             </div>
 

@@ -22,4 +22,17 @@
       color: #fff;
     }
   }
+
+  .no_paid {
+    h2 {
+      margin-bottom: 16px;
+    }
+    a {
+      background: #2cb75f;
+      border-radius: 100px;
+      padding: 5px 15px;
+      font-weight: 600;
+      display: inline-flex;
+    }
+  }
 }

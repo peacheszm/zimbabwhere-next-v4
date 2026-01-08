@@ -2,11 +2,15 @@
 import { useState } from "react";
 import Select from "react-select";
 import { updateCurrentUserNotifications } from "@/lib/endpoints/account";
-import NoticeMessage from "@/components/global/Notice";
+import Link from "next/link";
 
-export default function PaidCategories({ cats = [], userData = {}, token }) {
+export default function PaidBusinessCategories({
+  cats = [],
+  userData = {},
+  token,
+}) {
   const [orders, setOrders] = useState(
-    userData.data?.sign_up_to_notifications || []
+    userData.data?.additional_business_categories || []
   );
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null); // Will store order ID on success
@@ -16,9 +20,13 @@ export default function PaidCategories({ cats = [], userData = {}, token }) {
     return (
       <div className="account_selector">
         <div className="section_title">
-          <h2>Paid Headings</h2>
+          <h2>Additional Business Headings</h2>
+          <div className="no_paid">
+            <Link href="/premium-services">
+              Buy additional Business Headings
+            </Link>
+          </div>
         </div>
-        <NoticeMessage title="No Paid For Categories" />
       </div>
     );
   }

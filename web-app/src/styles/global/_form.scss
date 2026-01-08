@@ -144,6 +144,24 @@
     margin-top: 8px;
   }
 
+  .category_cta_message {
+    background: #f0fdf41a;
+    border: 1px solid #2cb75f;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+
+    a {
+      font-weight: 600;
+      background: #2cb75f;
+      padding: 5px 15px;
+      border-radius: 100px;
+      display: inline-flex;
+    }
+  }
+
   .error_box {
     background: rgba(255, 77, 77, 0.1);
     border: 1px solid #ff4d4d;
