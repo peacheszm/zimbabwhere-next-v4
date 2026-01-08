@@ -26,10 +26,7 @@ export default function SiteSideBar() {
         </Link>
       </div>
       <div className="child">
-        <Link
-          href="/my-account/add-a-business/"
-          title="Advertise Your Business"
-        >
+        <Link href="/add-a-business/" title="Advertise Your Business">
           <img
             src="https://admin.zimbabwhere.com/wp-content/uploads/2022/08/AddYourBusiness02-300x300-1.jpeg"
             alt=""
