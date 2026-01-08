@@ -2,7 +2,7 @@
 import React from "react";
 import {
   IconBrandFacebook,
-  IconBrandTwitter,
+  IconBrandX,
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandYoutube,
@@ -14,7 +14,7 @@ import EditSocial from "@/components/modals/single-business/EditSocial";
 
 const PLATFORM_ICONS = {
   Facebook: IconBrandFacebook,
-  Twitter: IconBrandTwitter,
+  Twitter: IconBrandX,
   Instagram: IconBrandInstagram,
   Linkedin: IconBrandLinkedin,
   Youtube: IconBrandYoutube,
@@ -48,11 +48,14 @@ export default function Social({ data }) {
           {socialProfiles.length > 0 ? (
             <div className="social_grid">
               {socialProfiles.map((profile, index) => {
-                const Icon = PLATFORM_ICONS[profile.social_platform] || IconBrandFacebook;
+                const Icon =
+                  PLATFORM_ICONS[profile.social_platform] || IconBrandFacebook;
                 return (
                   <div key={index} className="social_item">
-                    <Icon size={24} />
-                    <span className="platform">{profile.social_platform}</span>
+                    <div className="icon">
+                      <Icon size={24} />
+                    </div>
+
                     <a
                       href={profile.url}
                       target="_blank"

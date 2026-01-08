@@ -54,7 +54,6 @@ export default function Gallery({ data }) {
                     ) : (
                       <div className="file_preview">
                         <IconFileDescription size={48} />
-                        <span>{item.upload_type}</span>
                       </div>
                     )}
                     <div className="label">{item.upload_type}</div>

@@ -83,6 +83,19 @@
   }
 
   //   Sections
+  .logo {
+    .ms_body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .site_logo {
+      img {
+        max-width: 200px;
+      }
+    }
+  }
 
   .categories {
     .categories_list {
@@ -97,6 +110,109 @@
       margin: 0 5px 5px;
       padding: 0 6px;
       font-size: 12px;
+    }
+  }
+
+  .hours {
+    .hours_row {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      border-bottom: 1px solid #2cb75f;
+      padding: 10px 0;
+    }
+
+    .time {
+      margin-left: auto;
+    }
+  }
+
+  .social {
+    .social_item {
+      display: flex;
+      border-bottom: 1px solid #2cb75f;
+      padding: 10px 0;
+      align-items: center;
+    }
+
+    .icon {
+      height: auto;
+      margin-right: 10px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+  }
+
+  .videos {
+    .video_card {
+      border-bottom: 1px solid #2cb75f;
+      padding: 0 0 10px;
+      display: flex;
+    }
+
+    .video_thumbnail {
+      position: relative;
+      width: 100%;
+      max-width: 90px;
+    }
+
+    .play_overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        max-width: 32px;
+        height: auto;
+      }
+    }
+
+    .video_info {
+      width: 100%;
+      margin-left: 16px;
+    }
+  }
+
+  .gallery {
+    .gallery_grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .gallery_item {
+      // display: flex;
+      // flex-direction: column;
+      width: 100%;
+      max-width: 100px;
+      // height: 100%;
+    }
+
+    .label {
+      color: #1d1d1d;
+      background: #b9db96;
+      text-align: center;
+      font-weight: 600;
+      padding: 0 6px;
+      font-size: 12px;
+    }
+
+    .file_preview {
+      height: 100px;
+    }
+
+    .img_preview {
+      height: 100px;
+      img {
+        object-fit: cover;
+        height: 100px;
+      }
     }
   }
 }

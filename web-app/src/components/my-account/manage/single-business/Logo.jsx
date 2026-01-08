@@ -29,12 +29,14 @@ export default function Logo({ data }) {
       </div>
 
       <div className="ms_body">
-        <Image
-          src={logoUrl}
-          width={200}
-          height={200}
-          alt={data.title.rendered}
-        />
+        <div className="site_logo">
+          <Image
+            src={logoUrl}
+            width={200}
+            height={200}
+            alt={data.title.rendered}
+          />
+        </div>
       </div>
 
       <div className="ms_footer">
