@@ -4,8 +4,6 @@ export default function BusinessLogo({ data, onEditClick }) {
   const currentLogo = data?.acf.logo;
   const logoUrl = currentLogo?.url || currentLogo;
 
-  console.log(data);
-
   return (
     <div className="card card_main">
       <div className="card_title">Business Logo</div>

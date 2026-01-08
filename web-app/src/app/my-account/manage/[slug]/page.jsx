@@ -20,7 +20,7 @@ export default async function ManageSingleBusiness({ params }) {
     getBusinessCategories(),
   ]);
   const business = businessData[0];
-  console.log(business);
+
   return (
     <div className="page_wrapper manage_single_business">
       <div className="container">

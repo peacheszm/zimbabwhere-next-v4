@@ -13,12 +13,12 @@ import BusinessReviews from "@/components/single-business/BusinessReviews";
 
 import { yoastToMetadata } from "@/lib/seo/seo";
 
-export async function generateStaticParams() {
-  const businesses = await getAllBusinesses();
-  return businesses.map((business) => ({
-    slug: business.slug,
-  }));
-}
+// export async function generateStaticParams() {
+//   const businesses = await getAllBusinesses();
+//   return businesses.map((business) => ({
+//     slug: business.slug,
+//   }));
+// }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
