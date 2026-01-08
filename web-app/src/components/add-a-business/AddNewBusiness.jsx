@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import Dropzone from "@/components/ui/Dropzone";
 import { createUsersBusinesses } from "@/lib/endpoints/account";
@@ -305,7 +306,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
           <div className="form_row">
             <label>Select Headings *</label>
             <p className="field_desc">
-              Select any 3 free headings that best represent your company...
+              {/* Select any 3 free headings that best represent your company... */}
             </p>
             <Controller
               name="business_categories"
@@ -326,6 +327,10 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
                 />
               )}
             />
+            <p className="info_msg">
+              Can't find the heading you're looking for?{" "}
+              <Link href="/">Request one here</Link>. (3/3 selected)
+            </p>
             {selectedCategories.length === 3 && (
               <p className="info_msg">
                 Maximum 3 categories reached. Three headings not enough? Upgrade
