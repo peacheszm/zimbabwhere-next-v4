@@ -2,6 +2,14 @@ import ClientWrapper from "./ClientWrapper";
 import Script from "next/script";
 import "@/styles/main.scss";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#86b953",
+};
+
 export const metadata = {
   title: "Zimbabwhere",
   description:
@@ -27,7 +35,6 @@ export const metadata = {
     images: ["img/zimbabwhere-logo.png"],
   },
   manifest: "/manifest.json",
-  themeColor: "#86b953",
 };
 
 export default function RootLayout({ children }) {
