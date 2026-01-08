@@ -17,8 +17,8 @@ export default async function MyAccountPage() {
     <div className="page_wrapper">
       <div className="container">
         <main className="main">
-          {!response?.data.length > 0 && <NoBusiness />}
-          {response?.data.length < 0 && <MyBusinessList data={response.data} />}
+          {response?.data.length === 0 && <NoBusiness />}
+          {response?.data.length > 0 && <MyBusinessList data={response.data} />}
         </main>
         <aside className="aside">
           <SiteSideBar />
