@@ -39,10 +39,10 @@ export default function Gallery({ post }) {
                   swiper.params.pagination.el = paginationRef.current;
                 }}
                 spaceBetween={10}
-                slidesPerView={1}
+                slidesPerView={3}
                 breakpoints={{
                   640: {
-                    slidesPerView: 2,
+                    slidesPerView: 3,
                     spaceBetween: 20,
                   },
                   768: {
