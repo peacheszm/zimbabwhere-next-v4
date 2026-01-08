@@ -11,7 +11,7 @@
 
   img {
     @include media-breakpoint-up(lg) {
-      max-height: 80vh;
+      max-height: 60vh;
     }
   }
 }

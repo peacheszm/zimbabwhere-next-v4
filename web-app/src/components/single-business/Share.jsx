@@ -1,3 +1,5 @@
+"use client";
+import React, { useState, useEffect } from "react";
 import {
   IconBrandWhatsapp,
   IconMail,
@@ -6,12 +8,13 @@ import {
 } from "@tabler/icons-react";
 
 export default function Share({ post }) {
-  const pageurl = () => {
-    if (typeof window !== "undefined") {
-      return window.location.href;
-    }
-    return "";
-  };
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
+
+  const pageurl = () => url;
   return (
     <div className="business_share">
       <h4>Share Listing</h4>
