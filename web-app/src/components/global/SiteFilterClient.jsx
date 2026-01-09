@@ -87,6 +87,12 @@ export default function SiteFilterClient({ initialData }) {
         const descMatch = item.description?.toLowerCase().includes(term);
         return titleMatch || descMatch;
       })
+      .sort((a, b) => {
+        // Prioritize categories over businesses
+        if (a.type === "category" && b.type !== "category") return -1;
+        if (a.type !== "category" && b.type === "category") return 1;
+        return 0;
+      })
       .slice(0, 15);
   }, [searchTerm, searchData]);
 
