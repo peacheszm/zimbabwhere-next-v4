@@ -18,12 +18,16 @@
   }
 
   .filters_group {
-    display: flex;
     gap: 12px;
     width: 100%;
-
+    display: none;
     @include media-breakpoint-up(lg) {
       width: auto;
+      display: flex;
+    }
+
+    &.open {
+      display: flex;
     }
   }
 
@@ -136,6 +140,8 @@
     position: relative;
     flex: 2;
     width: 100%;
+    display: flex;
+    align-items: center;
 
     .search_input_group {
       position: relative;
@@ -144,7 +150,8 @@
       background: #2a2a2a;
       border: 1px solid #3a3a3a;
       border-radius: 8px;
-      padding: 0 0 0 12px;
+      padding: 0 0 0 0px;
+      width: 100%;
       @include transition($transition-base);
 
       &:focus-within {
@@ -184,6 +191,29 @@
         svg {
           max-width: 24px;
         }
+      }
+    }
+
+    .filter_mobile_toggle {
+      background: #32cd32;
+      color: #000;
+      border-radius: 4px;
+      @include robot(700, 15, 120%);
+      @include transition($transition-base);
+      cursor: pointer;
+      height: 42px;
+      width: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+
+      svg {
+        max-width: 24px;
       }
     }
   }

@@ -70,22 +70,6 @@ export default function BusinessCard({ item, premium = false }) {
 
       {/* Desktop Right Column */}
       <div className="col col_right">
-        <div className="bus_links">
-          {item.hasattachments && (
-            <div className="attachment">
-              {item.attachments.map((att, index) => (
-                <>
-                  {att.type != "Image" && (
-                    <Link href={att.file.link} target="_blank" key={index}>
-                      <span>{att.type}</span>
-                    </Link>
-                  )}
-                </>
-              ))}
-            </div>
-          )}
-        </div>
-
         <div className="btn_group">
           <Link
             href={`/get-a-quote?bid=${item.id}`}

@@ -2,7 +2,12 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
-import { IconSearch, IconX, IconChevronDown } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconX,
+  IconChevronDown,
+  IconAdjustments,
+} from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 export default function SiteFilterClient({ initialData }) {
@@ -28,6 +33,8 @@ export default function SiteFilterClient({ initialData }) {
   const categoryRef = useRef(null);
   const townRef = useRef(null);
   const searchRef = useRef(null);
+
+  const [showFilters, setShowFilters] = useState(false);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -83,7 +90,11 @@ export default function SiteFilterClient({ initialData }) {
       .slice(0, 15);
   }, [searchTerm, searchData]);
 
-  const triggerSearch = (term = searchTerm, catId = selectedCategory.id, townId = selectedTown.id) => {
+  const triggerSearch = (
+    term = searchTerm,
+    catId = selectedCategory.id,
+    townId = selectedTown.id
+  ) => {
     const params = new URLSearchParams();
     if (term.trim()) params.set("q", term.trim());
     if (catId) params.set("category_filter", catId);
@@ -107,7 +118,7 @@ export default function SiteFilterClient({ initialData }) {
     <div className="site_filter">
       <div className="container">
         <form className="filter_wrapper" onSubmit={handleSearchSubmit}>
-          <div className="filters_group">
+          <div className={`filters_group ${showFilters ? "open" : ""}`}>
             {/* Category Filter */}
             <div className="filter_item searchable_filter" ref={categoryRef}>
               <div
@@ -220,7 +231,11 @@ export default function SiteFilterClient({ initialData }) {
                           };
                           setSelectedTown(newTown);
                           setTownSearch("");
-                          triggerSearch(searchTerm, selectedCategory.id, newTown.id);
+                          triggerSearch(
+                            searchTerm,
+                            selectedCategory.id,
+                            newTown.id
+                          );
                         }}
                       >
                         {town.label || town.name}
@@ -251,7 +266,12 @@ export default function SiteFilterClient({ initialData }) {
                 <IconSearch className="search_icon" size={20} />
               </button>
             </div>
-
+            <div
+              className="filter_mobile_toggle"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <IconAdjustments />
+            </div>
             {/* Quick Search Dropdown */}
             {activeDropdown === "search" && filteredResults.length > 0 && (
               <div className="search_dropdown">
