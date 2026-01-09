@@ -85,8 +85,8 @@ export default async function PrivacyPolicyPage() {
             </li>
           </ul>
           <h2>Paid For Advertising Options:</h2>
-          <div class="paid_sections_wrapper">
-            <div class="paid_section">
+          <div className="paid_sections_wrapper">
+            <div className="paid_section">
               <h3>Extra Headings – $35 / Heading / Year</h3>
               <p>
                 (Available in both Advertisers and Independent Sections on the

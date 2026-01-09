@@ -97,6 +97,8 @@
       margin-bottom: 16px;
       border-bottom: 2px solid #2cb75f;
       padding-bottom: 8px;
+      display: flex;
+      position: relative;
       @include media-breakpoint-up(lg) {
         margin: 0 12px 0;
         padding-bottom: 0;
@@ -104,8 +106,32 @@
         font-size: 16px;
       }
 
+      &:after {
+        content: "";
+        width: 1px;
+        height: 16px;
+        background: #32cd32;
+        position: absolute;
+        top: 4px;
+        right: -10px;
+      }
+
       &:hover {
         color: #32cd32;
+      }
+
+      .icon {
+        width: 100%;
+        max-width: 24px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 16px;
+      }
+
+      .icon_user {
+        margin-left: 0 !important;
       }
     }
 
@@ -120,6 +146,10 @@
       display: flex;
       border-bottom: none;
       cursor: pointer;
+
+      &:after {
+        display: none;
+      }
 
       .icon {
         height: auto;
@@ -158,6 +188,10 @@
           font-style: 16px;
           border-bottom: 1px solid green;
           padding: 10px 0;
+        }
+
+        &:after {
+          display: none;
         }
       }
     }

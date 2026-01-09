@@ -1,32 +1,20 @@
-// app/quotes/page.js
-import { getQuotes } from "@/lib/endpoints/quotes";
+import { getLatestQuotes } from "@/lib/endpoints/quotes";
 import QuotesList from "@/components/home/QuotesList";
-import PaginationTop from "@/components/home/PaginationTop";
-import PaginationBottom from "@/components/home/PaginationBottom";
+import Link from "next/link";
 
-export default async function Quotes({ searchParams }) {
-  const page = Number(searchParams?.page) || 1;
-
+export default async function Quotes() {
   let quotes = [];
-  let pagination = null;
+  let total = 0;
   let error = null;
 
   try {
-    const result = await getQuotes({ page });
+    const result = await getLatestQuotes();
 
     if (result.statusCode) {
       error = result.body;
     } else {
       quotes = result.data || [];
-      pagination = {
-        from: (page - 1) * 10 + 1,
-        to: Math.min(page * 10, parseInt(result.total)),
-        total: parseInt(result.total),
-        currentPage: page,
-        totalPages: parseInt(result.totalPages),
-        prevPage: page > 1,
-        nextPage: page < parseInt(result.totalPages),
-      };
+      total = parseInt(result.total) || 0;
     }
   } catch (err) {
     error = err.message;
@@ -38,13 +26,19 @@ export default async function Quotes({ searchParams }) {
 
   return (
     <div className="quote_list_wrapper">
-      <div className="quotes_total">
-        {pagination && <PaginationTop pagination={pagination} />}
+      <div className="quotes_header">
+        <h2>Latest Quotes</h2>
       </div>
       <div className="quotes_body">
-        <QuotesList quotes={quotes} />
+        <QuotesList quotes={quotes} responsive={true} />
       </div>
-      {pagination && <PaginationBottom pagination={pagination} />}
+      {total > 3 && (
+        <div className="btn_group">
+          <Link href="/quotes" className="btn">
+            View More Quotes
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

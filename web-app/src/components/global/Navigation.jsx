@@ -4,7 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
+import {
+  IconMenu2,
+  IconX,
+  IconChevronDown,
+  IconListDetails,
+  IconBuildingEstate,
+  IconUserCircle,
+} from "@tabler/icons-react";
 
 import BackButton from "@/components/global/BackButton";
 
@@ -94,9 +101,15 @@ export default function Navigation() {
 
           <div className="nav_items">
             <Link href="/get-a-quote" onClick={closeNav}>
+              <div className="icon">
+                <IconListDetails />
+              </div>
               Get A Quote
             </Link>
             <Link href="/add-a-business" onClick={closeNav}>
+              <div className="icon">
+                <IconBuildingEstate />
+              </div>
               Add Your Business
             </Link>
 
@@ -116,8 +129,11 @@ export default function Navigation() {
                     className="my_account"
                     onClick={() => setIsAccountNavOpen(true)}
                   >
+                    <div className="icon icon_user">
+                      <IconUserCircle />
+                    </div>
                     Account
-                    <div className="icon">
+                    <div className="icon icon_toggle">
                       <IconChevronDown />
                     </div>
                   </div>

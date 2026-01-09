@@ -1,3 +1,31 @@
+export async function getLatestQuotes() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/quote?per_page=10&page=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: { revalidate: 3600 }, // Cache for 1 hour
+      }
+    );
+
+    // Parse the response JSON
+    const data = await response.json();
+
+    return {
+      data, // Array of posts
+      total: response.headers.get("x-wp-total"), // Total number of posts
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: error.message,
+    };
+  }
+}
+
 export async function getQuotes(page) {
   try {
     const response = await fetch(

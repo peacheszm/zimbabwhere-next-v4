@@ -134,3 +134,30 @@ textarea {
     margin-right: 8px;
   }
 }
+
+.mobile_get_quote {
+  display: flex;
+  align-content: inherit;
+  justify-content: center;
+  margin-bottom: 24px;
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    background: #32cd32;
+    padding: 10px 15px;
+    border-radius: 5px;
+
+    .icon {
+      width: 100%;
+      max-width: 24px;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+  }
+}

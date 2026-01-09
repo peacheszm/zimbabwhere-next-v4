@@ -1,4 +1,15 @@
 .quote_list_wrapper {
+  margin-bottom: 30px;
+  .quotes_header {
+    h2 {
+      @include bank(normal, 24, 20px);
+      letter-spacing: -1px;
+      word-spacing: -5px;
+      color: #2cb75f;
+      margin-left: -5px;
+      margin-bottom: 15px;
+    }
+  }
   .quote_item {
     background: #000;
     margin-bottom: 20px;

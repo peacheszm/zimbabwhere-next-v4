@@ -1,8 +1,11 @@
+import Link from "next/link";
 import FeaturedBusinessBanner from "@/components/home/FeaturedBusinessBanner";
 import FeaturedBusinessLogos from "@/components/home/FeaturedBusinessLogos";
 import Quotes from "@/components/home/Quotes";
 
 import SiteSideBar from "@/components/global/Sidebar";
+
+import { IconListDetails } from "@tabler/icons-react";
 
 import {
   getBillboardAds,
@@ -22,6 +25,15 @@ export default async function Home() {
       <div className="page_wrapper small_pad">
         <div className="container">
           <main className="main">
+            <div className="mobile_get_quote">
+              <Link href="/get-a-quote">
+                <div className="icon">
+                  <IconListDetails />
+                </div>
+                Get A Quote
+              </Link>
+            </div>
+
             <Quotes />
           </main>
           <aside className="aside">
