@@ -1,9 +1,9 @@
 import { getQuoteBySlug } from "@/lib/endpoints/quotes";
 import { formatDate } from "@/lib/utils/formatDate";
 
-import RespondActions from "@/components/quotes/RespondActions";
-import ShareQuote from "@/components/quotes/ShareQuote";
-import QuoteViewTracker from "@/components/quotes/QuoteViewTracker";
+import RespondActions from "@/components/quotes/quotes-single/RespondActions";
+import ShareQuote from "@/components/quotes/quotes-single/ShareQuote";
+import QuoteViewTracker from "@/components/quotes/quotes-single/QuoteViewTracker";
 import SiteSideBar from "@/components/global/Sidebar";
 
 import {
