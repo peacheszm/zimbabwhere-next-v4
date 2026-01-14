@@ -9,7 +9,7 @@ import {
   IconX,
   IconChevronDown,
   IconListDetails,
-  IconBuildingEstate,
+  IconPlus,
   IconUserCircle,
 } from "@tabler/icons-react";
 
@@ -100,7 +100,11 @@ export default function Navigation() {
           </div>
 
           <div className="nav_items">
-            <Link href="/get-a-quote" onClick={closeNav}>
+            <Link
+              href="/get-a-quote"
+              onClick={closeNav}
+              className="get_a_quote"
+            >
               <div className="icon">
                 <IconListDetails />
               </div>
@@ -108,7 +112,7 @@ export default function Navigation() {
             </Link>
             <Link href="/add-a-business" onClick={closeNav}>
               <div className="icon">
-                <IconBuildingEstate />
+                <IconPlus />
               </div>
               Add Your Business
             </Link>

@@ -27,15 +27,15 @@ export default async function Quotes() {
   return (
     <div className="quote_list_wrapper">
       <div className="quotes_header">
-        <h2>Latest Quotes</h2>
+        <h2>Quote Requests</h2>
       </div>
       <div className="quotes_body">
         <QuotesList quotes={quotes} responsive={true} />
       </div>
       {total > 3 && (
-        <div className="btn_group">
+        <div className="btn_group more_quotes">
           <Link href="/quotes" className="btn">
-            View More Quotes
+            View More Quotes...
           </Link>
         </div>
       )}

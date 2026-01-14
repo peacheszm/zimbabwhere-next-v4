@@ -14,7 +14,7 @@ export default function QuoteList({ quotes, responsive = false }) {
   const isMobile = useIsMobile();
 
   // Slice quotes based on device type when responsive mode is enabled
-  const displayQuotes = responsive && isMobile ? quotes.slice(0, 3) : quotes;
+  const displayQuotes = responsive && isMobile ? quotes.slice(0, 2) : quotes;
 
   return (
     <>
