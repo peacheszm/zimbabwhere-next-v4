@@ -14,11 +14,13 @@ import {
   IconChevronRight,
   IconFileText,
   IconChevronLeft,
+  IconPhone,
 } from "@tabler/icons-react";
 
 import BusinessRatings from "@/components/single-business/BusinessRatings";
 
 export default function BusinessCard({ item, premium = false }) {
+  console.log(item);
   return (
     <div
       key={`item-${item.id}`}
@@ -71,6 +73,14 @@ export default function BusinessCard({ item, premium = false }) {
       {/* Desktop Right Column */}
       <div className="col col_right">
         <div className="btn_group">
+          {item?.phone_number && (
+            <div className="call">
+              <a href={`tel:${item.phone_number}`}>
+                <IconPhone />
+              </a>
+            </div>
+          )}
+
           <Link
             href={`/get-a-quote?bid=${item.id}`}
             className="btn get_a_quote_button"
