@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
@@ -150,6 +151,7 @@ export default function GetQuote({ cats, towns }) {
                   options={cats}
                   onChange={(val) => field.onChange(val)}
                   placeholder="Choose multiple headings to reach as many companies as possible…"
+                  classNamePrefix="react-select"
                 />
               )}
             />
@@ -168,6 +170,7 @@ export default function GetQuote({ cats, towns }) {
                   options={towns}
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select your town/city/area coverage for the service you need..."
+                  classNamePrefix="react-select"
                 />
               )}
             />
@@ -186,6 +189,7 @@ export default function GetQuote({ cats, towns }) {
                   options={idealStartOptions}
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select a date."
+                  classNamePrefix="react-select"
                 />
               )}
             />
@@ -239,7 +243,8 @@ export default function GetQuote({ cats, towns }) {
           <div className="form_row checkbox">
             <input type="checkbox" {...register("terms")} id="terms" />
             <label htmlFor="terms">
-              I have read and agree to the Terms and Conditions
+              I have read and agree to the{" "}
+              <Link href="/terms-and-conditions">Terms and Conditions</Link>
             </label>
           </div>
 
