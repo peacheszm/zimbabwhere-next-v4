@@ -21,21 +21,40 @@ export default async function ManageNotifications() {
     getCurrentUserBusinesses(session.jwt),
   ]);
 
+  const hasBusiness = userBusiness.data?.length > 0;
+  const hasPaidCategories = hasBusiness 
+    ? (userData.data?.additional_business_categories?.length > 0) 
+    : (userData.data?.sign_up_to_notifications?.length > 0);
+
   return (
     <div className="page_wrapper">
       <div className="container">
         <main className="main">
-          <div className="page_title">
-            <h1>Manage my Independent section headings</h1>
-          </div>
           {userBusiness.data?.length === 0 ? (
             <>
+              <div className="page_title">
+                <h1>Manage my Independent section headings</h1>
+              </div>
               {/* Free Headings  */}
               <FreeCategories
                 cats={businessCats}
                 userData={userData}
                 token={session.jwt}
               />
+
+              {hasPaidCategories && (
+                <div className="page_title premium_section_header">
+                  <h1>Premium Notification Headings</h1>
+                  <p className="premium_blurb">
+                    You have unlocked premium notification headings! Select your
+                    additional categories below to stay informed about the
+                    sectors that matter most to you. These headings are part of
+                    your paid subscription and allow you to expand your
+                    notification reach.
+                  </p>
+                </div>
+              )}
+
               <PaidIndependantCategories
                 cats={businessCats}
                 userData={userData}
@@ -43,11 +62,25 @@ export default async function ManageNotifications() {
               />
             </>
           ) : (
-            <PaidBusinessCategories
-              cats={businessCats}
-              userData={userData}
-              token={session.jwt}
-            />
+            <>
+              {hasPaidCategories && (
+                <div className="page_title premium_section_header">
+                  <h1>Premium Notification Headings</h1>
+                  <p className="premium_blurb">
+                    You have unlocked premium notification headings! Select your
+                    additional categories below to stay informed about the
+                    sectors that matter most to you. These headings are part of
+                    your paid subscription and allow you to expand your
+                    notification reach.
+                  </p>
+                </div>
+              )}
+              <PaidBusinessCategories
+                cats={businessCats}
+                userData={userData}
+                token={session.jwt}
+              />
+            </>
           )}
         </main>
         <aside className="aside">
