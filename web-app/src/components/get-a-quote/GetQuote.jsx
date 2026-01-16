@@ -70,6 +70,8 @@ export default function GetQuote({ cats, towns }) {
       formData.append("start_date", data.start_date.toISOString());
     }
 
+    formData.append("quote_expire", data.quote_expire.toISOString());
+
     // Files handling
     if (data.quote_files && data.quote_files.length > 0) {
       Array.from(data.quote_files).forEach((file) => {
@@ -190,6 +192,24 @@ export default function GetQuote({ cats, towns }) {
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select a date."
                   classNamePrefix="react-select"
+                />
+              )}
+            />
+          </div>
+          <div className="form_row">
+            <label htmlFor="ideal_start">Quote expiry date</label>
+            <p>When do you wnt to hide this quote</p>
+            <Controller
+              name="quote_expire"
+              control={control}
+              rules={{ required: false }}
+              render={({ field }) => (
+                <DatePicker
+                  id="quote_expire"
+                  selected={field.value}
+                  onChange={(date) => field.onChange(date)}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Select a date"
                 />
               )}
             />
