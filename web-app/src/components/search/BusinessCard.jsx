@@ -81,15 +81,22 @@ export default function BusinessCard({ item, premium = false }) {
             </div>
           )}
 
-          <Link
-            href={`/get-a-quote?bid=${item.id}`}
-            className="btn get_a_quote_button"
-          >
-            <div className="icon">
-              <IconFileText size={20} />
-            </div>
-            Get A Quote
-          </Link>
+          <div className="get_quote_wrapper">
+            <Link
+              href={`/get-a-quote?bid=${item.id}`}
+              className="btn get_a_quote_button"
+            >
+              <div className="icon">
+                <Image
+                  src="/img/logo.png"
+                  alt="Zimbabwhere.com"
+                  width={100}
+                  height={100}
+                />
+              </div>
+              Get A Quote
+            </Link>
+          </div>
 
           <Link href={`/business/${item.slug}`} className="btn more-details">
             <Image
@@ -108,7 +115,7 @@ export default function BusinessCard({ item, premium = false }) {
         item.attachments.filter(
           (attachment) =>
             attachment.file.type === "image" &&
-            attachment.file.subtype !== "pdf"
+            attachment.file.subtype !== "pdf",
         ).length > 0 && (
           <div className="gallery_swiper_container">
             <Swiper
@@ -134,7 +141,7 @@ export default function BusinessCard({ item, premium = false }) {
                 .filter(
                   (attachment) =>
                     attachment.file.type === "image" &&
-                    attachment.file.subtype !== "pdf"
+                    attachment.file.subtype !== "pdf",
                 )
                 .map((attachment, i) => (
                   <SwiperSlide key={attachment.file.id || i}>

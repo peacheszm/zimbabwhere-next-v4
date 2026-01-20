@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
+import Modal from "@/components/global/Modal";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,13 +16,24 @@ export default function Gallery({ post }) {
   const nextRef = useRef(null);
   const paginationRef = useRef(null);
 
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const images = post.acf?.uploads?.filter((file) => file.file.subtype !== "pdf") || [];
+
+  const galleryOpen = (index) => {
+    setSelectedImageIndex(index);
+  };
+
+  const galleryClose = () => {
+    setSelectedImageIndex(null);
+  };
+
   return (
     <>
       {Array.isArray(post.acf?.uploads) && post.acf.uploads.length > 0 && (
         <div className="gallery" id="uploads">
           {/* Image Gallery Swiper */}
-          {post.acf.uploads.filter((file) => file.file.subtype !== "pdf")
-            .length > 0 && (
+          {images.length > 0 && (
             <div className="gallery_slider">
               <Swiper
                 modules={[Navigation, Pagination, Thumbs]}
@@ -56,9 +68,7 @@ export default function Gallery({ post }) {
                 }}
                 className="gallery_swiper"
               >
-                {post.acf.uploads
-                  .filter((file) => file.file.subtype !== "pdf")
-                  .map((file, i) => (
+                {images.map((file, i) => (
                     <SwiperSlide key={i}>
                       <div className="gallery_item">
                         <Image
@@ -67,6 +77,7 @@ export default function Gallery({ post }) {
                           width={200}
                           height={150}
                           onClick={() => galleryOpen(i)}
+                          style={{ cursor: "pointer" }}
                         />
                       </div>
                     </SwiperSlide>
@@ -120,6 +131,29 @@ export default function Gallery({ post }) {
             </ul>
           )}
         </div>
+      )}
+
+      {selectedImageIndex !== null && (
+        <Modal
+          onClose={galleryClose}
+          title={`Gallery image ${selectedImageIndex + 1}`}
+          maxWidth="1200px"
+        >
+          <div className="gallery_modal_content">
+            <Image
+              src={images[selectedImageIndex].file.url}
+              alt={`Gallery image ${selectedImageIndex + 1}`}
+              width={1200}
+              height={800}
+              style={{
+                width: "100%",
+                height: "auto",
+                objectFit: "contain",
+                maxHeight: "80vh",
+              }}
+            />
+          </div>
+        </Modal>
       )}
     </>
   );
