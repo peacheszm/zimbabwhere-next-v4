@@ -27,8 +27,9 @@ export default function Videos({ data }) {
       <div className="ms_desc">
         <h4>Visual Storytelling</h4>
         <p>
-          Showcase your business with YouTube videos. You can add walk-throughs,
-          service demonstrations, or customer testimonials to your profile.
+          Showcase your business with YouTube videos. Please add any videos or
+          promos that best showcase what you do. These will be accessible
+          through your business page.
         </p>
       </div>
 

@@ -31,7 +31,8 @@ export default function Info({ data }) {
             <strong>Name:</strong> <span>{data?.title?.rendered}</span>
           </div>
           <div className="info_item">
-            <strong>Email:</strong> <span>{data?.acf?.business_email || "Not set"}</span>
+            <strong>Email:</strong>{" "}
+            <span>{data?.acf?.business_email || "Not set"}</span>
           </div>
           <div className="info_item">
             <strong>Phone:</strong>{" "}
@@ -40,6 +41,14 @@ export default function Info({ data }) {
           <div className="info_item">
             <strong>Website:</strong>{" "}
             <span>{data?.acf?.business_website || "Not set"}</span>
+          </div>
+          <div className="info_item">
+            <strong>Description:</strong>{" "}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data?.acf?.business_description || "Not set",
+              }}
+            ></div>
           </div>
         </div>
       </div>

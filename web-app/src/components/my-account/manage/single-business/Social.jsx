@@ -39,7 +39,7 @@ export default function Social({ data }) {
         <p>
           Connect your social media profiles to your business listing. This
           makes it easier for customers to follow and engage with you across
-          platforms.
+          platforms. These will be accessible through your business page.
         </p>
       </div>
 

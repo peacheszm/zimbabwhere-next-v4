@@ -136,7 +136,7 @@ export async function updateUserPassword(userId, newPassword, token) {
       throw new Error(
         errorData.data?.message ||
           errorData.message ||
-          `Failed to update password: ${response.statusText}`
+          `Failed to update password: ${response.statusText}`,
       );
     }
 

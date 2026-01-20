@@ -31,20 +31,14 @@ export default function Categories({ data, cats }) {
     <div className="manage_section categories">
       <div className="ms_title">
         <h3>Business Categories</h3>
-        <a
-          href={autologinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="buy_link"
-        >
-          Buy Extra Headings
-        </a>
       </div>
       <div className="ms_desc">
         <h4>Business Categories</h4>
         <p>
           Below are your listed free headings. You can purchase more headings to
           increase your chances of receiving quotes and being found on our site.
+          3D Display Manufacturers4x4 Accessories ShopsAgricultural Seed
+          Suppliers
         </p>
       </div>
 
@@ -64,6 +58,14 @@ export default function Categories({ data, cats }) {
 
       <div className="ms_footer">
         <button onClick={handleOpenModal}>Edit Categories</button>
+        <a
+          href={autologinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="buy_link"
+        >
+          Buy Extra Headings
+        </a>
       </div>
 
       <EditCategories />

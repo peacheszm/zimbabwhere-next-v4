@@ -24,14 +24,6 @@ export default function Banner({ data }) {
     <div className="manage_section banner">
       <div className="ms_title">
         <h3>Business Banner</h3>
-        <a
-          href={autologinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="buy_link"
-        >
-          Buy Home Page Billboard
-        </a>
       </div>
       <div className="ms_desc">
         <h4>Home Page Banner</h4>
@@ -60,6 +52,14 @@ export default function Banner({ data }) {
 
       <div className="ms_footer">
         <button onClick={handleOpenModal}>Edit Banner</button>
+        <a
+          href={autologinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="buy_link"
+        >
+          Buy Home Page Billboard
+        </a>
       </div>
 
       <EditBanner />

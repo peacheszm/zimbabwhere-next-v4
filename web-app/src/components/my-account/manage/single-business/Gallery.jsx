@@ -24,10 +24,10 @@ export default function Gallery({ data }) {
       <div className="ms_desc">
         <h4>Business window shop - FREE UPLOADS</h4>
         <p>
-          Images and Photos go a long way in showing what you do or how you
-          look. Please add as many of these and use the other options provided
-          to best represent your business. These will be seen on your business
-          page. Images & Photos / Flyer / Brochure / Menu / Price List
+          Images & Photos / Flyers / Brochures / Menus / Price Lists go a long
+          way in showing what you do or how you look. Please add as many of
+          these and use the other free options provided to best represent your
+          business. These will be seen on your business page.
         </p>
       </div>
 
@@ -38,7 +38,7 @@ export default function Gallery({ data }) {
               {uploads.map((item, index) => {
                 const fileUrl = item.file?.url || item.file;
                 const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(
-                  fileUrl
+                  fileUrl,
                 );
 
                 return (

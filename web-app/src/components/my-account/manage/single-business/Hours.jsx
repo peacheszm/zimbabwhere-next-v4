@@ -22,8 +22,10 @@ export default function Hours({ data }) {
       <div className="ms_desc">
         <h4>Business Hours</h4>
         <p>
-          Let your customers know when you're available. Clear business hours
-          help set expectations and improve customer satisfaction.
+          Let your customers know when you're available. Please add your opening
+          hours to best help those that want to get hold of you. This will be
+          displayed on your business page. Clear business hours help set
+          expectations and improve customer satisfaction.
         </p>
       </div>
 

@@ -1,46 +1,23 @@
 .gallery {
   margin-bottom: 24px;
-  .gallery_swiper {
-    position: relative;
-  }
-  .swiper-slide {
-    height: auto;
+  background: #2e2e2e;
+  padding: 10px;
+  .gallery_grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
   }
 
   .gallery_item {
-    height: 100%;
+    width: 100%;
+    max-width: calc(25% - 10px);
 
     img {
       height: 100%;
       object-fit: cover;
       border-radius: 5px;
-    }
-  }
-  .pagination_wrapper {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 24px;
-
-    button {
-      width: 100%;
-      max-width: 32px;
-      color: #32cd32;
-    }
-
-    .navigation {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .swiper-pagination-bullet {
-      width: 8px;
-      height: 8px;
-      background: #fff;
-    }
-    .swiper-pagination-bullet-active {
-      background: #32cd32;
+      aspect-ratio: 1/1;
     }
   }
 
