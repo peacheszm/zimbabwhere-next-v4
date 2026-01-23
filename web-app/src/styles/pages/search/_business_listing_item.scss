@@ -114,24 +114,6 @@
     }
   }
 
-  .attachment {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-    @include media-breakpoint-up(lg) {
-      justify-content: flex-end;
-    }
-
-    a {
-      color: #1d1d1d;
-      background: #b9db96;
-      border-radius: 5px;
-      margin: 0 5px 5px;
-      padding: 0 6px;
-      font-size: 12px;
-    }
-  }
-
   .btn_group {
     width: 100%;
     flex-wrap: wrap;
@@ -172,7 +154,31 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      margin-bottom: 24px;
+      position: relative;
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 16px;
+        order: 2;
+      }
+
+      .attachment {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: auto;
+
+        @include media-breakpoint-up(lg) {
+          justify-content: flex-end;
+          position: absolute;
+          top: -60px;
+          left: 0;
+        }
+
+        a {
+          color: #b9db96;
+          font-size: 12px;
+          line-height: 100%;
+        }
+      }
     }
 
     .get_a_quote_button {
@@ -184,12 +190,12 @@
 
       text-align: center;
       justify-content: center;
-      margin-bottom: 24px;
+
       order: 1;
       clear: both;
       @include media-breakpoint-up(lg) {
         margin-left: auto;
-        margin-bottom: 16px;
+
         order: 2;
       }
 

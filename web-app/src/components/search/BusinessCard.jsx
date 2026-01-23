@@ -82,6 +82,16 @@ export default function BusinessCard({ item, premium = false }) {
           )}
 
           <div className="get_quote_wrapper">
+            {item.attachments && (
+              <div class="attachment">
+                <Link href={`/business/${item.slug}#uploads`}>
+                  Brochure <br />
+                  Flyer <br />
+                  Menu
+                </Link>
+              </div>
+            )}
+
             <Link
               href={`/get-a-quote?bid=${item.id}`}
               className="btn get_a_quote_button"

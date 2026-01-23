@@ -1,13 +1,12 @@
 "use client";
-import { useSession } from "next-auth/react";
+
 import Image from "next/image";
 
 // Modal Stuff
 import { useModal } from "@/contexts/ModalContext";
 import EditBanner from "@/components/modals/single-business/EditBanner";
-
+import BuyButton from "@/components/global/BuyButton";
 export default function Banner({ data }) {
-  const { data: session } = useSession();
   const { openModal } = useModal();
   const currentBanner = data?.acf?.business_banner;
   const bannerUrl = currentBanner?.url || currentBanner;
@@ -15,10 +14,6 @@ export default function Banner({ data }) {
   const handleOpenModal = () => {
     openModal("EditBanner", data);
   };
-
-  const autologinUrl = session?.jwt
-    ? `/api/auth/autologin-url?token=${encodeURIComponent(session.jwt)}`
-    : "#";
 
   return (
     <div className="manage_section banner">
@@ -52,14 +47,7 @@ export default function Banner({ data }) {
 
       <div className="ms_footer">
         <button onClick={handleOpenModal}>Edit Banner</button>
-        <a
-          href={autologinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="buy_link"
-        >
-          Buy Home Page Billboard
-        </a>
+        <BuyButton title="Buy Home Page Billboard" />
       </div>
 
       <EditBanner />

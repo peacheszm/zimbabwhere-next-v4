@@ -11,6 +11,7 @@ import { authOptions } from "@/lib/auth";
 import FreeCategories from "@/components/my-account/manage/notifications/FreeCategories";
 import PaidIndependantCategories from "@/components/my-account/manage/notifications/PaidIndependantCategories";
 import PaidBusinessCategories from "@/components/my-account/manage/notifications/PaidBusinessCategories";
+import BuyButton from "@/components/global/BuyButton";
 
 export default async function ManageNotifications() {
   const session = await getServerSession(authOptions);
@@ -22,9 +23,9 @@ export default async function ManageNotifications() {
   ]);
 
   const hasBusiness = userBusiness.data?.length > 0;
-  const hasPaidCategories = hasBusiness 
-    ? (userData.data?.additional_business_categories?.length > 0) 
-    : (userData.data?.sign_up_to_notifications?.length > 0);
+  const hasPaidCategories = hasBusiness
+    ? userData.data?.additional_business_categories?.length > 0
+    : userData.data?.sign_up_to_notifications?.length > 0;
 
   return (
     <div className="page_wrapper">
@@ -42,6 +43,9 @@ export default async function ManageNotifications() {
                 token={session.jwt}
               />
 
+              <h1>Additional Independent Headings</h1>
+              <p>$35 / Year / Heading</p>
+              <BuyButton title="Buy additional Independent Headings" />
               {hasPaidCategories && (
                 <div className="page_title premium_section_header">
                   <h1>Premium Notification Headings</h1>

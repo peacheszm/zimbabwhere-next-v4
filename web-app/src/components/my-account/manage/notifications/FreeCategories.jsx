@@ -44,7 +44,7 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
     } catch (error) {
       console.error("❌ Notification update failed:", error);
       setSubmitError(
-        error.message || "Failed to update categories. Please try again."
+        error.message || "Failed to update categories. Please try again.",
       );
     }
   };
@@ -90,10 +90,11 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
               />
               {selectedCategories.length === 3 && (
                 <p className="info_msg category_cta_message">
-                  Maximum 3 headings reached. Three headings not enough?{" "}
-                  <Link href="/premium-services">Buy Extra Headings</Link> or
-                  Contact us for Advertising Options. 0776404936 / 0776404936 /
-                  0773 765 485
+                  Maximum 3 headings reached. Three headings not enough? Update
+                  your 3 free headings first then you can.{" "}
+                  <Link href="/premium-services">Buy Extra Headings</Link>
+                  {""}or Contact us for Advertising Options. 0776404936 /
+                  0776404936 / 0773 765 485
                 </p>
               )}
             </div>
