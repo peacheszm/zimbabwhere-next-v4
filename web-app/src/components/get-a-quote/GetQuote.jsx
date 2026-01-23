@@ -58,7 +58,7 @@ export default function GetQuote({ cats, towns }) {
     if (data.quote_from_category) {
       formData.append(
         "quote_from_category",
-        JSON.stringify(data.quote_from_category)
+        JSON.stringify(data.quote_from_category),
       );
     }
 
@@ -154,6 +154,7 @@ export default function GetQuote({ cats, towns }) {
                   onChange={(val) => field.onChange(val)}
                   placeholder="Choose multiple headings to reach as many companies as possible…"
                   classNamePrefix="react-select"
+                  menuPlacement="top"
                 />
               )}
             />
@@ -173,6 +174,7 @@ export default function GetQuote({ cats, towns }) {
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select your town/city/area coverage for the service you need..."
                   classNamePrefix="react-select"
+                  menuPlacement="top"
                 />
               )}
             />
@@ -192,6 +194,7 @@ export default function GetQuote({ cats, towns }) {
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select a date."
                   classNamePrefix="react-select"
+                  menuPlacement="top"
                 />
               )}
             />

@@ -4,6 +4,11 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import Modal from "@/components/global/Modal";
 
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
@@ -81,22 +86,46 @@ export default function Gallery({ post }) {
       {selectedImageIndex !== null && (
         <Modal
           onClose={galleryClose}
-          title={`Gallery image ${selectedImageIndex + 1}`}
+          title={`Gallery`}
           maxWidth="1200px"
         >
           <div className="gallery_modal_content">
-            <Image
-              src={images[selectedImageIndex].file.url}
-              alt={`Gallery image ${selectedImageIndex + 1}`}
-              width={1200}
-              height={800}
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "contain",
-                maxHeight: "80vh",
+            <Swiper
+              modules={[Navigation, Pagination]}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
               }}
-            />
+              pagination={{ clickable: true }}
+              initialSlide={selectedImageIndex}
+              className="modal_swiper"
+              spaceBetween={20}
+            >
+              {images.map((file, i) => (
+                <SwiperSlide key={i}>
+                  <div className="modal_image_container">
+                    <Image
+                      src={file.file.url}
+                      alt={`Gallery image ${i + 1}`}
+                      width={1200}
+                      height={800}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "contain",
+                        maxHeight: "80vh",
+                      }}
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+              <div className="swiper-button-prev">
+                <IconChevronLeft size={30} />
+              </div>
+              <div className="swiper-button-next">
+                <IconChevronRight size={30} />
+              </div>
+            </Swiper>
           </div>
         </Modal>
       )}

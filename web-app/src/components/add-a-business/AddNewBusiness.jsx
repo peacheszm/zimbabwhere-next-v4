@@ -49,26 +49,26 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
       formDataPayload.append("title", formData.business_name);
       formDataPayload.append(
         "description",
-        formData.business_description || formData.business_overview
+        formData.business_description || formData.business_overview,
       );
       formDataPayload.append(
         "business_description",
-        formData.business_description
+        formData.business_description,
       );
       formDataPayload.append("business_motto", formData.business_motto || "");
       formDataPayload.append("phone_number", formData.phone_number || "");
       formDataPayload.append(
         "business_whatsapp",
-        formData.business_whatsapp || ""
+        formData.business_whatsapp || "",
       );
       formDataPayload.append("business_email", formData.business_email || "");
       formDataPayload.append(
         "business_website",
-        formData.business_website || ""
+        formData.business_website || "",
       );
       formDataPayload.append(
         "business_overview",
-        formData.business_overview || ""
+        formData.business_overview || "",
       );
       formDataPayload.append("street_number", formData.street_number || "");
       formDataPayload.append("street_name", formData.street_name || "");
@@ -91,7 +91,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
 
       const response = await createUsersBusinesses(
         session?.jwt,
-        formDataPayload
+        formDataPayload,
       );
 
       // Redirect to my-account or success page
@@ -99,7 +99,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
     } catch (error) {
       console.error("❌ Submission failed:", error);
       setSubmitError(
-        error.message || "Something went wrong. Please try again."
+        error.message || "Something went wrong. Please try again.",
       );
     }
   };
@@ -244,7 +244,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
           </div>
 
           <div className="form_row">
-            <label htmlFor="business_suburb">Suburb *</label>
+            <label htmlFor="business_suburb">Suburb / & Town *</label>
             <p className="field_desc">
               This will connect your business to map and directions...
             </p>
@@ -259,6 +259,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
                   placeholder="Select suburb..."
                   isClearable
                   classNamePrefix="react-select"
+                  menuPlacement="top"
                 />
               )}
             />
@@ -324,6 +325,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
                   isOptionDisabled={() => selectedCategories.length >= 3}
                   placeholder="Search/Select Categories"
                   classNamePrefix="react-select"
+                  menuPlacement="top"
                 />
               )}
             />

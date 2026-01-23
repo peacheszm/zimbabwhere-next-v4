@@ -77,4 +77,68 @@
   .btn_group {
     gap: 16px;
   }
+
+  //
+  .gallery_modal_content {
+    .modal_swiper {
+      padding-bottom: 40px;
+      position: relative;
+
+      .modal_image_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        z-index: 10;
+
+        &::after {
+          display: none;
+        }
+
+        &:hover {
+          background: #32cd32;
+          color: #000;
+        }
+
+        svg {
+          fill: none;
+        }
+      }
+
+      .swiper-button-prev {
+        left: 10px;
+      }
+
+      .swiper-button-next {
+        right: 10px;
+      }
+
+      .swiper-pagination-bullet {
+        background: #fff;
+        opacity: 0.5;
+
+        &-active {
+          background: #32cd32;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
