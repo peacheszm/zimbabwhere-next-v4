@@ -9,7 +9,10 @@ import Image from "next/image";
 import Modal from "@/components/global/Modal";
 import { useModal } from "@/contexts/ModalContext";
 import Dropzone from "@/components/ui/Dropzone";
-import { uploadBusinessGallery, updateCurrentUserBusinesses } from "@/lib/endpoints/account";
+import {
+  uploadBusinessGallery,
+  updateCurrentUserBusinesses,
+} from "@/lib/endpoints/account";
 
 const UPLOAD_TYPES = ["Menu", "Brochure", "Flyer", "Price List", "Image"];
 
@@ -51,12 +54,12 @@ export default function EditGallery() {
   };
 
   const onDrop = (acceptedFiles) => {
-    acceptedFiles.forEach(file => {
+    acceptedFiles.forEach((file) => {
       append({
         upload_type: "Image",
         file: file,
         file_url: URL.createObjectURL(file),
-        gallery_row_id: ""
+        gallery_row_id: "",
       });
     });
   };
@@ -95,14 +98,18 @@ export default function EditGallery() {
         // No new files, just update the JSON
         const updateData = {
           acf: {
-            uploads: urlRows.map(r => ({
+            uploads: urlRows.map((r) => ({
               upload_type: r.upload_type,
               file: r.file_url,
-              gallery_row_id: r.gallery_row_id
-            }))
-          }
+              gallery_row_id: r.gallery_row_id,
+            })),
+          },
         };
-        await updateCurrentUserBusinesses(session.jwt, businessData.id, updateData);
+        await updateCurrentUserBusinesses(
+          session.jwt,
+          businessData.id,
+          updateData,
+        );
       }
 
       router.refresh();
@@ -126,7 +133,9 @@ export default function EditGallery() {
 
           <div className="gallery_edit_list">
             {fields.map((field, index) => {
-              const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(field.file_url);
+              const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(
+                field.file_url,
+              );
               return (
                 <div key={field.id} className="gallery_edit_row">
                   <div className="preview_box">
@@ -150,7 +159,7 @@ export default function EditGallery() {
                     className="remove_btn"
                     onClick={() => remove(index)}
                   >
-                    <IconTrash size={18} />
+                    Remove
                   </button>
                 </div>
               );
@@ -158,11 +167,7 @@ export default function EditGallery() {
           </div>
 
           <div className="form_row btn_group">
-            <button
-              type="submit"
-              className="primary"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Changes"}
             </button>
           </div>
