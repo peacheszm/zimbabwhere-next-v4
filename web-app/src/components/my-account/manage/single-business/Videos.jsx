@@ -55,11 +55,7 @@ export default function Videos({ data }) {
               ))}
             </div>
           ) : (
-            <p>
-              No videos provided yet. Please add any videos or promos that best
-              showcase what you do. These will be accessible through your
-              business page.
-            </p>
+            <p>No videos provided yet.</p>
           )}
         </div>
       </div>

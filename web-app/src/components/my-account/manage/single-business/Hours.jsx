@@ -43,11 +43,7 @@ export default function Hours({ data }) {
               ))}
             </div>
           ) : (
-            <p>
-              No opening times provided yet. Please add your opening hours to
-              best help those that want to get hold of you. This will be
-              displayed on your business page
-            </p>
+            <p>No opening times provided yet.</p>
           )}
         </div>
       </div>
