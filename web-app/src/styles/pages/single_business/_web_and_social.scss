@@ -1,5 +1,11 @@
 .web_and_social {
   margin-bottom: 24px;
+  .business_logo {
+    margin-bottom: 24px;
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
+  }
   .business_website {
     display: flex;
     align-items: center;
@@ -8,6 +14,7 @@
 
     a {
       display: flex;
+      background: #c7c6c6;
       align-items: center;
       justify-content: center;
       border-radius: 8px;

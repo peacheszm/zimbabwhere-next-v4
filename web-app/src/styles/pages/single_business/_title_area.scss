@@ -9,6 +9,9 @@
     width: 100%;
     max-width: 70px;
     margin-right: 10px;
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
   }
 
   .col_right {
