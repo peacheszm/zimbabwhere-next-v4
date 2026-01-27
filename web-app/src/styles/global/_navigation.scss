@@ -7,6 +7,10 @@
   z-index: 10;
   @include transition($transition-base);
   background: #1d1d1d;
+  @include media-breakpoint-up(lg) {
+    background: #000;
+    padding-bottom: 0;
+  }
 
   .container {
     display: flex;
@@ -57,12 +61,15 @@
     padding: 10px 24px;
     z-index: 10;
     @include media-breakpoint-up(lg) {
+      background: #000;
       opacity: 1;
       visibility: visible;
       position: relative;
       height: auto;
       width: auto;
       margin-left: auto;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     &.nav_open {
