@@ -22,7 +22,7 @@ export default function FeaturedBusinessLogos({ businesses }) {
           loop={true}
           slidesPerView="auto"
           watchSlidesProgress={true}
-          spaceBetween={27}
+          spaceBetween={12}
           grabCursor={true}
           className="featured_business_caro"
         >
@@ -44,7 +44,7 @@ export default function FeaturedBusinessLogos({ businesses }) {
                     </Link>
                   </div>
                 </SwiperSlide>
-              )
+              ),
           )}
         </Swiper>
       </div>
