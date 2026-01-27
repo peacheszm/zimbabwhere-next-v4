@@ -115,13 +115,15 @@
       }
 
       &:after {
-        content: "";
-        width: 1px;
-        height: 16px;
-        background: #32cd32;
-        position: absolute;
-        top: 4px;
-        right: -13px;
+        @include media-breakpoint-up(lg) {
+          content: "";
+          width: 1px;
+          height: 16px;
+          background: #32cd32;
+          position: absolute;
+          top: 4px;
+          right: -13px;
+        }
       }
 
       &:hover {
@@ -145,24 +147,22 @@
     }
 
     .get_a_quote {
+      background: #32cd32;
+      padding: 7px 15px 7px 5px;
+      border-radius: 5px;
+
+      &:after {
+        display: none;
+      }
+
+      &:hover {
+        color: #fff;
+      }
       .icon {
         background: #000;
         width: 100%;
         padding: 4px;
         border-radius: 4px;
-      }
-      @include media-breakpoint-up(lg) {
-        background: #32cd32;
-        padding: 7px 15px 7px 5px;
-        border-radius: 5px;
-
-        &:after {
-          display: none;
-        }
-
-        &:hover {
-          color: #fff;
-        }
       }
     }
 
