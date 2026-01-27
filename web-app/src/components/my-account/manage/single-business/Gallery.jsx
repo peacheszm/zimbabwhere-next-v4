@@ -19,7 +19,7 @@ export default function Gallery({ data }) {
   return (
     <div className="manage_section gallery">
       <div className="ms_title">
-        <h3>Menu, Price List & Gallery</h3>
+        <h3>GALLERY, FLYER, MENU</h3>
       </div>
       <div className="ms_desc">
         <h4>Business window shop - FREE UPLOADS</h4>
@@ -36,18 +36,23 @@ export default function Gallery({ data }) {
           {uploads.length > 0 ? (
             <div className="gallery_sections">
               {/* Images Section */}
-              {uploads.some(item => {
+              {uploads.some((item) => {
                 const fileUrl = item.file?.url || item.file;
                 const mimeType = item.file?.mime_type || "";
-                return mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "");
+                return (
+                  mimeType?.startsWith("image/") ||
+                  /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "")
+                );
               }) && (
                 <div className="gallery_section">
                   <div className="gallery_grid">
                     {uploads.map((item, index) => {
                       const fileUrl = item.file?.url || item.file;
                       const mimeType = item.file?.mime_type || "";
-                      const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "");
-                      
+                      const isImage =
+                        mimeType?.startsWith("image/") ||
+                        /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "");
+
                       if (!isImage) return null;
 
                       return (
@@ -69,29 +74,43 @@ export default function Gallery({ data }) {
               )}
 
               {/* Other Files Section */}
-              {uploads.some(item => {
+              {uploads.some((item) => {
                 const fileUrl = item.file?.url || item.file;
                 const mimeType = item.file?.mime_type || "";
-                return !(mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || ""));
+                return !(
+                  mimeType?.startsWith("image/") ||
+                  /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "")
+                );
               }) && (
                 <div className="gallery_section docs_section">
                   <div className="file_list">
                     {uploads.map((item, index) => {
                       const fileUrl = item.file?.url || item.file;
                       const mimeType = item.file?.mime_type || "";
-                      const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "");
-                      
+                      const isImage =
+                        mimeType?.startsWith("image/") ||
+                        /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(fileUrl || "");
+
                       if (isImage) return null;
 
-                      const fileName = item.file?.filename || item.file?.name || (typeof item.file === 'string' ? item.file.split('/').pop() : "Unknown File");
+                      const fileName =
+                        item.file?.filename ||
+                        item.file?.name ||
+                        (typeof item.file === "string"
+                          ? item.file.split("/").pop()
+                          : "Unknown File");
 
                       return (
                         <div key={index} className="file_list_row">
                           <div className="file_info">
                             <IconFileDescription size={24} />
                             <div className="file_details">
-                              <span className="file_name" title={fileName}>{fileName}</span>
-                              <span className="file_type">{item.upload_type}</span>
+                              <span className="file_name" title={fileName}>
+                                {fileName}
+                              </span>
+                              <span className="file_type">
+                                {item.upload_type}
+                              </span>
                             </div>
                           </div>
                         </div>

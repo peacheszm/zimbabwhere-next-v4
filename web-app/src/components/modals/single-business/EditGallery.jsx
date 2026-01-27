@@ -27,7 +27,10 @@ export default function EditGallery() {
   const normalizedUploads = (businessData?.acf?.uploads || []).map((r) => ({
     upload_type: r.upload_type || "Image",
     file_url: r.file?.url || r.file || "",
-    file_name: r.file?.filename || r.file?.name || (typeof r.file === 'string' ? r.file.split('/').pop() : ""),
+    file_name:
+      r.file?.filename ||
+      r.file?.name ||
+      (typeof r.file === "string" ? r.file.split("/").pop() : ""),
     mime_type: r.file?.mime_type || "",
     gallery_row_id: r.gallery_row_id || "",
   }));
@@ -132,7 +135,11 @@ export default function EditGallery() {
         <div className="form_wrapper">
           <div className="form_row">
             <label>Upload New Files</label>
-            <Dropzone onDrop={onDrop} multiple={true} />
+            <Dropzone
+              onDrop={onDrop}
+              multiple={true}
+              subtitle="...or click to select any Images, flyers, Menus & Price lists file from your computer."
+            />
           </div>
 
           <div className="gallery_sections">
@@ -141,10 +148,15 @@ export default function EditGallery() {
               <label>Images</label>
               <div className="gallery_grid">
                 {fields.map((field, index) => {
-                  const previewUrl = field.file_url || (field.file ? URL.createObjectURL(field.file) : "");
-                  const mimeType = field.mime_type || (field.file ? field.file.type : "");
-                  const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
-                  
+                  const previewUrl =
+                    field.file_url ||
+                    (field.file ? URL.createObjectURL(field.file) : "");
+                  const mimeType =
+                    field.mime_type || (field.file ? field.file.type : "");
+                  const isImage =
+                    mimeType?.startsWith("image/") ||
+                    /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
+
                   if (!isImage) return null;
 
                   return (
@@ -180,10 +192,15 @@ export default function EditGallery() {
               <label>Documents & Other Files</label>
               <div className="file_list">
                 {fields.map((field, index) => {
-                  const previewUrl = field.file_url || (field.file ? URL.createObjectURL(field.file) : "");
-                  const mimeType = field.mime_type || (field.file ? field.file.type : "");
-                  const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
-                  
+                  const previewUrl =
+                    field.file_url ||
+                    (field.file ? URL.createObjectURL(field.file) : "");
+                  const mimeType =
+                    field.mime_type || (field.file ? field.file.type : "");
+                  const isImage =
+                    mimeType?.startsWith("image/") ||
+                    /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
+
                   if (isImage) return null;
 
                   return (

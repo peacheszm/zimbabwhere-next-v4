@@ -7,6 +7,7 @@ import styles from "./Dropzone.module.css";
 
 export default function Dropzone({
   title,
+  subtitle,
   files = [],
   onFilesChange,
   onDrop,
@@ -39,7 +40,7 @@ export default function Dropzone({
         }
       }
     },
-    [onDrop, onFilesChange, maxFiles]
+    [onDrop, onFilesChange, maxFiles],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -82,7 +83,9 @@ export default function Dropzone({
           <IconUpload size={24} className={styles.uploadIcon} />
           <h3 className={styles.title}>{title}</h3>
           <div className={styles.subtitle}>
-            ...or click to select a file from your computer
+            {subtitle
+              ? subtitle
+              : "...or click to select a file from your computer"}
           </div>
           <p className={styles.fileTypes}>
             Accepted: Images, PDF, Word documents (max {maxFiles} files)
