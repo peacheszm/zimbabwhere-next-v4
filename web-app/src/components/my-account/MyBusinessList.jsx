@@ -30,6 +30,11 @@ export default function MyBusinessList({ data }) {
             <div className="card_body">
               <div className="card_title">
                 <h5>{business.title}</h5>
+                <p>
+                  Please click 'edit' to update or add for free to your business
+                  page - any Photos, Brochures, menus, opening hours, social
+                  media links ..etc to best represent your business.
+                </p>
 
                 <div className="address">
                   <div className="icon">
