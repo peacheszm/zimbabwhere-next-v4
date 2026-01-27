@@ -145,17 +145,19 @@
     }
 
     .get_a_quote {
+      .icon {
+        background: #000;
+        width: 100%;
+        padding: 4px;
+        border-radius: 4px;
+      }
       @include media-breakpoint-up(lg) {
         background: #32cd32;
-        padding: 10px 25px;
+        padding: 7px 15px 7px 5px;
         border-radius: 5px;
 
         &:after {
           display: none;
-        }
-
-        .icon {
-          color: #fff;
         }
 
         &:hover {

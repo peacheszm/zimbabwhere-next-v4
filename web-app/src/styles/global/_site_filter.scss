@@ -52,6 +52,7 @@
       cursor: pointer;
       @include robot(400, 14, 120%);
       @include transition($transition-base);
+      height: 42px;
 
       &:hover {
         border-color: #2cb75f;

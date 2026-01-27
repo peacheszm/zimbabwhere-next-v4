@@ -51,7 +51,7 @@ export default function Navigation() {
   }, []);
 
   const closeNav = () => {
-    setIsNavOpen(false), setIsAccountNavOpen(false);
+    (setIsNavOpen(false), setIsAccountNavOpen(false));
   };
 
   return (
@@ -106,7 +106,12 @@ export default function Navigation() {
               className="get_a_quote"
             >
               <div className="icon">
-                <IconListDetails />
+                <Image
+                  src="/img/logo.png"
+                  alt="Zimbabwhere.com"
+                  width={100}
+                  height={100}
+                />
               </div>
               Get A Quote
             </Link>
