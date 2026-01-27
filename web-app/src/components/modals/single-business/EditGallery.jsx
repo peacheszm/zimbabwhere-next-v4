@@ -3,7 +3,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
-import { IconTrash, IconPlus } from "@tabler/icons-react";
+import { IconTrash, IconPlus, IconFile } from "@tabler/icons-react";
 import Image from "next/image";
 
 import Modal from "@/components/global/Modal";
@@ -27,6 +27,8 @@ export default function EditGallery() {
   const normalizedUploads = (businessData?.acf?.uploads || []).map((r) => ({
     upload_type: r.upload_type || "Image",
     file_url: r.file?.url || r.file || "",
+    file_name: r.file?.filename || r.file?.name || (typeof r.file === 'string' ? r.file.split('/').pop() : ""),
+    mime_type: r.file?.mime_type || "",
     gallery_row_id: r.gallery_row_id || "",
   }));
 
@@ -58,7 +60,9 @@ export default function EditGallery() {
       append({
         upload_type: "Image",
         file: file,
-        file_url: URL.createObjectURL(file),
+        file_url: URL.createObjectURL(file), // This is for preview
+        file_name: file.name,
+        mime_type: file.type,
         gallery_row_id: "",
       });
     });
@@ -131,39 +135,86 @@ export default function EditGallery() {
             <Dropzone onDrop={onDrop} multiple={true} />
           </div>
 
-          <div className="gallery_edit_list">
-            {fields.map((field, index) => {
-              const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(
-                field.file_url,
-              );
-              return (
-                <div key={field.id} className="gallery_edit_row">
-                  <div className="preview_box">
-                    {isImage ? (
-                      <img src={field.file_url} alt="Preview" />
-                    ) : (
-                      <div className="no_preview">No Preview</div>
-                    )}
-                  </div>
-                  <div className="form_row">
-                    <select {...register(`uploads.${index}.upload_type`)}>
-                      {UPLOAD_TYPES.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <button
-                    type="button"
-                    className="remove_btn"
-                    onClick={() => remove(index)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              );
-            })}
+          <div className="gallery_sections">
+            {/* Image Grid Section */}
+            <div className="gallery_section">
+              <label>Images</label>
+              <div className="gallery_grid">
+                {fields.map((field, index) => {
+                  const previewUrl = field.file_url || (field.file ? URL.createObjectURL(field.file) : "");
+                  const mimeType = field.mime_type || (field.file ? field.file.type : "");
+                  const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
+                  
+                  if (!isImage) return null;
+
+                  return (
+                    <div key={field.id} className="gallery_grid_item">
+                      <div className="preview_box">
+                        <img src={previewUrl} alt="Preview" />
+                        <button
+                          type="button"
+                          className="remove_btn_overlay"
+                          onClick={() => remove(index)}
+                          title="Remove Image"
+                        >
+                          <IconTrash size={16} />
+                        </button>
+                      </div>
+                      <div className="type_select">
+                        <select {...register(`uploads.${index}.upload_type`)}>
+                          {UPLOAD_TYPES.map((type) => (
+                            <option key={type} value={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Other Files Section */}
+            <div className="gallery_section">
+              <label>Documents & Other Files</label>
+              <div className="file_list">
+                {fields.map((field, index) => {
+                  const previewUrl = field.file_url || (field.file ? URL.createObjectURL(field.file) : "");
+                  const mimeType = field.mime_type || (field.file ? field.file.type : "");
+                  const isImage = mimeType?.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(previewUrl || "");
+                  
+                  if (isImage) return null;
+
+                  return (
+                    <div key={field.id} className="file_list_row">
+                      <div className="file_info">
+                        <IconFile size={20} />
+                        <span className="file_name" title={field.file_name}>
+                          {field.file_name || "Unknown File"}
+                        </span>
+                      </div>
+                      <div className="form_row">
+                        <select {...register(`uploads.${index}.upload_type`)}>
+                          {UPLOAD_TYPES.map((type) => (
+                            <option key={type} value={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <button
+                        type="button"
+                        className="remove_btn"
+                        onClick={() => remove(index)}
+                      >
+                        <IconTrash size={16} />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="form_row btn_group">
