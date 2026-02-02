@@ -42,7 +42,7 @@ export default async function ManageNotifications() {
                 userData={userData}
                 token={session.jwt}
               />
-              <div className="section_title">
+              <div className="independant_headings section_title">
                 <h2>Additional Independent Headings</h2>
 
                 <BuyButton

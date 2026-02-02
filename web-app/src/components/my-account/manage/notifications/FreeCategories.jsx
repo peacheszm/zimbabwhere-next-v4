@@ -56,7 +56,7 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
           <h2>Free Headings</h2>
           <p>
             You have access to free business headings. Select up to 3 headings
-            to receive notifications for.
+            to receive notifications for Quotes.
           </p>
         </div>
 

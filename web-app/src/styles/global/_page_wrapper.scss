@@ -43,15 +43,13 @@
     }
   }
 
-  h2 {
-    @include bank(normal, 24, 20px);
-    letter-spacing: -1px;
-    word-spacing: -5px;
-    color: #b9db96;
-    margin-left: -5px;
-    margin-bottom: 10px;
-    @include media-breakpoint-up(lg) {
-      font-size: 28px;
+  .independant_headings {
+    h2 {
+      @include bank(normal, 24, 20px);
+      letter-spacing: -1px;
+      word-spacing: -5px;
+
+      margin-left: -5px;
       margin-bottom: 10px;
     }
   }
