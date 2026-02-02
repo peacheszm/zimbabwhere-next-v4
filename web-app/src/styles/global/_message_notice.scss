@@ -5,28 +5,29 @@
   border: 1px solid;
   padding: 16px;
   margin-bottom: 24px;
+  width: 100%;
 
   &.success {
-    border-color: $green;
+    border-color: #32cd32;
     background: #ecfdf3;
     .icon {
-      color: $green;
+      color: #32cd32;
     }
   }
 
   &.error {
-    border-color: $red;
+    border-color: #ff0000;
     background: #fef3f2;
     .icon {
-      color: $red;
+      color: #ff0000;
     }
   }
 
   &.notice {
-    border-color: $noticeblue;
+    border-color: #2271b1;
     background: #f0f9ff;
     .icon {
-      color: $noticeblue;
+      color: #2271b1;
     }
   }
 
@@ -35,11 +36,13 @@
   }
 
   .message_title {
-    @include mont(600, 16, 120%);
+    // @include mont(600, 16, 120%);
     margin-bottom: 4px;
+    color: #000;
   }
 
   .message_body {
+    color: #000;
     font-size: 14px;
   }
 }

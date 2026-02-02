@@ -51,7 +51,7 @@ export default function SiteSideBar() {
           title="Click For Additional Advertising Options"
         >
           <img
-            src="https://admin.zimbabwhere.com/wp-content/uploads/2022/08/banner01-448x1024-1.jpeg"
+            src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/Every-page-Advertising-options-at-bottom-of-all-videos.png"
             alt=""
           />
         </Link>

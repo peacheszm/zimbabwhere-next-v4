@@ -3,6 +3,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+import ErrorMessage from "../global/Error";
 // Removed large eye icons in favor of a simple text toggle
 
 export default function RegisterForm() {
@@ -106,11 +108,7 @@ export default function RegisterForm() {
     <div className="page_forms">
       <form onSubmit={handleSubmit}>
         <div className="form_wrapper">
-          {error && (
-            <div className="form_row">
-              <div className="errors">{error}</div>
-            </div>
-          )}
+          {error && <ErrorMessage body={error} />}
 
           {success && (
             <div className="form_row">
