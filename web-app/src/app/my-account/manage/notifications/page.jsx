@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SiteSideBar from "@/components/global/Sidebar";
 
 import { getCurrentUserNotifications } from "@/lib/endpoints/account";
@@ -12,7 +13,14 @@ import FreeCategories from "@/components/my-account/manage/notifications/FreeCat
 import PaidIndependantCategories from "@/components/my-account/manage/notifications/PaidIndependantCategories";
 import PaidBusinessCategories from "@/components/my-account/manage/notifications/PaidBusinessCategories";
 import BuyButton from "@/components/global/BuyButton";
-
+import {
+  IconMenu2,
+  IconX,
+  IconChevronDown,
+  IconListDetails,
+  IconPlus,
+  IconUserCircle,
+} from "@tabler/icons-react";
 export default async function ManageNotifications() {
   const session = await getServerSession(authOptions);
 
@@ -49,6 +57,20 @@ export default async function ManageNotifications() {
                   title="$35 / Heading / Year"
                   subTitle="Buy extra Headings"
                 />
+              </div>
+
+              <div className="upsell_featured">
+                <h2>WANT TO BE MORE VISIBLE ON OUR PLATFORM</h2>
+                <p>
+                  Add your business for free and show more of who you are as a
+                  business.
+                </p>
+                <Link href="/add-a-business">
+                  <div className="icon">
+                    <IconPlus />
+                  </div>
+                  ADD BUSINESS
+                </Link>
               </div>
 
               {hasPaidCategories && (
