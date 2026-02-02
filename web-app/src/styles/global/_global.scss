@@ -162,7 +162,29 @@ textarea {
   }
 }
 
-.buy_link {
-  color: #32cd32;
-  text-decoration: underline;
+.buy_link_wrapper {
+  display: flex;
+  margin-top: 16px;
+  .buy_link {
+    color: #fff;
+    text-decoration: underline;
+    background: #b9db96;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    @include media-breakpoint-up(lg) {
+      font-size: 28px;
+    }
+  }
 }

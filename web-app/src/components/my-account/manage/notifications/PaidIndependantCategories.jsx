@@ -10,7 +10,7 @@ export default function PaidIndependantCategories({
   token,
 }) {
   const [orders, setOrders] = useState(
-    userData.data?.sign_up_to_notifications || []
+    userData.data?.sign_up_to_notifications || [],
   );
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null); // Will store order ID on success
@@ -20,12 +20,12 @@ export default function PaidIndependantCategories({
     return (
       <div className="account_selector">
         <div className="section_title">
-          <h2>Additional Independent Headings</h2>
+          {/* <h2>Additional Independent Headings</h2>
           <div className="no_paid">
             <Link href="/premium-services">
               Buy additional Independent Headings
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -81,7 +81,7 @@ export default function PaidIndependantCategories({
       console.error("❌ Notification update failed:", error);
       setSubmitError(
         `Order #${orderId} update failed: ` +
-          (error.message || "Please try again.")
+          (error.message || "Please try again."),
       );
     } finally {
       setIsUpdating(null);
@@ -101,7 +101,7 @@ export default function PaidIndependantCategories({
           .map((cat) => {
             const catId = typeof cat === "object" ? cat.term_id : cat;
             return cats.find(
-              (c) => c.value === catId || c.value === String(catId)
+              (c) => c.value === catId || c.value === String(catId),
             );
           })
           .filter(Boolean);
@@ -185,8 +185,8 @@ function OrderRow({
               {isUpdating
                 ? "Updating..."
                 : isSuccess
-                ? "Saved!"
-                : "Update Headings"}
+                  ? "Saved!"
+                  : "Update Headings"}
             </button>
           </div>
         </div>

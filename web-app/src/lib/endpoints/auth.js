@@ -23,7 +23,23 @@ export async function registerUser(userData) {
       }),
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type");
+    let data;
+    let text;
+
+    if (contentType && contentType.includes("application/json")) {
+      try {
+        data = await response.json();
+      } catch (e) {
+        text = await response.text();
+        console.error("Failed to parse JSON even though content-type was application/json. Raw response:", text);
+        throw new Error("The server sent a malformed response. Please contact support.");
+      }
+    } else {
+      text = await response.text();
+      console.error("Non-JSON response from WordPress:", text);
+      throw new Error("Invalid response from server. It might be down or misconfigured.");
+    }
 
     if (!response.ok) {
       throw new Error(
@@ -63,7 +79,15 @@ export async function authenticateUser(login, password) {
       }),
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type");
+    let data;
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      console.error("Non-JSON response from WordPress:", text);
+      throw new Error("Invalid response from server. Please try again later.");
+    }
 
     if (!response.ok) {
       throw new Error(

@@ -75,13 +75,38 @@ export default function RegisterForm() {
         }),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type");
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+        console.log(data);
+      } else {
+        const text = await response.text();
+        console.error("Registration error response:", text);
+        throw new Error(
+          "The server returned an invalid response. Please try again.",
+        );
+      }
 
       if (!response.ok) {
         throw new Error(data.message || "Registration failed");
       }
+      console.log(data);
 
-      setSuccess("Registration successful! Please log in.");
+      setSuccess("Registration successful! Logging you in...");
+
+      // Automatically sign in the user
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (result?.error) {
+        throw new Error(
+          "Registration successful, but auto-login failed. Please log in manually.",
+        );
+      }
 
       // Clear form
       setFormData({
@@ -93,10 +118,10 @@ export default function RegisterForm() {
         confirm_password: "",
       });
 
-      // Redirect to login after 2 seconds
+      // Redirect to homepage after a short delay
       setTimeout(() => {
-        router.push("/auth/login");
-      }, 2000);
+        router.push("/");
+      }, 1500);
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");
     } finally {

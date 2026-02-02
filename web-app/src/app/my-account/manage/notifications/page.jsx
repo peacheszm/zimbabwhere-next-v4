@@ -42,10 +42,15 @@ export default async function ManageNotifications() {
                 userData={userData}
                 token={session.jwt}
               />
+              <div className="section_title">
+                <h2>Additional Independent Headings</h2>
 
-              <h1>Additional Independent Headings</h1>
-              <p>$35 / Year / Heading</p>
-              <BuyButton title="Buy additional Independent Headings" />
+                <BuyButton
+                  title="$35 / Heading / Year"
+                  subTitle="Buy extra Headings"
+                />
+              </div>
+
               {hasPaidCategories && (
                 <div className="page_title premium_section_header">
                   <h1>Premium Notification Headings</h1>

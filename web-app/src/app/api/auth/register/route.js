@@ -48,7 +48,10 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Registration error:", error);
+    console.error("Registration error details:", {
+      message: error.message,
+      stack: error.stack,
+    });
 
     // Handle specific WordPress errors
     if (error.message.includes("already exists")) {
