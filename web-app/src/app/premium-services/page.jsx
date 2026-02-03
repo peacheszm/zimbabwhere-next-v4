@@ -88,6 +88,10 @@ export default async function PrivacyPolicyPage() {
           <div className="paid_sections_wrapper">
             <div className="paid_section">
               <h3>Extra Headings – $35 / Heading / Year</h3>
+              <img
+                src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/Business-Listing-Zimbabwhere.com_.jpg"
+                alt=""
+              />
               <p>
                 (Available in both Advertisers and Independent Sections on the
                 APP &amp; Website)
@@ -113,7 +117,7 @@ export default async function PrivacyPolicyPage() {
               <h3>Premium Listing – $450 / Year</h3>
               <img
                 class="alignnone wp-image-2959 size-full"
-                src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/Premium-Listings-2.jpg"
+                src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/hero_ad.jpg"
                 alt="Premium Listings 2"
                 width="1724"
                 height="464"
@@ -157,7 +161,7 @@ export default async function PrivacyPolicyPage() {
               <h3>Home Page Billboard Display – $200 / Month</h3>
               <img
                 class="alignnone wp-image-2961 size-full"
-                src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/HomePageBanner-2-scaled.jpg"
+                src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/homepage_display.png"
                 alt="Homepagebanner 2"
                 width="2560"
                 height="993"
