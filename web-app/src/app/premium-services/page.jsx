@@ -31,6 +31,8 @@ export default async function PrivacyPolicyPage() {
             on our platform by adding more headings or promoting your free
             listing please see your options below.
           </p>
+          <br />
+          <br />
           <h3>Free Use of our Quoting System – What you get</h3>
           <ul>
             <li>
@@ -84,7 +86,10 @@ export default async function PrivacyPolicyPage() {
               All your headings you are listed under to show your main services
             </li>
           </ul>
-          <h2>Paid For Advertising Options:</h2>
+          <br />
+          <br />
+          <h2 style={{ color: "#2cb75f" }}>Paid For Advertising Options:</h2>
+
           <div className="paid_sections_wrapper">
             <div className="paid_section">
               <h3>Extra Headings – $35 / Heading / Year</h3>
@@ -113,6 +118,8 @@ export default async function PrivacyPolicyPage() {
                 Buy Extra Headings
               </a>
             </div>
+            <br />
+            <br />
             <div className="paid_section">
               <h3>Premium Listing – $450 / Year</h3>
               <img
@@ -156,7 +163,8 @@ export default async function PrivacyPolicyPage() {
                 Buy Premium Listing
               </a>
             </div>
-
+            <br />
+            <br />
             <div class="paid_section">
               <h3>Home Page Billboard Display – $200 / Month</h3>
               <img
@@ -189,7 +197,9 @@ export default async function PrivacyPolicyPage() {
               >
                 Buy Home Page Billboard
               </a>
-            </div>
+            </div>{" "}
+            <br />
+            <br />
             <div class="paid_section">
               <h3>Home Page Logo Display – $10 / Month</h3>
               <img
@@ -221,13 +231,14 @@ export default async function PrivacyPolicyPage() {
               >
                 Buy Home Page Logo
               </a>
-            </div>
-
+            </div>{" "}
+            <br />
+            <br />
             <div class="paid_section">
               <h3>Video Display on every Page – $50 / Month</h3>
               <img
                 class="alignnone wp-image-2963 size-full"
-                src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/Video-image-web.jpg"
+                src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/VideoOnAllPages-3-2.jpg"
                 alt="Videoonallpages 3 2"
                 width="1710"
                 height="825"
@@ -249,8 +260,9 @@ export default async function PrivacyPolicyPage() {
               >
                 Buy Video Display
               </a>
-            </div>
-
+            </div>{" "}
+            <br />
+            <br />
             <div class="paid_section promo">
               <h3>Promotional Video Production – Contact Us</h3>
               (Available only in Advertisers Section on the APP &amp; Website)
