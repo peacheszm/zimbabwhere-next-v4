@@ -46,7 +46,7 @@ export default function FeaturedBusinessbanner({ businesses }) {
                 </Link>
               </div>
             </SwiperSlide>
-          )
+          ),
       )}
     </Swiper>
   );

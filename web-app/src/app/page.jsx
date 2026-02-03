@@ -20,20 +20,19 @@ export default async function Home() {
 
   return (
     <div className="home_page">
+      <div className="mobile_get_quote">
+        <Link href="/get-a-quote">
+          <div className="icon">
+            <IconListDetails />
+          </div>
+          Get A Quote
+        </Link>
+      </div>
       <FeaturedBusinessBanner businesses={featuredBusiness} />
       <FeaturedBusinessLogos businesses={businessLogos} />
       <div className="page_wrapper small_pad">
         <div className="container">
           <main className="main">
-            <div className="mobile_get_quote">
-              <Link href="/get-a-quote">
-                <div className="icon">
-                  <IconListDetails />
-                </div>
-                Get A Quote
-              </Link>
-            </div>
-
             <Quotes />
           </main>
           <aside className="aside">
