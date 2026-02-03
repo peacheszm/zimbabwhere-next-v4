@@ -98,7 +98,7 @@ export default function RegisterForm() {
       // Automatically sign in the user
       const result = await signIn("credentials", {
         redirect: false,
-        email: formData.email,
+        login: formData.email,
         password: formData.password,
       });
 
@@ -120,7 +120,7 @@ export default function RegisterForm() {
 
       // Redirect to homepage after a short delay
       setTimeout(() => {
-        router.push("/");
+        router.push("/my-account");
       }, 1500);
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");

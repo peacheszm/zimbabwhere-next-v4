@@ -16,8 +16,9 @@ export const authOptions = {
 
           // 2) Otherwise, obtain JWT from WordPress
           if (!jwt) {
+            const login = credentials.login || credentials.email;
             const authData = await authenticateUser(
-              credentials.login,
+              login,
               credentials.password
             );
 
