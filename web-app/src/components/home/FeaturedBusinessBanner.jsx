@@ -37,12 +37,12 @@ export default function FeaturedBusinessbanner({ businesses }) {
                     backgroundImage: `url(${bus.meta.business_banner.url})`,
                   }}
                 >
-                  <Image
+                  {/* <Image
                     src="/img/shims/banner_shim.png"
                     alt={bus.meta.business_banner.name}
                     width="1600"
                     height="1000"
-                  />
+                  /> */}
                 </Link>
               </div>
             </SwiperSlide>

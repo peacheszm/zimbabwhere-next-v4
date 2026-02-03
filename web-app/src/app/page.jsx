@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import FeaturedBusinessBanner from "@/components/home/FeaturedBusinessBanner";
 import FeaturedBusinessLogos from "@/components/home/FeaturedBusinessLogos";
 import Quotes from "@/components/home/Quotes";
@@ -23,7 +24,12 @@ export default async function Home() {
       <div className="mobile_get_quote">
         <Link href="/get-a-quote">
           <div className="icon">
-            <IconListDetails />
+            <Image
+              src="/img/logo.png"
+              alt="Zimbabwhere.com"
+              width={100}
+              height={100}
+            />
           </div>
           Get A Quote
         </Link>
