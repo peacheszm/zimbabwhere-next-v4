@@ -28,11 +28,13 @@ export default function EditHours() {
   const isOpen = isModalOpen("EditHours");
   const businessData = getModalProps("EditHours");
 
-  const initialHours = businessData?.acf?.opening_times || DAYS_OF_WEEK.map(day => ({
-    day,
-    opening_time: "",
-    closing_time: "",
-  }));
+  const initialHours =
+    businessData?.acf?.opening_times ||
+    DAYS_OF_WEEK.map((day) => ({
+      day,
+      opening_time: "",
+      closing_time: "",
+    }));
 
   const {
     register,
@@ -62,7 +64,7 @@ export default function EditHours() {
     try {
       // Filter out empty entries
       const filteredTimes = data.opening_times.filter(
-        (time) => time.day && (time.opening_time || time.closing_time)
+        (time) => time.day && (time.opening_time || time.closing_time),
       );
 
       const updateData = {
@@ -71,7 +73,11 @@ export default function EditHours() {
         },
       };
 
-      await updateCurrentUserBusinesses(session.jwt, businessData.id, updateData);
+      await updateCurrentUserBusinesses(
+        session.jwt,
+        businessData.id,
+        updateData,
+      );
       router.refresh();
       handleClose();
     } catch (error) {
@@ -112,7 +118,7 @@ export default function EditHours() {
                 </div>
                 <button
                   type="button"
-                  className="remove_btn"
+                  className="remove_btn icon"
                   onClick={() => remove(index)}
                 >
                   <IconTrash size={18} />
@@ -124,17 +130,18 @@ export default function EditHours() {
           <button
             type="button"
             className="add_btn secondary"
-            onClick={() => append({ day: "Monday", opening_time: "", closing_time: "" })}
+            onClick={() =>
+              append({ day: "Monday", opening_time: "", closing_time: "" })
+            }
           >
-            <IconPlus size={18} /> Add Hour Slot
+            <div className="icon">
+              <IconPlus size={18} />
+            </div>{" "}
+            Add Hour Slot
           </button>
 
           <div className="form_row btn_group">
-            <button
-              type="submit"
-              className="primary"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Hours"}
             </button>
           </div>

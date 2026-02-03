@@ -25,10 +25,10 @@ export default function Categories({ data, cats }) {
   return (
     <div className="manage_section categories">
       <div className="ms_title">
-        <h3>Business Categories</h3>
+        <h3>Business Headings</h3>
       </div>
       <div className="ms_desc">
-        <h4>Business Categories</h4>
+        <h4>Business Headings</h4>
         <p>
           Below are your listed free headings. You can purchase more headings to
           increase your chances of receiving quotes and being found on our site.
@@ -52,7 +52,7 @@ export default function Categories({ data, cats }) {
       </div>
 
       <div className="ms_footer">
-        <button onClick={handleOpenModal}>Edit Categories</button>
+        <button onClick={handleOpenModal}>Edit Headings</button>
         <BuyButton title="$35 / Heading / Year" subTitle="Buy Extra Headings" />
       </div>
 
