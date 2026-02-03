@@ -55,7 +55,7 @@ export default function EditSocial() {
     try {
       // Filter out empty entries
       const filteredProfiles = data.social.filter(
-        (profile) => profile.social_platform && profile.url
+        (profile) => profile.social_platform && profile.url,
       );
 
       const updateData = {
@@ -64,7 +64,11 @@ export default function EditSocial() {
         },
       };
 
-      await updateCurrentUserBusinesses(session.jwt, businessData.id, updateData);
+      await updateCurrentUserBusinesses(
+        session.jwt,
+        businessData.id,
+        updateData,
+      );
       router.refresh();
       handleClose();
     } catch (error) {
@@ -100,7 +104,7 @@ export default function EditSocial() {
                 </div>
                 <button
                   type="button"
-                  className="remove_btn"
+                  className="remove_btn icon"
                   onClick={() => remove(index)}
                 >
                   <IconTrash size={18} />
@@ -114,15 +118,14 @@ export default function EditSocial() {
             className="add_btn secondary"
             onClick={() => append({ social_platform: "Facebook", url: "" })}
           >
-            <IconPlus size={18} /> Add Social Profile
+            <div className="icon">
+              <IconPlus size={18} />
+            </div>{" "}
+            Add Social Profile
           </button>
 
           <div className="form_row btn_group">
-            <button
-              type="submit"
-              className="primary"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Social Links"}
             </button>
           </div>

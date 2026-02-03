@@ -72,7 +72,11 @@ export default function EditVideos() {
         },
       };
 
-      await updateCurrentUserBusinesses(session.jwt, businessData.id, updateData);
+      await updateCurrentUserBusinesses(
+        session.jwt,
+        businessData.id,
+        updateData,
+      );
       router.refresh();
       handleClose();
     } catch (error) {
@@ -108,7 +112,7 @@ export default function EditVideos() {
                 </div>
                 <button
                   type="button"
-                  className="remove_btn"
+                  className="remove_btn icon"
                   onClick={() => remove(index)}
                 >
                   <IconTrash size={18} />
@@ -122,15 +126,14 @@ export default function EditVideos() {
             className="add_btn secondary"
             onClick={() => append({ video_title: "", video_url: "" })}
           >
-            <IconPlus size={18} /> Add Video
+            <div className="icon">
+              <IconPlus size={18} />
+            </div>{" "}
+            Add Video
           </button>
 
           <div className="form_row btn_group">
-            <button
-              type="submit"
-              className="primary"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Videos"}
             </button>
           </div>
