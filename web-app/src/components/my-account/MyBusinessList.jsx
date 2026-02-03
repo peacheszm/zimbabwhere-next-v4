@@ -5,7 +5,12 @@ export default function MyBusinessList({ data }) {
   return (
     <div className="my_business_list">
       <div className="page_title">
-        <h1>My Businesses</h1>
+        <h1 style={{ marginBottom: "32px" }}>My Businesses</h1>
+        <p>
+          Please click 'edit' to update or add for free to your business page -
+          any Photos, Brochures, menus, opening hours, social media links ..etc
+          to best represent your business.
+        </p>
       </div>
 
       <div className="my_business_listings">
@@ -30,11 +35,6 @@ export default function MyBusinessList({ data }) {
             <div className="card_body">
               <div className="card_title">
                 <h5>{business.title}</h5>
-                <p>
-                  Please click 'edit' to update or add for free to your business
-                  page - any Photos, Brochures, menus, opening hours, social
-                  media links ..etc to best represent your business.
-                </p>
 
                 <div className="address">
                   <div className="icon">
