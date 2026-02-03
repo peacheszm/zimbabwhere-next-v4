@@ -227,7 +227,7 @@ export default async function PrivacyPolicyPage() {
               <h3>Video Display on every Page – $50 / Month</h3>
               <img
                 class="alignnone wp-image-2963 size-full"
-                src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/VideoOnAllPages-3-2.jpg"
+                src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/Video-image-web.jpg"
                 alt="Videoonallpages 3 2"
                 width="1710"
                 height="825"
