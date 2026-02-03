@@ -1,27 +1,24 @@
 export async function getUserProfile(userId, token) {
-  try {
-    const url = `${
-      process.env.NEXT_PUBLIC_WP_SITE_URL
-    }/?rest_route=/wine-app/v1/users/${userId}/profile`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch user profile: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching user profile:", error);
-    throw error;
-  }
+  // try {
+  //   const url = `${
+  //     process.env.NEXT_PUBLIC_WP_SITE_URL
+  //   }/?rest_route=/wine-app/v1/users/${userId}/profile`;
+  //   const response = await fetch(url, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`Failed to fetch user profile: ${response.statusText}`);
+  //   }
+  //   const data = await response.json();
+  //   return data;
+  // } catch (error) {
+  //   console.error("Error fetching user profile:", error);
+  //   throw error;
+  // }
 }
 
 export async function updateUserProfile(userId, profileData, token) {

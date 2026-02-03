@@ -11,7 +11,7 @@ export default async function MyAccountPage() {
   const session = await getServerSession(authOptions);
 
   const response = await getCurrentUserBusinesses(session.jwt);
-  console.log(response);
+  
 
   return (
     <div className="page_wrapper">
