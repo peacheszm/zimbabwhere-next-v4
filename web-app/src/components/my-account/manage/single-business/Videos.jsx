@@ -55,7 +55,7 @@ export default function Videos({ data }) {
               ))}
             </div>
           ) : (
-            <p>No videos provided yet.</p>
+            <p style={{ color: "#b9db96" }}>No videos provided yet.</p>
           )}
         </div>
       </div>

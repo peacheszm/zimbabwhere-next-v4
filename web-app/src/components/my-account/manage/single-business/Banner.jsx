@@ -41,13 +41,18 @@ export default function Banner({ data }) {
             style={{ objectFit: "cover", width: "100%", height: "auto" }}
           />
         ) : (
-          <div className="placeholder_banner">No uploads provided yet.</div>
+          <div className="placeholder_banner" style={{ color: "#b9db96" }}>
+            No uploads provided yet.
+          </div>
         )}
       </div>
 
       <div className="ms_footer">
         <button onClick={handleOpenModal}>Edit Banner</button>
-        <BuyButton title="Buy Home Page Billboard" />
+        <BuyButton
+          title="$200 / Billboard / Year"
+          subTitle="Buy Home Page Billboard"
+        />
       </div>
 
       <EditBanner />

@@ -121,7 +121,7 @@ export default function Gallery({ data }) {
               )}
             </div>
           ) : (
-            <p>No gallery files added yet</p>
+            <p style={{ color: "#b9db96" }}>No gallery files added yet</p>
           )}
         </div>
       </div>

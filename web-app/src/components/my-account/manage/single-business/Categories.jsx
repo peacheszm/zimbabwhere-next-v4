@@ -53,7 +53,7 @@ export default function Categories({ data, cats }) {
 
       <div className="ms_footer">
         <button onClick={handleOpenModal}>Edit Categories</button>
-        <BuyButton title="Buy Extra Headings" />
+        <BuyButton title="$35 / Heading / Year" subTitle="Buy Extra Headings" />
       </div>
 
       <EditCategories />

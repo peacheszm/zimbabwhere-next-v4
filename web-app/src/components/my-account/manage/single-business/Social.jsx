@@ -69,7 +69,7 @@ export default function Social({ data }) {
               })}
             </div>
           ) : (
-            <p>No social profiles provided yet.</p>
+            <p style={{ color: "#b9db96" }}>No social profiles provided yet.</p>
           )}
         </div>
       </div>

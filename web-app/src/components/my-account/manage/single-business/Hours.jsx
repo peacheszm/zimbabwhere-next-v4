@@ -43,7 +43,7 @@ export default function Hours({ data }) {
               ))}
             </div>
           ) : (
-            <p>No opening times provided yet.</p>
+            <p style={{ color: "#b9db96" }}>No opening times provided yet.</p>
           )}
         </div>
       </div>

@@ -57,6 +57,7 @@
 
   .ms_footer {
     display: flex;
+    align-items: center;
     button {
       background: #2cb75f;
       padding: 10px 15px;
@@ -67,19 +68,9 @@
       text-transform: uppercase;
     }
 
-    a {
-      text-transform: uppercase;
-      background: #32cd32;
-      border-radius: 5px;
-      justify-content: center;
-      align-items: center;
-      display: flex;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 100%;
+    .buy_link_wrapper {
       margin-left: auto;
-      padding: 10px 15px;
+      transform: scale(0.8);
     }
   }
 
@@ -190,7 +181,7 @@
     .gallery_section {
       display: flex;
       flex-direction: column;
-      
+
       &.docs_section {
         border-top: 1px solid rgba(44, 183, 95, 0.2);
         padding-top: 24px;
@@ -246,7 +237,7 @@
           display: flex;
           align-items: center;
           gap: 12px;
-          
+
           svg {
             color: #2cb75f;
             max-width: 24px;
