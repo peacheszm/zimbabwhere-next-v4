@@ -155,7 +155,11 @@ export default function BusinessCard({ item, premium = false }) {
                 )
                 .map((attachment, i) => (
                   <SwiperSlide key={attachment.file.id || i}>
-                    <div className="gallery_item">
+                    <Link
+                      href={`/business/${item.slug}?img=${encodeURIComponent(attachment.file.url)}`}
+                      className="gallery_item"
+                      style={{ display: "block" }}
+                    >
                       <Image
                         src={attachment.file.url}
                         alt={
@@ -165,7 +169,7 @@ export default function BusinessCard({ item, premium = false }) {
                         width={200}
                         height={150}
                       />
-                    </div>
+                    </Link>
                   </SwiperSlide>
                 ))}
             </Swiper>

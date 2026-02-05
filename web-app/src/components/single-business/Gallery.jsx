@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 
@@ -17,9 +18,22 @@ export default function Gallery({ post }) {
   if (!post.acf.uploads) return;
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const imgParam = searchParams.get("img");
 
   const images =
     post.acf?.uploads?.filter((file) => file.file.subtype !== "pdf") || [];
+
+  useEffect(() => {
+    if (imgParam && images.length > 0 && selectedImageIndex === null) {
+      const index = images.findIndex((file) => file.file.url === imgParam);
+      if (index !== -1) {
+        setSelectedImageIndex(index);
+      }
+    }
+  }, [imgParam, images, selectedImageIndex]);
 
   const galleryOpen = (index) => {
     setSelectedImageIndex(index);
@@ -27,6 +41,14 @@ export default function Gallery({ post }) {
 
   const galleryClose = () => {
     setSelectedImageIndex(null);
+    // Clear the img param from URL when closing
+    if (imgParam) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("img");
+      router.replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`, {
+        scroll: false,
+      });
+    }
   };
 
   return (
