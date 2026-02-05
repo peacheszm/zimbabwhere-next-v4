@@ -75,10 +75,10 @@ export default function BusinessCard({ item, premium = false }) {
         <div className="btn_group">
           {item?.phone_number && (
             <div className="call">
-              {item.attachments && (
+              {item.attachments.length > 0 && (
                 <div class="attachment">
                   <Link href={`/business/${item.slug}#uploads`}>
-                    Brochure <br />
+                    Images <br />
                     Flyer <br />
                     Menu
                   </Link>
