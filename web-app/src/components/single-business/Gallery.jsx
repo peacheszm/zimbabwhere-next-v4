@@ -18,6 +18,7 @@ export default function Gallery({ post }) {
   if (!post.acf.uploads) return;
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const hasAutoOpened = useRef(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -27,13 +28,14 @@ export default function Gallery({ post }) {
     post.acf?.uploads?.filter((file) => file.file.subtype !== "pdf") || [];
 
   useEffect(() => {
-    if (imgParam && images.length > 0 && selectedImageIndex === null) {
+    if (imgParam && images.length > 0 && !hasAutoOpened.current) {
       const index = images.findIndex((file) => file.file.url === imgParam);
       if (index !== -1) {
         setSelectedImageIndex(index);
+        hasAutoOpened.current = true;
       }
     }
-  }, [imgParam, images, selectedImageIndex]);
+  }, [imgParam, images]);
 
   const galleryOpen = (index) => {
     setSelectedImageIndex(index);
