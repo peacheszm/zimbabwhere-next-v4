@@ -16,7 +16,7 @@ export default function Share({ post }) {
 
   const pageurl = () => url;
   return (
-    <div className="business_share">
+    <div className="business_share" style={{ paddingTop: "24px" }}>
       <h4>Share Listing</h4>
       <div className="share_items">
         <a

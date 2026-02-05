@@ -20,7 +20,6 @@ import {
 import BusinessRatings from "@/components/single-business/BusinessRatings";
 
 export default function BusinessCard({ item, premium = false }) {
-  console.log(item);
   return (
     <div
       key={`item-${item.id}`}
