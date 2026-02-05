@@ -63,6 +63,12 @@
       flex-direction: column;
       margin-left: 16px;
     }
+
+    .btn_group {
+      @include media-breakpoint-up(lg) {
+        max-width: 142px;
+      }
+    }
   }
 
   h3 {
