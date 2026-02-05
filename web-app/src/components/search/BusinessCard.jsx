@@ -75,7 +75,7 @@ export default function BusinessCard({ item, premium = false }) {
           {item?.phone_number && (
             <div className="call">
               {item.attachments.length > 0 && (
-                <div class="attachment">
+                <div className="attachment">
                   <Link href={`/business/${item.slug}#uploads`}>
                     Images <br />
                     Flyer <br />

@@ -123,7 +123,7 @@ export default async function PrivacyPolicyPage() {
             <div className="paid_section">
               <h3>Premium Listing – $450 / Year</h3>
               <img
-                class="alignnone wp-image-2959 size-full"
+                className="alignnone wp-image-2959 size-full"
                 src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/hero_ad.jpg"
                 alt="Premium Listings 2"
                 width="1724"
@@ -165,10 +165,10 @@ export default async function PrivacyPolicyPage() {
             </div>
             <br />
             <br />
-            <div class="paid_section">
+            <div className="paid_section">
               <h3>Home Page Billboard Display – $200 / Month</h3>
               <img
-                class="alignnone wp-image-2961 size-full"
+                className="alignnone wp-image-2961 size-full"
                 src="https://admin.zimbabwhere.com/wp-content/uploads/2026/02/homepage_display.png"
                 alt="Homepagebanner 2"
                 width="2560"
@@ -200,10 +200,10 @@ export default async function PrivacyPolicyPage() {
             </div>{" "}
             <br />
             <br />
-            <div class="paid_section">
+            <div className="paid_section">
               <h3>Home Page Logo Display – $10 / Month</h3>
               <img
-                class="alignnone wp-image-2960 size-full"
+                className="alignnone wp-image-2960 size-full"
                 src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/HomePageLogo-2.jpg"
                 alt="Homepagelogo 2"
                 width="2416"
@@ -234,10 +234,10 @@ export default async function PrivacyPolicyPage() {
             </div>{" "}
             <br />
             <br />
-            <div class="paid_section">
+            <div className="paid_section">
               <h3>Video Display on every Page – $50 / Month</h3>
               <img
-                class="alignnone wp-image-2963 size-full"
+                className="alignnone wp-image-2963 size-full"
                 src="https://admin.zimbabwhere.com/wp-content/uploads/2022/09/VideoOnAllPages-3-2.jpg"
                 alt="Videoonallpages 3 2"
                 width="1710"
@@ -263,7 +263,7 @@ export default async function PrivacyPolicyPage() {
             </div>{" "}
             <br />
             <br />
-            <div class="paid_section promo">
+            <div className="paid_section promo">
               <h3>Promotional Video Production – Contact Us</h3>
               (Available only in Advertisers Section on the APP &amp; Website)
               Zimbabwhere.com has expertise, knowledge and some of the best

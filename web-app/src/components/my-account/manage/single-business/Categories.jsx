@@ -32,8 +32,6 @@ export default function Categories({ data, cats }) {
         <p>
           Below are your listed free headings. You can purchase more headings to
           increase your chances of receiving quotes and being found on our site.
-          3D Display Manufacturers4x4 Accessories ShopsAgricultural Seed
-          Suppliers
         </p>
       </div>
 
