@@ -11,7 +11,7 @@ import { updateCurrentUserBusinesses } from "@/lib/endpoints/account";
 
 const SOCIAL_PLATFORMS = [
   "Facebook",
-  "Twitter",
+  "X (Twitter)",
   "Instagram",
   "Linkedin",
   "Youtube",
