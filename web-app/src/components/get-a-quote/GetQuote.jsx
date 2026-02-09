@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
+import { useSearchParams } from "next/navigation";
+
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,12 +14,16 @@ import { useModal } from "@/contexts/ModalContext";
 
 import ThankYouQuoteModal from "@/components/modals/ThankYouQuote";
 
-export default function GetQuote({ cats, towns }) {
+export default function GetQuote({ cats, towns, business }) {
+  const searchParams = useSearchParams();
+  const bid = searchParams.get("bid");
+
   const { openModal, closeModal } = useModal();
 
   const handleOpenModal = () => {
     openModal("ThankYouQuoteModal");
   };
+
   const {
     register,
     handleSubmit,
@@ -28,6 +34,8 @@ export default function GetQuote({ cats, towns }) {
   } = useForm({
     defaultValues: {
       quote_files: [],
+      quote_from_company: business?.id || "",
+      selectedBusinessCategories: [],
     },
   });
 
@@ -60,6 +68,18 @@ export default function GetQuote({ cats, towns }) {
         "quote_from_category",
         JSON.stringify(data.quote_from_category),
       );
+    } else if (
+      data.selectedBusinessCategories &&
+      data.selectedBusinessCategories.length > 0
+    ) {
+      formData.append(
+        "quote_from_category",
+        JSON.stringify(data.selectedBusinessCategories),
+      );
+    }
+
+    if (data.quote_from_company) {
+      formData.append("quote_from_company", data.quote_from_company);
     }
 
     if (data.ideal_start) {
@@ -97,6 +117,28 @@ export default function GetQuote({ cats, towns }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {business && (
+          <div className="form_wrapper">
+            <input type="hidden" {...register("quote_from_company")} />
+            <div className="form_row">
+              <label>I want quotes from {business?.title?.rendered}</label>
+              <p className="field_desc">Send to other businesses listed in</p>
+              <div className="b_categorys">
+                {business?._embedded?.["wp:term"]?.[0]?.map((item, index) => (
+                  <div key={index} className="form_row checkbox">
+                    <input
+                      id={`cat${item.id}`}
+                      type="checkbox"
+                      value={item.id}
+                      {...register("selectedBusinessCategories")}
+                    />
+                    <label htmlFor={`cat${item.id}`}>{item.name}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="form_wrapper">
           <div className="form_row">
             <label htmlFor="title">Quote Title</label>
@@ -139,26 +181,28 @@ export default function GetQuote({ cats, towns }) {
             />
           </div>
 
-          <div className="form_row">
-            <label htmlFor="quote_from_category">I want quotes from</label>
-            <Controller
-              name="quote_from_category"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  inputId="quote_from_category"
-                  isMulti
-                  options={cats}
-                  onChange={(val) => field.onChange(val)}
-                  placeholder="Choose multiple headings to reach as many companies as possible…"
-                  classNamePrefix="react-select"
-                  menuPlacement="top"
-                />
-              )}
-            />
-          </div>
+          {!business && (
+            <div className="form_row">
+              <label htmlFor="quote_from_category">I want quotes from</label>
+              <Controller
+                name="quote_from_category"
+                control={control}
+                rules={{ required: !business }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    inputId="quote_from_category"
+                    isMulti
+                    options={cats}
+                    onChange={(val) => field.onChange(val)}
+                    placeholder="Choose multiple headings to reach as many companies as possible…"
+                    classNamePrefix="react-select"
+                    menuPlacement="top"
+                  />
+                )}
+              />
+            </div>
+          )}
 
           <div className="form_row">
             <label htmlFor="town_city">Town / City</label>
@@ -272,8 +316,8 @@ export default function GetQuote({ cats, towns }) {
           </div>
 
           <div className="form_row btn_group">
-            <button type="submit" className="primary">
-              Submit
+            <button type="submit" className="primary" disabled={isSubmitting}>
+              {isSubmitting ? "Busy sending..." : "Submit"}
             </button>
           </div>
         </div>

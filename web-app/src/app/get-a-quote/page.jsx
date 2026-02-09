@@ -5,7 +5,21 @@ import {
   getBusinessTowns,
 } from "@/lib/endpoints/json/json";
 
-export default async function GetAQuotePage() {
+import { getBusinessById } from "@/lib/endpoints/business";
+
+export default async function GetAQuotePage({ searchParams }) {
+  const params = await searchParams;
+  const bid = params?.bid;
+
+  let business = null;
+  if (bid) {
+    try {
+      business = await getBusinessById(bid);
+    } catch (error) {
+      console.error("Error fetching business for quote:", error);
+    }
+  }
+
   const [businessCats, businessTowns] = await Promise.all([
     getBusinessCategories(),
     getBusinessTowns(),
@@ -25,7 +39,11 @@ export default async function GetAQuotePage() {
             </p>
           </div>
 
-          <GetQuote cats={businessCats} towns={businessTowns} />
+          <GetQuote
+            cats={businessCats}
+            towns={businessTowns}
+            business={business}
+          />
         </main>
         <aside className="aside">
           <SiteSideBar />
