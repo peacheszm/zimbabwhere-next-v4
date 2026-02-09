@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { IconPhone, IconBrandWhatsapp } from "@tabler/icons-react";
+import { getYouTubeEmbedUrl, getYouTubeThumbnail } from "@/lib/utils/youtube";
 
 export default function SiteSideBar() {
+  const featuredVideos = [
+    "https://www.youtube.com/watch?v=9jOcgxuI-G8",
+    "https://www.youtube.com/watch?v=LafgTKb3TyE",
+  ];
+
   return (
     <div className="advertbox">
       <div className="child">
@@ -33,18 +38,36 @@ export default function SiteSideBar() {
           />
         </Link>
       </div>
-      <div className="child">
-        <a
-          href="https://youtu.be/eSXKDLEUsnk"
-          target="_blank"
-          title="Featured Video"
-        >
-          <img
-            src="https://admin.zimbabwhere.com/wp-content/uploads/2022/08/Screenshot-2022-06-14-at-10.42.24-300x167-1.png"
-            alt=""
-          />
-        </a>
-      </div>
+
+      {featuredVideos.map((videoUrl, index) => (
+        <div className="child" key={index}>
+          <div
+            className="video_wrapper"
+            style={{
+              position: "relative",
+              paddingBottom: "56.25%",
+              height: 0,
+              overflow: "hidden",
+            }}
+          >
+            <iframe
+              src={getYouTubeEmbedUrl(videoUrl)}
+              title="Featured Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+              }}
+            ></iframe>
+          </div>
+        </div>
+      ))}
+
       <div className="child">
         <Link
           href="/premium-services"

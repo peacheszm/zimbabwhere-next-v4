@@ -8,6 +8,7 @@ import { IconTrash, IconPlus } from "@tabler/icons-react";
 import Modal from "@/components/global/Modal";
 import { useModal } from "@/contexts/ModalContext";
 import { updateCurrentUserBusinesses } from "@/lib/endpoints/account";
+import { extractVideoId } from "@/lib/utils/youtube";
 
 export default function EditVideos() {
   const { data: session } = useSession();
@@ -41,19 +42,7 @@ export default function EditVideos() {
     closeModal("EditVideos");
   };
 
-  const extractVideoId = (url) => {
-    if (!url) return "";
-    const patterns = [
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-      /youtube\.com\/watch\?.*v=([^&\n?#]+)/,
-    ];
-    for (const pattern of patterns) {
-      const match = url.match(pattern);
-      if (match) return match[1];
-    }
-    if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
-    return url;
-  };
+
 
   const onSubmit = async (data) => {
     if (!session?.jwt || !businessData?.id) return;

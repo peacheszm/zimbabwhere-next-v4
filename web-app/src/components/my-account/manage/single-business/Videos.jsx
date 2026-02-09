@@ -6,6 +6,8 @@ import { IconBrandYoutube, IconPlayerPlay } from "@tabler/icons-react";
 import { useModal } from "@/contexts/ModalContext";
 import EditVideos from "@/components/modals/single-business/EditVideos";
 
+import { getYouTubeThumbnail } from "@/lib/utils/youtube";
+
 export default function Videos({ data }) {
   const { openModal } = useModal();
 
@@ -13,10 +15,6 @@ export default function Videos({ data }) {
 
   const handleOpenModal = () => {
     openModal("EditVideos", data);
-  };
-
-  const getYouTubeThumbnail = (videoId) => {
-    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
   };
 
   return (
