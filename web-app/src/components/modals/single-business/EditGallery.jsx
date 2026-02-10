@@ -42,6 +42,7 @@ export default function EditGallery() {
     formState: { isSubmitting },
     reset,
     setValue,
+    watch,
   } = useForm({
     values: {
       uploads: normalizedUploads,
@@ -236,7 +237,11 @@ export default function EditGallery() {
 
           <div className="form_row btn_group">
             <button type="submit" className="primary" disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Save Changes"}
+              {isSubmitting
+                ? watch("uploads")?.some((u) => u.file instanceof File)
+                  ? "Busy uploading files..."
+                  : "Processing changes..."
+                : "Save Changes"}
             </button>
           </div>
         </div>
