@@ -10,6 +10,13 @@ import {
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
+const decodeHtml = (html) => {
+  if (typeof window === "undefined" || !html) return html;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 export default function SiteFilterClient({ initialData }) {
   const router = useRouter();
   const { categories, towns, searchData } = initialData;
@@ -168,16 +175,17 @@ export default function SiteFilterClient({ initialData }) {
                         key={cat.id}
                         className="dropdown_option"
                         onClick={() => {
+                          const name = decodeHtml(cat.label || cat.name);
                           const newCat = {
                             id: cat.id,
-                            name: cat.label || cat.name,
+                            name: name,
                           };
                           setSelectedCategory(newCat);
                           setCategorySearch("");
                           triggerSearch(searchTerm, newCat.id, selectedTown.id);
                         }}
                       >
-                        {cat.label || cat.name}
+                        {decodeHtml(cat.label || cat.name)}
                       </div>
                     ))}
                     {filteredCategories.length === 0 && (
@@ -231,9 +239,10 @@ export default function SiteFilterClient({ initialData }) {
                         key={town.id}
                         className="dropdown_option"
                         onClick={() => {
+                          const name = decodeHtml(town.label || town.name);
                           const newTown = {
                             id: town.id,
-                            name: town.label || town.name,
+                            name: name,
                           };
                           setSelectedTown(newTown);
                           setTownSearch("");
@@ -244,7 +253,7 @@ export default function SiteFilterClient({ initialData }) {
                           );
                         }}
                       >
-                        {town.label || town.name}
+                        {decodeHtml(town.label || town.name)}
                       </div>
                     ))}
                     {filteredTowns.length === 0 && (
