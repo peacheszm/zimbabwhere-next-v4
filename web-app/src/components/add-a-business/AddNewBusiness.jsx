@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useSession } from "next-auth/react";
@@ -8,11 +8,30 @@ import Link from "next/link";
 
 import Dropzone from "@/components/ui/Dropzone";
 import { createUsersBusinesses } from "@/lib/endpoints/account";
+import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function AddNewBusiness({ cats = [], towns = [] }) {
   const { data: session } = useSession();
   const router = useRouter();
   const [submitError, setSubmitError] = useState(null);
+
+  const decodedCats = useMemo(
+    () =>
+      cats.map((cat) => ({
+        ...cat,
+        label: decodeHtml(cat.label),
+      })),
+    [cats],
+  );
+
+  const decodedTowns = useMemo(
+    () =>
+      towns.map((town) => ({
+        ...town,
+        label: decodeHtml(town.label || town.title),
+      })),
+    [towns],
+  );
 
   const {
     register,
@@ -253,9 +272,9 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               control={control}
               rules={{ required: "Suburb is required" }}
               render={({ field }) => (
-                <Select
+                 <Select
                   {...field}
-                  options={towns}
+                  options={decodedTowns}
                   placeholder="Select suburb..."
                   isClearable
                   classNamePrefix="react-select"
@@ -318,10 +337,10 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
                   val.length <= 3 || "Maximum 3 categories reached",
               }}
               render={({ field }) => (
-                <Select
+                 <Select
                   {...field}
                   isMulti
-                  options={cats}
+                  options={decodedCats}
                   isOptionDisabled={() => selectedCategories.length >= 3}
                   placeholder="Search/Select Categories"
                   classNamePrefix="react-select"

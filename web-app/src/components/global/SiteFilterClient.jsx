@@ -9,13 +9,7 @@ import {
   IconAdjustments,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-
-const decodeHtml = (html) => {
-  if (typeof window === "undefined" || !html) return html;
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-};
+import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function SiteFilterClient({ initialData }) {
   const router = useRouter();

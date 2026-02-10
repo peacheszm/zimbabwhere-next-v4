@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
@@ -13,12 +14,31 @@ import { createQuote } from "@/lib/endpoints/quotes";
 import { useModal } from "@/contexts/ModalContext";
 
 import ThankYouQuoteModal from "@/components/modals/ThankYouQuote";
+import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function GetQuote({ cats, towns, business }) {
   const searchParams = useSearchParams();
   const bid = searchParams.get("bid");
 
   const { openModal, closeModal } = useModal();
+
+  const decodedCats = useMemo(
+    () =>
+      cats.map((cat) => ({
+        ...cat,
+        label: decodeHtml(cat.label),
+      })),
+    [cats],
+  );
+
+  const decodedTowns = useMemo(
+    () =>
+      towns.map((town) => ({
+        ...town,
+        label: decodeHtml(town.label),
+      })),
+    [towns],
+  );
 
   const handleOpenModal = () => {
     openModal("ThankYouQuoteModal");
@@ -132,7 +152,7 @@ export default function GetQuote({ cats, towns, business }) {
                       value={item.id}
                       {...register("selectedBusinessCategories")}
                     />
-                    <label htmlFor={`cat${item.id}`}>{item.name}</label>
+                    <label htmlFor={`cat${item.id}`}>{decodeHtml(item.name)}</label>
                   </div>
                 ))}
               </div>
@@ -193,7 +213,7 @@ export default function GetQuote({ cats, towns, business }) {
                     {...field}
                     inputId="quote_from_category"
                     isMulti
-                    options={cats}
+                    options={decodedCats}
                     onChange={(val) => field.onChange(val)}
                     placeholder="Choose multiple headings to reach as many companies as possible…"
                     classNamePrefix="react-select"
@@ -214,7 +234,7 @@ export default function GetQuote({ cats, towns, business }) {
                 <Select
                   {...field}
                   inputId="town_city"
-                  options={towns}
+                  options={decodedTowns}
                   onChange={(val) => field.onChange(val)}
                   placeholder="Select your town/city/area coverage for the service you need..."
                   classNamePrefix="react-select"
