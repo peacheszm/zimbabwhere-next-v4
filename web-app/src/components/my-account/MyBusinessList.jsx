@@ -6,6 +6,9 @@ export default function MyBusinessList({ data }) {
     <div className="my_business_list">
       <div className="page_title">
         <h1 style={{ marginBottom: "32px" }}>My Businesses</h1>
+        <h3 style={{ marginBottom: "16px" }}>
+          CONGRATULATIONS! Your listed businesses are shown below:
+        </h3>
         <p>
           Please click 'edit' to update or add for free to your business page -
           any Photos, Brochures, menus, opening hours, social media links ..etc
