@@ -27,6 +27,7 @@ export default function EditGallery() {
   const normalizedUploads = (businessData?.acf?.uploads || []).map((r) => ({
     upload_type: r.upload_type || "Image",
     file_url: r.file?.url || r.file || "",
+    file_id: r.file?.ID || r.file?.id || "",
     file_name:
       r.file?.filename ||
       r.file?.name ||
@@ -95,7 +96,7 @@ export default function EditGallery() {
         if (urlRows.length > 0) {
           const existing = urlRows.map((r) => ({
             upload_type: r.upload_type,
-            file: r.file_url,
+            file: r.file_id || r.file_url,
             gallery_row_id: r.gallery_row_id,
           }));
           formData.append("uploads_existing_json", JSON.stringify(existing));
@@ -108,7 +109,7 @@ export default function EditGallery() {
           acf: {
             uploads: urlRows.map((r) => ({
               upload_type: r.upload_type,
-              file: r.file_url,
+              file: r.file_id || r.file_url,
               gallery_row_id: r.gallery_row_id,
             })),
           },
