@@ -3,7 +3,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
-import { IconTrash, IconPlus } from "@tabler/icons-react";
+import { IconTrash, IconPlus, IconClock } from "@tabler/icons-react";
 
 import Modal from "@/components/global/Modal";
 import { useModal } from "@/contexts/ModalContext";
@@ -105,16 +105,22 @@ export default function EditHours() {
                   </select>
                 </div>
                 <div className="form_row">
-                  <input
-                    type="time"
-                    {...register(`opening_times.${index}.opening_time`)}
-                  />
+                  <div className="time_input_wrapper">
+                    <input
+                      type="time"
+                      {...register(`opening_times.${index}.opening_time`)}
+                    />
+                    <IconClock size={16} />
+                  </div>
                 </div>
                 <div className="form_row">
-                  <input
-                    type="time"
-                    {...register(`opening_times.${index}.closing_time`)}
-                  />
+                  <div className="time_input_wrapper">
+                    <input
+                      type="time"
+                      {...register(`opening_times.${index}.closing_time`)}
+                    />
+                    <IconClock size={16} />
+                  </div>
                 </div>
                 <button
                   type="button"
