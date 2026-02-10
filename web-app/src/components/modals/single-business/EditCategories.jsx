@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useState, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
@@ -8,6 +8,7 @@ import Select from "react-select";
 import Modal from "@/components/global/Modal";
 import { useModal } from "@/contexts/ModalContext";
 import { updateCurrentUserBusinesses } from "@/lib/endpoints/account";
+import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function EditCategories() {
   const { data: session } = useSession();
@@ -18,6 +19,15 @@ export default function EditCategories() {
   const modalProps = getModalProps("EditCategories");
   const businessData = modalProps?.business;
   const cats = modalProps?.cats || [];
+
+  const decodedCats = useMemo(
+    () =>
+      cats.map((cat) => ({
+        ...cat,
+        label: decodeHtml(cat.label),
+      })),
+    [cats],
+  );
 
   // Map initial categories to react-select values
   const initialCategoryIds = (businessData?.["business_cat"] || []).map(id => String(id));
@@ -84,7 +94,7 @@ export default function EditCategories() {
                 <Select
                   {...field}
                   isMulti
-                  options={cats}
+                  options={decodedCats}
                   isOptionDisabled={() => selectedCategories.length >= 3}
                   placeholder="Search/Select Categories"
                   classNamePrefix="react-select"
