@@ -24,10 +24,10 @@ export default function Gallery({ data }) {
       <div className="ms_desc">
         <h4>Business window shop - FREE UPLOADS</h4>
         <p>
-          Images & Photos / Flyers / Brochures / Menus / Price Lists go a long
-          way in showing what you do or how you look. Please add as many of
-          these and use the other free options provided to best represent your
-          business. These will be seen on your business page.
+          ADD - Images & Photos / Flyers / Brochures / Menus / Price Lists to
+          show what you do, or how you look. Please add as many of these and use
+          the other free options provided to best represent your business. These
+          will be seen on your business page.
         </p>
       </div>
 
