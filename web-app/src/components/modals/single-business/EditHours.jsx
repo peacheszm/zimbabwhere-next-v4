@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
-import { IconTrash, IconPlus, IconClock } from "@tabler/icons-react";
+import { useForm, Controller } from "react-hook-form";
+import { IconClock } from "@tabler/icons-react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import Modal from "@/components/global/Modal";
 import { useModal } from "@/contexts/ModalContext";
@@ -20,6 +22,21 @@ const DAYS_OF_WEEK = [
   "Public Holidays",
 ];
 
+const parseTime = (timeStr) => {
+  if (!timeStr) return null;
+  const [hours, minutes] = timeStr.split(":");
+  const date = new Date();
+  date.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+  return date;
+};
+
+const formatTime = (date) => {
+  if (!date) return "";
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+
 export default function EditHours() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -28,16 +45,19 @@ export default function EditHours() {
   const isOpen = isModalOpen("EditHours");
   const businessData = getModalProps("EditHours");
 
-  const initialHours =
-    businessData?.acf?.opening_times ||
-    DAYS_OF_WEEK.map((day) => ({
-      day,
-      opening_time: "",
-      closing_time: "",
-    }));
+  const initialHours = useMemo(() => {
+    const existing = businessData?.acf?.opening_times || [];
+    return DAYS_OF_WEEK.map((day) => {
+      const found = existing.find((item) => item.day === day);
+      return {
+        day,
+        opening_time: parseTime(found?.opening_time),
+        closing_time: parseTime(found?.closing_time),
+      };
+    });
+  }, [businessData]);
 
   const {
-    register,
     handleSubmit,
     control,
     formState: { isSubmitting },
@@ -46,11 +66,6 @@ export default function EditHours() {
     values: {
       opening_times: initialHours,
     },
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "opening_times",
   });
 
   const handleClose = () => {
@@ -62,10 +77,14 @@ export default function EditHours() {
     if (!session?.jwt || !businessData?.id) return;
 
     try {
-      // Filter out empty entries
-      const filteredTimes = data.opening_times.filter(
-        (time) => time.day && (time.opening_time || time.closing_time),
-      );
+      // Filter out empty entries and format times back to strings
+      const filteredTimes = data.opening_times
+        .map((item) => ({
+          day: item.day,
+          opening_time: formatTime(item.opening_time),
+          closing_time: formatTime(item.closing_time),
+        }))
+        .filter((time) => time.opening_time || time.closing_time);
 
       const updateData = {
         acf: {
@@ -92,59 +111,57 @@ export default function EditHours() {
     <Modal title="Edit Business Hours" onClose={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form_wrapper">
-          <div className="hours_edit_list">
-            {fields.map((field, index) => (
-              <div key={field.id} className="hours_edit_row">
-                <div className="form_row">
-                  <select {...register(`opening_times.${index}.day`)}>
-                    {DAYS_OF_WEEK.map((day) => (
-                      <option key={day} value={day}>
-                        {day}
-                      </option>
-                    ))}
-                  </select>
+          <div className="hours_edit_list fixed_rows">
+            {DAYS_OF_WEEK.map((day, index) => (
+              <div key={day} className="hours_edit_row">
+                <div className="day_label">
+                  <strong>{day}</strong>
                 </div>
                 <div className="form_row">
                   <div className="time_input_wrapper">
-                    <input
-                      type="time"
-                      {...register(`opening_times.${index}.opening_time`)}
+                    <Controller
+                      name={`opening_times.${index}.opening_time`}
+                      control={control}
+                      render={({ field }) => (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(date) => field.onChange(date)}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={15}
+                          timeCaption="Opening"
+                          dateFormat="HH:mm"
+                          placeholderText="Opening"
+                        />
+                      )}
                     />
                     <IconClock size={16} />
                   </div>
                 </div>
                 <div className="form_row">
                   <div className="time_input_wrapper">
-                    <input
-                      type="time"
-                      {...register(`opening_times.${index}.closing_time`)}
+                    <Controller
+                      name={`opening_times.${index}.closing_time`}
+                      control={control}
+                      render={({ field }) => (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(date) => field.onChange(date)}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={15}
+                          timeCaption="Closing"
+                          dateFormat="HH:mm"
+                          placeholderText="Closing"
+                        />
+                      )}
                     />
                     <IconClock size={16} />
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="remove_btn icon"
-                  onClick={() => remove(index)}
-                >
-                  <IconTrash size={18} />
-                </button>
               </div>
             ))}
           </div>
-
-          <button
-            type="button"
-            className="add_btn secondary"
-            onClick={() =>
-              append({ day: "Monday", opening_time: "", closing_time: "" })
-            }
-          >
-            <div className="icon">
-              <IconPlus size={18} />
-            </div>{" "}
-            Add Hour Slot
-          </button>
 
           <div className="form_row btn_group">
             <button type="submit" className="primary" disabled={isSubmitting}>
