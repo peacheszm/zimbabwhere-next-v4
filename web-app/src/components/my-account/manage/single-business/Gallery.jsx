@@ -19,7 +19,7 @@ export default function Gallery({ data }) {
   return (
     <div className="manage_section gallery">
       <div className="ms_title">
-        <h3>GALLERY, FLYER, MENU</h3>
+        <h3>GALLERY, FLYER, MENU and PDF's</h3>
       </div>
       <div className="ms_desc">
         <h4>Business window shop - FREE UPLOADS</h4>
