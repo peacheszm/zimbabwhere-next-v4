@@ -57,6 +57,8 @@ export default function WebSocial({ post }) {
       )}
 
       {/* Social media */}
+      <br />
+      <h4>Social Media</h4>
       <div className="business_social">
         {Array.isArray(post.acf?.social) &&
           post.acf.social.map((social, i) => (
