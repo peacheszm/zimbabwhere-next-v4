@@ -6,6 +6,8 @@ import {
   IconFileText,
   IconWorldWww,
 } from "@tabler/icons-react";
+import { extractVideoId } from "@/lib/utils/youtube";
+
 export default function WebSocial({ post }) {
   return (
     <div className="web_and_social">
@@ -81,17 +83,21 @@ export default function WebSocial({ post }) {
           ))}
 
         {Array.isArray(post.acf?.youtube_videos) &&
-          post.acf.youtube_videos.map((yt, yti) => (
-            <a
-              key={yti}
-              href={yt.video_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon_yt"
-            >
-              <IconBrandYoutube size={20} />
-            </a>
-          ))}
+          post.acf.youtube_videos.map((yt, yti) => {
+            const videoId = extractVideoId(yt.video_url);
+            if (!videoId) return null;
+            return (
+              <a
+                key={yti}
+                href={`https://www.youtube.com/watch?v=${videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon_yt"
+              >
+                <IconBrandYoutube size={20} />
+              </a>
+            );
+          })}
       </div>
     </div>
   );

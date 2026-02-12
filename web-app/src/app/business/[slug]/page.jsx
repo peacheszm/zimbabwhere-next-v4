@@ -33,7 +33,7 @@ export default async function SingleBusiness({ params }) {
   const { slug } = await params;
   const posts = await getBusinessBySlug(slug);
   const post = posts[0];
-
+  console.log(post);
   return (
     <div className="single_business_page_wrapper">
       <div className="container">
