@@ -1,3 +1,4 @@
+import Categorys from "@/components/single-business/Categorys";
 import Image from "next/image";
 import {
   IconBrandFacebook,
@@ -34,6 +35,9 @@ export default function WebSocial({ post }) {
             height={200}
           />
         )}
+      </div>
+      <div className="desktop_only">
+        <Categorys post={post} />
       </div>
       {/* Visit website */}
       {post.acf?.business_website && (

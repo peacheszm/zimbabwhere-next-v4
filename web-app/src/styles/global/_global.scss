@@ -186,3 +186,15 @@ textarea {
     }
   }
 }
+
+.mobile_only {
+  @include media-breakpoint-up(lg) {
+    display: none !important;
+  }
+}
+
+.desktop_only {
+  @include media-breakpoint-down(lg) {
+    display: none !important;
+  }
+}

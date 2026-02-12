@@ -49,6 +49,10 @@ export default async function SingleBusiness({ params }) {
 
           {/* Business OverView */}
           <Overview post={post} />
+          <div className="mobile_only">
+            <Categorys post={post} />
+            <br />
+          </div>
 
           {/* Reviews */}
           <BusinessReviews
@@ -61,7 +65,6 @@ export default async function SingleBusiness({ params }) {
           <Hours post={post} />
           <Map post={post} />
           <Share post={post} />
-          <Categorys post={post} />
         </aside>
       </div>
     </div>
