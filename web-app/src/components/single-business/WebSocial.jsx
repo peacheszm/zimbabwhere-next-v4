@@ -39,22 +39,6 @@ export default function WebSocial({ post }) {
       <div className="desktop_only">
         <Categorys post={post} />
       </div>
-      {/* Visit website */}
-      {post.acf?.business_website && (
-        <div className="business_website btn_group">
-          <a
-            className="btn btn-green"
-            href={post.acf.business_website}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="icon">
-              <IconWorldWww size={20} />
-            </span>
-            Visit Website
-          </a>
-        </div>
-      )}
 
       {/* Social media */}
       <br />
@@ -105,6 +89,24 @@ export default function WebSocial({ post }) {
             );
           })}
       </div>
+      {/* Visit website */}
+      <br />
+
+      {post.acf?.business_website && (
+        <div className="business_website btn_group">
+          <a
+            className="btn btn-green"
+            href={post.acf.business_website}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="icon">
+              <IconWorldWww size={20} />
+            </span>
+            Visit Website
+          </a>
+        </div>
+      )}
     </div>
   );
 }
