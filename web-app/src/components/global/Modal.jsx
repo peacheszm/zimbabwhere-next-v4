@@ -3,7 +3,13 @@ import { createPortal } from "react-dom";
 
 import { IconX } from "@tabler/icons-react";
 
-export default function Modal({ onClose, title, children, className = "", maxWidth }) {
+export default function Modal({
+  onClose,
+  title,
+  children,
+  className = "",
+  maxWidth,
+}) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -40,10 +46,17 @@ export default function Modal({ onClose, title, children, className = "", maxWid
   return createPortal(
     <div className="page_modal">
       <div className="modal_underlay" onClick={onClose}></div>
-      <div className={`modal_overlay ${className}`} style={maxWidth ? { maxWidth } : {}}>
+      <div
+        className={`modal_overlay ${className}`}
+        style={maxWidth ? { maxWidth } : {}}
+      >
         <div className="modal_inner">
           <div className="modal_header">
-            <h5>{title}</h5>
+            <h5
+              dangerouslySetInnerHTML={{
+                __html: title,
+              }}
+            ></h5>
 
             <div className="close_button" onClick={onClose}>
               <IconX />
@@ -53,6 +66,6 @@ export default function Modal({ onClose, title, children, className = "", maxWid
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
