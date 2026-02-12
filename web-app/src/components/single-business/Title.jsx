@@ -61,7 +61,6 @@ export default function Title({ post }) {
           </div>
           <span>
             {post.acf?.street_number} {post.acf?.street_name},
-            {post.acf?.suburb && <span> {post.acf.suburb.name} </span>}
             {post.acf?.town && <span> {post.acf.town.name} </span>}
           </span>
         </a>

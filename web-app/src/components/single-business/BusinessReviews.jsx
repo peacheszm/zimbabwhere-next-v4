@@ -21,6 +21,13 @@ export default function BusinessReviews({ business_id, business_title }) {
       }
     }
     fetchReviews();
+
+    const handleRefresh = () => fetchReviews();
+    window.addEventListener("reviewSubmitted", handleRefresh);
+
+    return () => {
+      window.removeEventListener("reviewSubmitted", handleRefresh);
+    };
   }, [business_id]);
 
   const findNoRating = (rating) => {

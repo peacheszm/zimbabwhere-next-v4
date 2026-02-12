@@ -5,7 +5,10 @@ import { useForm, Controller } from "react-hook-form";
 import { createBusinessReview } from "@/lib/endpoints/business";
 import { IconStar, IconStarFilled } from "@tabler/icons-react";
 
+import { useRouter } from "next/navigation";
+
 export default function CreateBusinessReview() {
+  const router = useRouter();
   const { isModalOpen, getModalProps, closeModal } = useModal();
   const isOpen = isModalOpen("CreateBusinessReview");
   const modalProps = getModalProps("CreateBusinessReview");
@@ -36,6 +39,10 @@ export default function CreateBusinessReview() {
       if (result) {
         setShowSuccess(true);
         reset();
+        // Dispatch event to refresh reviews list
+        window.dispatchEvent(new Event("reviewSubmitted"));
+        // Refresh router to sync any server-side data
+        router.refresh();
       }
     } catch (error) {
       console.error("Failed to submit review:", error);
