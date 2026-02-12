@@ -53,89 +53,160 @@ export default function CreateBusinessReview() {
           }}
         >
           {!showSuccess ? (
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form_wrapper">
-                <div className="form_row">
-                  <label htmlFor="author">Your Name</label>
-                  <input
-                    id="author"
-                    type="text"
-                    {...register("author", { required: "Name is required" })}
-                  />
-                  {errors.author && (
-                    <span className="error">{errors.author.message}</span>
-                  )}
-                </div>
-
-                <div className="form_row">
-                  <label htmlFor="email">Your Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
-                      },
-                    })}
-                  />
-                  {errors.email && (
-                    <span className="error">{errors.email.message}</span>
-                  )}
-                </div>
-
-                <div className="form_row">
-                  <label htmlFor="rating">Your Rating</label>
-                  <Controller
-                    name="rating"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => (
-                      <div className="star_rating_input">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <button
-                            key={star}
-                            type="button"
-                            onClick={() => field.onChange(star)}
-                            className="star_btn"
-                          >
-                            {star <= field.value ? (
-                              <IconStarFilled size={24} color="#FFD700" />
-                            ) : (
-                              <IconStar size={24} />
-                            )}
-                          </button>
-                        ))}
+            <>
+              <div className="modal_rating">
+                <div className="col col_left">
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form_wrapper">
+                      <div className="form_row">
+                        <label htmlFor="author">Your Name</label>
+                        <input
+                          id="author"
+                          type="text"
+                          {...register("author", {
+                            required: "Name is required",
+                          })}
+                        />
+                        {errors.author && (
+                          <span className="error">{errors.author.message}</span>
+                        )}
                       </div>
-                    )}
-                  />
-                </div>
 
-                <div className="form_row">
-                  <label htmlFor="content">Your Review</label>
-                  <textarea
-                    id="content"
-                    {...register("content", {
-                      required: "Review content is required",
-                    })}
-                  ></textarea>
-                  {errors.content && (
-                    <span className="error">{errors.content.message}</span>
-                  )}
-                </div>
+                      <div className="form_row">
+                        <label htmlFor="email">Your Email</label>
+                        <input
+                          id="email"
+                          type="email"
+                          {...register("email", {
+                            required: "Email is required",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Invalid email address",
+                            },
+                          })}
+                        />
+                        {errors.email && (
+                          <span className="error">{errors.email.message}</span>
+                        )}
+                      </div>
 
-                <div className="form_row btn_group">
-                  <button
-                    type="submit"
-                    className="primary"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit Review"}
-                  </button>
+                      <div className="form_row">
+                        <label htmlFor="rating">Your Rating</label>
+                        <Controller
+                          name="rating"
+                          control={control}
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <div className="star_rating_input">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                  key={star}
+                                  type="button"
+                                  onClick={() => field.onChange(star)}
+                                  className="star_btn"
+                                >
+                                  {star <= field.value ? (
+                                    <IconStarFilled size={24} color="#FFD700" />
+                                  ) : (
+                                    <IconStar size={24} />
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        />
+                      </div>
+
+                      <div className="form_row">
+                        <label htmlFor="content">Your Review</label>
+                        <textarea
+                          id="content"
+                          {...register("content", {
+                            required: "Review content is required",
+                          })}
+                        ></textarea>
+                        {errors.content && (
+                          <span className="error">
+                            {errors.content.message}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="form_row btn_group">
+                        <button
+                          type="submit"
+                          className="primary"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? "Submitting..." : "Submit Review"}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div className="col col_right">
+                  <div className="rating_right">
+                    <h5>How to rate a Business</h5>
+                    <div className="rating_table">
+                      <div className="row">
+                        {"★★★★★".split("").map((s, i) => (
+                          <IconStarFilled key={i} size={16} />
+                        ))}
+                        <div className="rating_title">Top Notch</div>
+                      </div>
+                      <div className="row">
+                        {"★★★★☆"
+                          .split("")
+                          .map((s, i) =>
+                            s === "★" ? (
+                              <IconStarFilled key={i} size={16} />
+                            ) : (
+                              <IconStar key={i} size={16} />
+                            ),
+                          )}
+                        <div className="rating_title">Mushe</div>
+                      </div>
+                      <div className="row">
+                        {"★★★☆☆"
+                          .split("")
+                          .map((s, i) =>
+                            s === "★" ? (
+                              <IconStarFilled key={i} size={16} />
+                            ) : (
+                              <IconStar key={i} size={16} />
+                            ),
+                          )}
+                        <div className="rating_title">Yah good</div>
+                      </div>
+                      <div className="row">
+                        {"★★☆☆☆"
+                          .split("")
+                          .map((s, i) =>
+                            s === "★" ? (
+                              <IconStarFilled key={i} size={16} />
+                            ) : (
+                              <IconStar key={i} size={16} />
+                            ),
+                          )}
+                        <div className="rating_title">Could be better</div>
+                      </div>
+                      <div className="row">
+                        {"★☆☆☆☆"
+                          .split("")
+                          .map((s, i) =>
+                            s === "★" ? (
+                              <IconStarFilled key={i} size={16} />
+                            ) : (
+                              <IconStar key={i} size={16} />
+                            ),
+                          )}
+                        <div className="rating_title">Eish!</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </form>
+            </>
           ) : (
             <div className="success_message">
               <h3>Thank you!</h3>
