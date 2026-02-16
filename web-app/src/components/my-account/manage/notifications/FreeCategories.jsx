@@ -68,14 +68,14 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
             <div className="form_row">
               <label>Select Headings</label>
               <p className="field_desc">
-                Choose up to 3 categories you want to be notified about...
+                Choose up to 3 headings you want to be notified about...
               </p>
               <Controller
                 name="free_categories"
                 control={control}
                 rules={{
                   validate: (val) =>
-                    val.length <= 3 || "Maximum 3 categories allowed",
+                    val.length <= 3 || "Maximum 3 headings allowed",
                 }}
                 render={({ field }) => (
                   <Select
@@ -91,7 +91,7 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
               {selectedCategories.length === 3 && (
                 <>
                   <p className="info_msg category_cta_message">
-                    Maximum 3 categories reached. Three headings not enough?
+                    Maximum 3 headings reached. Three headings not enough?
                     Upgrade options available after submission.
                     <br /> Can't find the heading you're looking for?{" "}
                     <a href="/">Request one here.</a>

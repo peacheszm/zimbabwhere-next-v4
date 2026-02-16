@@ -272,7 +272,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               control={control}
               rules={{ required: "Suburb is required" }}
               render={({ field }) => (
-                 <Select
+                <Select
                   {...field}
                   options={decodedTowns}
                   placeholder="Select suburb..."
@@ -334,15 +334,15 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               rules={{
                 required: "Select at least one category",
                 validate: (val) =>
-                  val.length <= 3 || "Maximum 3 categories reached",
+                  val.length <= 3 || "Maximum 3 headingss reached",
               }}
               render={({ field }) => (
-                 <Select
+                <Select
                   {...field}
                   isMulti
                   options={decodedCats}
                   isOptionDisabled={() => selectedCategories.length >= 3}
-                  placeholder="Search/Select Categories"
+                  placeholder="Search/Select Headings"
                   classNamePrefix="react-select"
                   menuPlacement="top"
                 />
@@ -354,7 +354,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
             </p>
             {selectedCategories.length === 3 && (
               <p className="info_msg">
-                Maximum 3 categories reached. Three headings not enough? Upgrade
+                Maximum 3 headings reached. Three headings not enough? Upgrade
                 options available after submission.
               </p>
             )}

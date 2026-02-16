@@ -30,8 +30,12 @@ export default function EditCategories() {
   );
 
   // Map initial categories to react-select values
-  const initialCategoryIds = (businessData?.["business_cat"] || []).map(id => String(id));
-  const initialSelected = cats.filter(cat => initialCategoryIds.includes(String(cat.value)));
+  const initialCategoryIds = (businessData?.["business_cat"] || []).map((id) =>
+    String(id),
+  );
+  const initialSelected = cats.filter((cat) =>
+    initialCategoryIds.includes(String(cat.value)),
+  );
 
   const {
     handleSubmit,
@@ -57,13 +61,17 @@ export default function EditCategories() {
 
     try {
       // For categories, we often need to send them as an array of IDs
-      const categoryIds = data.categories.map(cat => cat.value);
-      
+      const categoryIds = data.categories.map((cat) => cat.value);
+
       const updateData = {
-        "business_cat": categoryIds,
+        business_cat: categoryIds,
       };
 
-      await updateCurrentUserBusinesses(session.jwt, businessData.id, updateData);
+      await updateCurrentUserBusinesses(
+        session.jwt,
+        businessData.id,
+        updateData,
+      );
       router.refresh();
       handleClose();
     } catch (error) {
@@ -81,14 +89,15 @@ export default function EditCategories() {
           <div className="form_row">
             <label>Select Headings (Max 3)</label>
             <p className="field_desc">
-              Choose up to 3 categories that best represent your business.
+              Choose up to 3 headings that best represent your business.
             </p>
             <Controller
               name="categories"
               control={control}
               rules={{
                 required: "Select at least one category",
-                validate: (val) => val.length <= 3 || "Maximum 3 categories allowed",
+                validate: (val) =>
+                  val.length <= 3 || "Maximum 3 headings allowed",
               }}
               render={({ field }) => (
                 <Select
@@ -107,11 +116,7 @@ export default function EditCategories() {
           </div>
 
           <div className="form_row btn_group">
-            <button
-              type="submit"
-              className="primary"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Changes"}
             </button>
           </div>
