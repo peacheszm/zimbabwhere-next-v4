@@ -28,7 +28,7 @@ export default async function GetAQuotePage({ searchParams }) {
     <div className="page_wrapper">
       <div className="container">
         <main className="main">
-          <div className="page_title">
+          <div className="page_title" style={{ paddingBottom: "45px" }}>
             <h1>Welcome to the quote me application page</h1>
             <p>
               Write down your item/s or shopping list of what you need in one
