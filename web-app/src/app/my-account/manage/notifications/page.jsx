@@ -59,13 +59,16 @@ export default async function ManageNotifications() {
                 />
               </div>
 
-              <div className="upsell_featured">
+              <div className="upsell_featured" style={{ paddingTop: "25px" }}>
                 <h2>WANT TO BE MORE VISIBLE ON OUR PLATFORM</h2>
                 <p>
                   Add your business for free and show more of who you are as a
                   business.
                 </p>
-                <Link href="/add-a-business">
+                <Link
+                  href="/add-a-business"
+                  style={{ backgroundColor: "#168a11" }}
+                >
                   <div className="icon">
                     <IconPlus />
                   </div>
