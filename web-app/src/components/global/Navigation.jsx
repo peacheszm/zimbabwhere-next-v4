@@ -68,7 +68,7 @@ export default function Navigation() {
                 height={100}
               />
             </div>
-            <span>Zimbabwhere.com</span>
+            <span>Welcome to Zimbabwhere.com</span>
           </Link>
         </div>
 
@@ -91,7 +91,7 @@ export default function Navigation() {
                     height={100}
                   />
                 </div>
-                <span>Welcome to Zimbabwhere.com</span>
+                <span>Zimbabwhere.com</span>
               </Link>
             </div>
             <div className="menu_toggle" onClick={() => setIsNavOpen(false)}>
