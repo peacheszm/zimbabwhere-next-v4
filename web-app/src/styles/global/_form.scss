@@ -139,7 +139,8 @@
     }
   }
 
-  .error_msg {
+  .error_msg,
+  .errors {
     @include robot(400, 12, 120%);
     color: #ff4d4d;
     margin-top: 4px;
