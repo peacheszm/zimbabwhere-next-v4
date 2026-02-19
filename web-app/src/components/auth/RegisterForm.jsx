@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -20,8 +20,16 @@ export default function RegisterForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [success, setSuccess] = useState("");
   const router = useRouter();
+  const errorRef = useRef(null);
+
+  const scrollToError = () => {
+    setTimeout(() => {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,28 +39,42 @@ export default function RegisterForm() {
     }));
     // Clear error when user starts typing
     if (error) setError("");
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const validateForm = () => {
-    if (formData.password !== formData.confirm_password) {
-      setError("Passwords do not match");
-      return false;
+    let isValid = true;
+    const newErrors = {};
+
+    if (!formData.email.includes("@")) {
+      newErrors.email = "Please enter a valid email address";
+      isValid = false;
     }
     if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return false;
+      newErrors.password = "Password must be at least 6 characters long";
+      isValid = false;
     }
-    if (!formData.email.includes("@")) {
-      setError("Please enter a valid email address");
-      return false;
+    if (formData.password !== formData.confirm_password) {
+      newErrors.confirm_password = "Passwords do not match";
+      isValid = false;
     }
-    return true;
+
+    setFieldErrors(newErrors);
+
+    if (!isValid) {
+      scrollToError();
+    }
+
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    setFieldErrors({});
     setSuccess("");
 
     if (!validateForm()) {
@@ -124,6 +146,7 @@ export default function RegisterForm() {
       }, 1500);
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");
+      scrollToError();
     } finally {
       setIsLoading(false);
     }
@@ -132,7 +155,7 @@ export default function RegisterForm() {
   return (
     <div className="page_forms">
       <form onSubmit={handleSubmit}>
-        <div className="form_wrapper">
+        <div className="form_wrapper" ref={errorRef}>
           {error && <ErrorMessage body={error} />}
 
           {success && (
@@ -198,6 +221,11 @@ export default function RegisterForm() {
                 required
                 disabled={isLoading}
               />
+              {fieldErrors.email && (
+                <div className="errors" style={{ marginTop: "0.25rem" }}>
+                  {fieldErrors.email}
+                </div>
+              )}
             </div>
           </div>
 
@@ -213,6 +241,11 @@ export default function RegisterForm() {
                 required
                 disabled={isLoading}
               />
+              {fieldErrors.password && (
+                <div className="errors" style={{ marginTop: "0.25rem" }}>
+                  {fieldErrors.password}
+                </div>
+              )}
               {/* <button
                 type="button"
                 className="password_toggle_link"
@@ -236,6 +269,11 @@ export default function RegisterForm() {
                 required
                 disabled={isLoading}
               />
+              {fieldErrors.confirm_password && (
+                <div className="errors" style={{ marginTop: "0.25rem" }}>
+                  {fieldErrors.confirm_password}
+                </div>
+              )}
               {/* <button
                 type="button"
                 className="password_toggle_link"

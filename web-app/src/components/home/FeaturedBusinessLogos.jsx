@@ -37,7 +37,7 @@ export default function FeaturedBusinessLogos({ businesses }) {
                     >
                       <Image
                         src={bus.meta.logo.url}
-                        alt={bus.slug}
+                        alt={bus.slug ? bus.slug : "Zimbabwhere"}
                         width="500"
                         height="500"
                       />

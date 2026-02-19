@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -13,6 +13,13 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const errorRef = useRef(null);
+
+  const scrollToError = () => {
+    setTimeout(() => {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +45,7 @@ export default function LoginForm() {
 
       if (result?.error) {
         setError("Invalid credentials. Please try again.");
+        scrollToError();
       } else {
         // Check if user is authenticated
         const session = await getSession();
@@ -47,6 +55,7 @@ export default function LoginForm() {
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
+      scrollToError();
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +64,7 @@ export default function LoginForm() {
   return (
     <div className="page_forms">
       <form onSubmit={handleSubmit}>
-        <div className="form_wrapper">
+        <div className="form_wrapper" ref={errorRef}>
           {error && (
             <div className="form_row">
               <div className="errors">{error}</div>
