@@ -231,6 +231,9 @@
       width: 100%;
       max-width: 190px;
       order: 3;
+      @include media-breakpoint-down(xxs) {
+        max-width: 140px;
+      }
       @include media-breakpoint-up(lg) {
         max-width: 140px;
       }
