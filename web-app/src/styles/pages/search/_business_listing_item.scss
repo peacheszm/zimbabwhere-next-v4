@@ -203,9 +203,9 @@
       clear: both;
       padding: 5px;
       width: 100%;
+      max-width: 140px;
       @include media-breakpoint-up(lg) {
         margin-left: auto;
-
         order: 2;
       }
 
