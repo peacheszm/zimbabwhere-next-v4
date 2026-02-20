@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import ClientWrapper from "./ClientWrapper";
 import Script from "next/script";
 import "@/styles/main.scss";
@@ -58,6 +59,7 @@ export default function RootLayout({ children }) {
           />
         </noscript>
         <ClientWrapper>{children}</ClientWrapper>
+        <Analytics />
       </body>
     </html>
   );
