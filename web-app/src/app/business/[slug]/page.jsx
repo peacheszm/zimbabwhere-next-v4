@@ -1,4 +1,8 @@
-import { getBusinessBySlug, getAllBusinesses, getBusinessById } from "@/lib/endpoints/business";
+import {
+  getBusinessBySlug,
+  getAllBusinesses,
+  getBusinessById,
+} from "@/lib/endpoints/business";
 import { redirect, notFound } from "next/navigation";
 
 import Title from "@/components/single-business/Title";
@@ -24,7 +28,7 @@ import { yoastToMetadata } from "@/lib/seo/seo";
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   let page = null;
-  
+
   try {
     const pages = await getBusinessBySlug(`${slug}`);
     if (pages && pages.length > 0) {
@@ -61,9 +65,8 @@ export default async function SingleBusiness({ params }) {
     } else if (/^\d+$/.test(slug)) {
       // Check if the slug is numeric and fetch by ID
       try {
-        
         const business = await getBusinessById(slug);
-        
+
         if (business && business.slug) {
           redirectUrl = `/business/${business.slug}`;
         }
@@ -83,7 +86,6 @@ export default async function SingleBusiness({ params }) {
     notFound();
   }
 
-  console.log(post);
   return (
     <div className="single_business_page_wrapper">
       <div className="container">

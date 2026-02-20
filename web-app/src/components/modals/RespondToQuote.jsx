@@ -10,6 +10,7 @@ export default function RespondToQuote() {
 
   const RespondToQuoteProps = getModalProps("RespondToQuote"); // contains farm info
 
+
   const {
     register,
     handleSubmit,

@@ -19,6 +19,8 @@ export default async function QuotePage({ params }) {
   const posts = await getQuoteBySlug(slug);
   const post = posts[0];
 
+  
+
   return (
     <div className="page_wrapper">
       <div className="container">

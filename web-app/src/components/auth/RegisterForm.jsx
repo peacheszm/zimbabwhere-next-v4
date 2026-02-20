@@ -101,7 +101,6 @@ export default function RegisterForm() {
       let data;
       if (contentType && contentType.includes("application/json")) {
         data = await response.json();
-        console.log(data);
       } else {
         const text = await response.text();
         console.error("Registration error response:", text);
@@ -113,7 +112,6 @@ export default function RegisterForm() {
       if (!response.ok) {
         throw new Error(data.message || "Registration failed");
       }
-      console.log(data);
 
       setSuccess("Registration successful! Logging you in...");
 
