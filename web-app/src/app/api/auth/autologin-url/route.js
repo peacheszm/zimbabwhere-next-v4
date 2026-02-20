@@ -8,8 +8,8 @@ export async function GET(request) {
     return NextResponse.json({ error: "Token required" }, { status: 400 });
   }
 
-  const url = `https://stage.justlime.com/zimbabwhere21/?rest_route=/simple-jwt-login/v1/autologin&JWT=${encodeURIComponent(
-    token
+  const url = `https://admin.zimbabwhere.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${encodeURIComponent(
+    token,
   )}&AUTH_KEY=${process.env.NEXTAUTH_SECRET}`;
 
   return NextResponse.redirect(url);

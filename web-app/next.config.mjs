@@ -4,18 +4,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "stage.justlime.com",
-        port: "",
-        pathname: "/zimbabwhere21/**",
-      },
-      {
-        protocol: "https",
-        hostname: "justlime.com",
-        port: "",
-        pathname: "/zimbabwhere21/**",
-      },
-      {
-        protocol: "https",
         hostname: "admin.zimbabwhere.com",
         port: "",
         pathname: "/**",

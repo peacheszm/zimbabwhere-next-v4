@@ -111,7 +111,7 @@ export default async function PrivacyPolicyPage() {
                 listed under it.
               </p>
               <a
-                href="https://stage.justlime.com/zimbabwhere21"
+                href="https://admin.zimbabwhere.com"
                 target="_blank"
                 rel="noopener"
               >
@@ -156,7 +156,7 @@ export default async function PrivacyPolicyPage() {
               </p>
 
               <a
-                href="https://stage.justlime.com/zimbabwhere21"
+                href="https://admin.zimbabwhere.com"
                 target="_blank"
                 rel="noopener"
               >
@@ -191,7 +191,7 @@ export default async function PrivacyPolicyPage() {
               </p>
 
               <a
-                href="https://stage.justlime.com/zimbabwhere21"
+                href="https://admin.zimbabwhere.com"
                 target="_blank"
                 rel="noopener"
               >
@@ -225,7 +225,7 @@ export default async function PrivacyPolicyPage() {
               </p>
 
               <a
-                href="https://stage.justlime.com/zimbabwhere21"
+                href="https://admin.zimbabwhere.com"
                 target="_blank"
                 rel="noopener"
               >
@@ -254,7 +254,7 @@ export default async function PrivacyPolicyPage() {
               </p>
 
               <a
-                href="https://stage.justlime.com/zimbabwhere21"
+                href="https://admin.zimbabwhere.com"
                 target="_blank"
                 rel="noopener"
               >
