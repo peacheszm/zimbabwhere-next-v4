@@ -14,6 +14,7 @@
   }
 
   a {
+    display: block; // Added so the link takes up the block's height and width
     width: 100%;
     height: 100%;
     background-position: center;

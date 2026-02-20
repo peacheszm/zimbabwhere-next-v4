@@ -8,7 +8,7 @@ import "swiper/css";
 import Link from "next/link";
 
 export default function FeaturedBusinessbanner({ businesses }) {
-  console.log(businesses);
+  console.log(businesses.data);
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay, EffectFade]}
@@ -26,29 +26,33 @@ export default function FeaturedBusinessbanner({ businesses }) {
       effect="fade"
       className="featured_business_banner"
     >
-      {businesses.data.map(
-        (bus) =>
-          bus.meta.business_banner && (
-            <SwiperSlide key={bus.id}>
-              <div className="featured_business_slide">
-                <Link
-                  href={`/business/${bus.slug}`}
-                  title="Click to view Business"
-                  style={{
-                    backgroundImage: `url(${bus.meta.business_banner.url})`,
-                  }}
-                >
-                  {/* <Image
+      {businesses.data.map((bus) => {
+        const bgImageUrl =
+          bus.meta?.business_banner?.url || bus.meta?.logo?.url;
+
+        if (!bgImageUrl) return null;
+
+        return (
+          <SwiperSlide key={bus.id}>
+            <div className="featured_business_slide">
+              <Link
+                href={`/business/${bus.slug}`}
+                title="Click to view Business"
+                style={{
+                  backgroundImage: `url(${bgImageUrl})`,
+                }}
+              >
+                {/* <Image
                     src="/img/shims/banner_shim.png"
-                    alt={bus.meta.business_banner.name}
+                    alt={bus.meta.business_banner?.name || bus.meta.logo?.name || bus.title}
                     width="1600"
                     height="1000"
                   /> */}
-                </Link>
-              </div>
-            </SwiperSlide>
-          ),
-      )}
+              </Link>
+            </div>
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }
