@@ -5,7 +5,8 @@ import PaginationBottom from "@/components/home/PaginationBottom";
 import SiteSideBar from "@/components/global/Sidebar";
 
 export default async function QuotesPage({ searchParams }) {
-  const page = Number(searchParams?.page) || 1;
+  const params = await searchParams;
+  const page = Number(params?.page) || 1;
 
   let quotes = [];
   let pagination = null;
