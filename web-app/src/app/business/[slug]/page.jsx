@@ -1,4 +1,5 @@
-import { getBusinessBySlug, getAllBusinesses } from "@/lib/endpoints/business";
+import { getBusinessBySlug, getAllBusinesses, getBusinessById } from "@/lib/endpoints/business";
+import { redirect, notFound } from "next/navigation";
 
 import Title from "@/components/single-business/Title";
 import Gallery from "@/components/single-business/Gallery";
@@ -22,9 +23,26 @@ import { yoastToMetadata } from "@/lib/seo/seo";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  let page = null;
   
-  const pages = await getBusinessBySlug(`${slug}`);
-  const page = pages[0];
+  try {
+    const pages = await getBusinessBySlug(`${slug}`);
+    if (pages && pages.length > 0) {
+      page = pages[0];
+    } else if (/^\d+$/.test(slug)) {
+      // If not found by slug, and slug is numeric, we might be redirecting
+      try {
+        const business = await getBusinessById(slug);
+        if (business && business.slug) {
+          return {}; // Will redirect in the component
+        }
+      } catch (e) {
+        return {};
+      }
+    }
+  } catch (error) {
+    return {};
+  }
 
   if (!page) return {};
 
@@ -33,11 +51,36 @@ export async function generateMetadata({ params }) {
 
 export default async function SingleBusiness({ params }) {
   const { slug } = await params;
-  const posts = await getBusinessBySlug(slug);
-  const post = posts[0];
-  
+  let post = null;
+  let redirectUrl = null;
+
+  try {
+    const posts = await getBusinessBySlug(slug);
+    if (posts && posts.length > 0) {
+      post = posts[0];
+    } else if (/^\d+$/.test(slug)) {
+      // Check if the slug is numeric and fetch by ID
+      try {
+        
+        const business = await getBusinessById(slug);
+        
+        if (business && business.slug) {
+          redirectUrl = `/business/${business.slug}`;
+        }
+      } catch (e) {
+        // ID not found either
+      }
+    }
+  } catch (error) {
+    // Fetch failed entirely
+  }
+
+  if (redirectUrl) {
+    redirect(redirectUrl);
+  }
+
   if (!post) {
-    // This could also be a notFound() if you import it, but leaving as is handles the page gracefully or throws
+    notFound();
   }
 
   console.log(post);

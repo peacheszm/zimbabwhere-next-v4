@@ -14,11 +14,11 @@ export async function getBusinessBySlug(slug) {
     if (data && data.length > 0) {
       return data;
     } else {
-      throw new Error("Business not found");
+      return null;
     }
   } catch (error) {
     console.error("Error fetching business:", error);
-    throw error;
+    return null;
   }
 }
 
