@@ -22,8 +22,10 @@ import { yoastToMetadata } from "@/lib/seo/seo";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  
   const pages = await getBusinessBySlug(`${slug}`);
   const page = pages[0];
+
   if (!page) return {};
 
   return yoastToMetadata(page.yoast_head_json, `/business/${slug}`);
@@ -33,6 +35,11 @@ export default async function SingleBusiness({ params }) {
   const { slug } = await params;
   const posts = await getBusinessBySlug(slug);
   const post = posts[0];
+  
+  if (!post) {
+    // This could also be a notFound() if you import it, but leaving as is handles the page gracefully or throws
+  }
+
   console.log(post);
   return (
     <div className="single_business_page_wrapper">
