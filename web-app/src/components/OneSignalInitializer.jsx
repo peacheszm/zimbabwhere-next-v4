@@ -2,9 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 import OneSignal from 'react-onesignal';
+import { useSession } from 'next-auth/react';
 
 export default function OneSignalInitializer() {
   const initialized = useRef(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !initialized.current) {
@@ -33,6 +35,15 @@ export default function OneSignalInitializer() {
       initialized.current = true;
     }
   }, []);
+
+  // Sync user ID with OneSignal when session changes
+  useEffect(() => {
+    if (initialized.current && session?.user?.id) {
+      OneSignal.login(session.user.id.toString());
+    } else if (initialized.current && status === 'unauthenticated') {
+      OneSignal.logout();
+    }
+  }, [session, status]);
 
   return null;
 }
