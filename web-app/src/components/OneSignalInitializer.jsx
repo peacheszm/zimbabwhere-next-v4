@@ -40,9 +40,20 @@ export default function OneSignalInitializer() {
 
   // Sync user ID with OneSignal when session changes
   useEffect(() => {
+    console.log('[OneSignal] Session check:', {
+      isInitialized: initialized.current,
+      sessionStatus: status,
+      hasUserId: !!session?.user?.id,
+      userId: session?.user?.id
+    });
+
     if (initialized.current && session?.user?.id) {
-      OneSignal.login(session.user.id.toString());
+      console.log('[OneSignal] Logging in user:', session.user.id.toString());
+      OneSignal.login(session.user.id.toString())
+        .then(() => console.log('[OneSignal] User login successful'))
+        .catch(err => console.error('[OneSignal] User login failed:', err));
     } else if (initialized.current && status === 'unauthenticated') {
+      console.log('[OneSignal] User unauthenticated, logging out device from user profile');
       OneSignal.logout();
     }
   }, [session, status]);
