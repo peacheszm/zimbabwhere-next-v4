@@ -2,7 +2,7 @@
   "name": "Zimbabwhere",
   "short_name": "Zimbabwhere",
   "description": "Zimbabwe's first free online Quoting Service and free Business Advertising for all local businesses",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
