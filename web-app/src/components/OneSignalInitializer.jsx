@@ -18,18 +18,6 @@ export default function OneSignalInitializer() {
           size: "medium",
           theme: "default",
           position: "bottom-right",
-          text: {
-            "tip.state.unsubscribed": "Allow notifications",
-            "tip.state.subscribed": "You're subscribed to notifications",
-            "tip.state.blocked": "You've blocked notifications",
-            "message.prenotify": "Click to subscribe to notifications",
-            "message.action.subscribed": "Thanks for subscribing!",
-            "message.action.resubscribed": "You're subscribed to notifications",
-            "message.action.unsubscribed": "You won't receive notifications again",
-            "dialog.main.title": "Manage Site Notifications",
-            "dialog.main.button.subscribe": "SECURE SUBSCRIBE",
-            "dialog.main.button.unsubscribe": "UNSUBSCRIBE"
-          }
         },
         allowLocalhostAsSecureOrigin: true,
       }).then(() => {
@@ -38,23 +26,23 @@ export default function OneSignalInitializer() {
     }
   }, []);
 
-  // Sync user ID with OneSignal when session changes
+  // Sync user ID with OneSignal when session changes AFTER initialization
+  // Sync user ID with OneSignal when session changes AFTER initialization
   useEffect(() => {
-    console.log('[OneSignal] Session check:', {
-      isInitialized: initialized.current,
-      sessionStatus: status,
-      hasUserId: !!session?.user?.id,
-      userId: session?.user?.id
-    });
-
-    if (initialized.current && session?.user?.id) {
-      console.log('[OneSignal] Logging in user:', session.user.id.toString());
-      OneSignal.login(session.user.id.toString())
-        .then(() => console.log('[OneSignal] User login successful'))
-        .catch(err => console.error('[OneSignal] User login failed:', err));
-    } else if (initialized.current && status === 'unauthenticated') {
-      console.log('[OneSignal] User unauthenticated, logging out device from user profile');
-      OneSignal.logout();
+    // Only attempt login if initialized has flipped AND we have a valid session
+    if (initialized.current) {
+        if (status === 'authenticated' && session?.user?.id) {
+            const externalId = 'zw_user_' + session.user.id.toString();
+            // Wrap in a tiny timeout to ensure OneSignal's internal state is fully ready
+            // after the init() promise returns (sometimes there is a race condition)
+            setTimeout(() => {
+                OneSignal.login(externalId).catch(e => console.log('OneSignal Login Error:', e));
+            }, 500);
+        } else if (status === 'unauthenticated') {
+            setTimeout(() => {
+                OneSignal.logout().catch(e => console.log('OneSignal Logout Error:', e));
+            }, 500);
+        }
     }
   }, [session, status]);
 
