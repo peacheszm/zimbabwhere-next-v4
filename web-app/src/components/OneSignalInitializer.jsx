@@ -10,6 +10,7 @@ export default function OneSignalInitializer() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !initialized.current) {
+      initialized.current = true;
       OneSignal.init({
         appId: "01595039-d840-4721-b8bf-96b3e36e7399",
         notifyButton: {
@@ -31,8 +32,9 @@ export default function OneSignalInitializer() {
           }
         },
         allowLocalhostAsSecureOrigin: true,
+      }).then(() => {
+        OneSignal.Slidedown.promptPush();
       });
-      initialized.current = true;
     }
   }, []);
 
