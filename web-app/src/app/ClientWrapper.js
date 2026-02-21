@@ -8,10 +8,12 @@ import { UserProvider } from "@/contexts/UserContext";
 import Navigation from "@/components/global/Navigation";
 import Footer from "@/components/global/Footer";
 import CreateBusinessReview from "@/components/modals/CreateBusinessReview";
+import OneSignalInitializer from "@/components/OneSignalInitializer";
 
 export default function ClientWrapper({ children }) {
   return (
     <SessionProvider>
+      <OneSignalInitializer />
       <UserProvider>
         <SearchProvider>
           <ModalProvider>

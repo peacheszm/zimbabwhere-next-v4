@@ -2,7 +2,6 @@ import { Analytics } from "@vercel/analytics/next";
 import ClientWrapper from "./ClientWrapper";
 import Script from "next/script";
 import "@/styles/main.scss";
-import OneSignalInitializer from "@/components/OneSignalInitializer";
 
 export const viewport = {
   width: "device-width",
@@ -59,7 +58,6 @@ export default function RootLayout({ children }) {
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <OneSignalInitializer />
         <ClientWrapper>{children}</ClientWrapper>
         <Analytics />
         <Script
