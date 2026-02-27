@@ -20,8 +20,6 @@ export default function OneSignalInitializer() {
           position: "bottom-right",
         },
         allowLocalhostAsSecureOrigin: true,
-      }).then(() => {
-        OneSignal.Slidedown.promptPush();
       });
     }
   }, []);

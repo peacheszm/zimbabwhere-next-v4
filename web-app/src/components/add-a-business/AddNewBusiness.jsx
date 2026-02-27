@@ -9,6 +9,7 @@ import Link from "next/link";
 import Dropzone from "@/components/ui/Dropzone";
 import { createUsersBusinesses } from "@/lib/endpoints/account";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
+import NotificationPrompt from "@/components/ui/NotificationPrompt";
 
 export default function AddNewBusiness({ cats = [], towns = [] }) {
   const { data: session } = useSession();
@@ -125,6 +126,10 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
 
   return (
     <div className="add_business_form_container">
+      <NotificationPrompt 
+        title="Stay Updated!" 
+        message="Sign up to get notifications based on your headings and stay alert to new quote requests." 
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form_wrapper">
           {/* Business Info */}
