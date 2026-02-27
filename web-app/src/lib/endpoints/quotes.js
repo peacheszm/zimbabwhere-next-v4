@@ -7,8 +7,7 @@ export async function getLatestQuotes() {
         headers: {
           "Content-Type": "application/json",
         },
-        next: { revalidate: 3600 }, // Cache for 1 hour
-      }
+      },
     );
 
     // Parse the response JSON
@@ -35,7 +34,7 @@ export async function getQuotes(page) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     // Parse the response JSON
@@ -60,7 +59,7 @@ export async function getQuoteBySlug(slug) {
       `${process.env.NEXT_PUBLIC_WP_API_URL}/quote?_embed&slug=${slug}`,
       {
         next: { revalidate: 3600 }, // Cache for 1 hour
-      }
+      },
     );
 
     if (!response.ok) {
