@@ -140,7 +140,7 @@ export default function RegisterForm() {
 
       // Redirect to homepage after a short delay
       setTimeout(() => {
-        router.push("/my-account");
+        window.location.href = "/my-account";
       }, 1500);
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");

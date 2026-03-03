@@ -50,7 +50,7 @@ export default function LoginForm() {
         // Check if user is authenticated
         const session = await getSession();
         if (session) {
-          router.push("/my-account");
+          window.location.href = "/my-account";
         }
       }
     } catch (error) {

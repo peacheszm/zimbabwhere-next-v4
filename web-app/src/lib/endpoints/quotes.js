@@ -7,6 +7,7 @@ export async function getLatestQuotes() {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-store",
       },
     );
 
@@ -34,6 +35,7 @@ export async function getQuotes(page) {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-store",
       },
     );
 
