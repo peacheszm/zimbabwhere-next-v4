@@ -68,10 +68,6 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
       const formDataPayload = new FormData();
       formDataPayload.append("title", formData.business_name);
       formDataPayload.append(
-        "description",
-        formData.business_description || formData.business_overview,
-      );
-      formDataPayload.append(
         "business_description",
         formData.business_description,
       );

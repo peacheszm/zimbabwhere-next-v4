@@ -24,7 +24,8 @@ export default function EditInfo() {
   } = useForm({
     values: {
       title: businessData?.title?.rendered || "",
-      description: businessData?.content?.rendered || "",
+      business_description: businessData?.acf?.business_description || "",
+      business_overview: businessData?.acf?.business_overview || "",
       email: businessData?.acf?.business_email || "",
       phone: businessData?.acf?.phone_number || "",
       website: businessData?.acf?.business_website || "",
@@ -42,8 +43,9 @@ export default function EditInfo() {
     try {
       const updateData = {
         title: data.title,
-        content: data.description,
         acf: {
+          business_description: data.business_description,
+          business_overview: data.business_overview,
           business_email: data.email,
           phone_number: data.phone,
           business_website: data.website,
@@ -78,11 +80,20 @@ export default function EditInfo() {
           </div>
 
           <div className="form_row">
-            <label htmlFor="description">Business Description</label>
+            <label htmlFor="business_description">Business Description</label>
             <textarea
-              id="description"
+              id="business_description"
+              rows={3}
+              {...register("business_description")}
+            />
+          </div>
+
+          <div className="form_row">
+            <label htmlFor="business_overview">Business Overview</label>
+            <textarea
+              id="business_overview"
               rows={5}
-              {...register("description")}
+              {...register("business_overview")}
             />
           </div>
 
