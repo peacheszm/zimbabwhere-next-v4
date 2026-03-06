@@ -8,6 +8,7 @@ import "swiper/css";
 import Link from "next/link";
 
 export default function FeaturedBusinessLogos({ businesses }) {
+  console.log(businesses);
   return (
     <div className="featured_business_logo">
       <div className="container">
@@ -36,8 +37,8 @@ export default function FeaturedBusinessLogos({ businesses }) {
                       title="Click to view Business"
                     >
                       <Image
-                        src={bus.meta.logo.url}
-                        alt={bus.slug ? bus.slug : "Zimbabwhere"}
+                        src={bus.meta.logo?.url ?? bus.meta.logo}
+                        alt={bus.slug ?? "Zimbabwhere"}
                         width="500"
                         height="500"
                       />

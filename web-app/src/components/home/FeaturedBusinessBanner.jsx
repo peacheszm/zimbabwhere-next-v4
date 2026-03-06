@@ -11,18 +11,11 @@ export default function FeaturedBusinessbanner({ businesses }) {
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay, EffectFade]}
-      speed={3000}
-      autoplay={{
-        delay: 5000, // 5 seconds instead of 5ms
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }}
+      autoplay={true}
       loop={true}
-      slidesPerView="auto"
-      watchSlidesProgress={true}
-      spaceBetween={27}
+      slidesPerView={1}
+      spaceBetween={0}
       grabCursor={true}
-      effect="fade"
       className="featured_business_banner"
     >
       {businesses.data.map((bus) => {
