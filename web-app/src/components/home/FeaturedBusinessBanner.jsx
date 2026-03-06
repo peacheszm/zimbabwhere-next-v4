@@ -8,6 +8,7 @@ import "swiper/css";
 import Link from "next/link";
 
 export default function FeaturedBusinessbanner({ businesses }) {
+  console.log(businesses);
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay, EffectFade]}
@@ -20,7 +21,9 @@ export default function FeaturedBusinessbanner({ businesses }) {
     >
       {businesses.data.map((bus) => {
         const bgImageUrl =
-          bus.meta?.business_banner?.url || bus.meta?.logo?.url;
+          bus.meta?.business_banner?.url ?? // 1. Try Banner URL property
+          bus.meta?.business_banner ?? // 2. Try Banner itself (if it's just a string/URL)
+          bus.meta?.logo?.url;
 
         if (!bgImageUrl) return null;
 

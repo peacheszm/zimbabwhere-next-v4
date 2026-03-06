@@ -8,7 +8,6 @@ import "swiper/css";
 import Link from "next/link";
 
 export default function FeaturedBusinessLogos({ businesses }) {
-  console.log(businesses);
   return (
     <div className="featured_business_logo">
       <div className="container">
