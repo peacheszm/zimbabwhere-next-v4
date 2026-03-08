@@ -19,5 +19,14 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "/img/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
   ]
 }
