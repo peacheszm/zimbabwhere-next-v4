@@ -24,15 +24,9 @@
   "screenshots": [
     {
       "src": "/img/screenshot-mobile.png",
-      "sizes": "1080x1920",
+      "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow"
-    },
-    {
-      "src": "/img/screenshot-desktop.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide"
     }
   ]
 }
