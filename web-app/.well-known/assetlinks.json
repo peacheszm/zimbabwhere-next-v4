@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.zimbabwhere2026.twa",
+        "sha256_cert_fingerprints": ["CF:02:CB:2D:08:1B:E7:90:8A:BE:62:95:DD:2C:10:1A:9F:32:63:A9:B4:4E:AC:F5:03:90:83:63:BF:3F:0E:B3"]
+      }
+    }]
