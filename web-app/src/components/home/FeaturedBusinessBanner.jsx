@@ -18,7 +18,7 @@ export default function FeaturedBusinessbanner({ businesses }) {
       grabCursor={true}
       className="featured_business_banner"
     >
-      {businesses.data.map((bus) => {
+      {businesses.data.map((bus, index) => {
         const bgImageUrl =
           bus.meta?.business_banner?.url ?? // 1. Try Banner URL property
           bus.meta?.business_banner ?? // 2. Try Banner itself (if it's just a string/URL)
@@ -27,7 +27,7 @@ export default function FeaturedBusinessbanner({ businesses }) {
         if (!bgImageUrl) return null;
 
         return (
-          <SwiperSlide key={bus.id}>
+          <SwiperSlide key={bus.index}>
             <div className="featured_business_slide">
               <Link
                 href={`/business/${bus.slug}`}
