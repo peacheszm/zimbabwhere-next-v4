@@ -41,7 +41,7 @@ export default async function ManageSingleBusiness({ params }) {
           <div className="see_more_links">
             <Link href={`/add-a-business`}>Add New Business</Link>
             <Link className="view_link" href={`/business/${business.slug}`}>
-              Veiw your updated Business Page
+              View your updated Business Page
             </Link>
           </div>
         </main>

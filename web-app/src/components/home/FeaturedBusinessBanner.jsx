@@ -8,7 +8,6 @@ import "swiper/css";
 import Link from "next/link";
 
 export default function FeaturedBusinessbanner({ businesses }) {
-  console.log(businesses);
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay, EffectFade]}

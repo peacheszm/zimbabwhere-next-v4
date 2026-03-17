@@ -32,11 +32,9 @@ export async function getCurrentUserPurchases(token) {
 export async function selectBusinessForAdvertisement(adData, token) {
   const baseWp = process.env.NEXT_PUBLIC_WORDPRESS_ENDPOINT;
 
-  console.log(adData);
-
   if (!baseWp) {
     throw new Error(
-      "NEXT_PUBLIC_CUSTOM_WORDPRESS_ENDPOINT environment variable is not defined"
+      "NEXT_PUBLIC_CUSTOM_WORDPRESS_ENDPOINT environment variable is not defined",
     );
   }
 
@@ -65,8 +63,8 @@ export async function selectBusinessForAdvertisement(adData, token) {
   if (!upgradeType) {
     throw new Error(
       `Unsupported ad_type: ${adData?.ad_type}. Expected one of ${Object.keys(
-        typeToSlug
-      ).join(", ")}`
+        typeToSlug,
+      ).join(", ")}`,
     );
   }
   response = await fetch(
@@ -79,7 +77,7 @@ export async function selectBusinessForAdvertisement(adData, token) {
       },
       // Pass through any helpful metadata (order_id etc.). Backend may ignore.
       body: JSON.stringify(adData),
-    }
+    },
   );
 
   if (!response.ok) {
