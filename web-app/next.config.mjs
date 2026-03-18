@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
