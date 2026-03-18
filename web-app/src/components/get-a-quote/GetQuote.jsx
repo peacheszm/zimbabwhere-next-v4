@@ -152,7 +152,9 @@ export default function GetQuote({ cats, towns, business }) {
                       value={item.id}
                       {...register("selectedBusinessCategories")}
                     />
-                    <label htmlFor={`cat${item.id}`}>{decodeHtml(item.name)}</label>
+                    <label htmlFor={`cat${item.id}`}>
+                      {decodeHtml(item.name)}
+                    </label>
                   </div>
                 ))}
               </div>
@@ -265,7 +267,7 @@ export default function GetQuote({ cats, towns, business }) {
           </div>
           <div className="form_row">
             <label htmlFor="ideal_start">Quote expiry date</label>
-            <p>When do you wnt to hide this quote</p>
+            <p>When do you want to hide this quote</p>
             <Controller
               name="quote_expire"
               control={control}
