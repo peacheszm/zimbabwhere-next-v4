@@ -8,11 +8,12 @@ import {
   IconChevronDown,
   IconAdjustments,
 } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function SiteFilterClient({ initialData }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { categories, towns, searchData } = initialData;
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,6 +37,41 @@ export default function SiteFilterClient({ initialData }) {
   const searchRef = useRef(null);
 
   const [showFilters, setShowFilters] = useState(false);
+
+  // Sync state with URL search parameters
+  useEffect(() => {
+    const q = searchParams.get("q") || "";
+    const catId = searchParams.get("category_filter") || "";
+    const townId = searchParams.get("location_filter") || "";
+
+    setSearchTerm(q);
+
+    if (catId) {
+      const category = categories.find(
+        (cat) => cat.id.toString() === catId.toString()
+      );
+      if (category) {
+        setSelectedCategory({
+          id: category.id,
+          name: decodeHtml(category.label || category.name),
+        });
+      }
+    } else {
+      setSelectedCategory({ id: "", name: "All Categories" });
+    }
+
+    if (townId) {
+      const town = towns.find((t) => t.id.toString() === townId.toString());
+      if (town) {
+        setSelectedTown({
+          id: town.id,
+          name: decodeHtml(town.label || town.name),
+        });
+      }
+    } else {
+      setSelectedTown({ id: "", name: "All Towns" });
+    }
+  }, [searchParams, categories, towns]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -118,6 +154,10 @@ export default function SiteFilterClient({ initialData }) {
 
   const clearSearch = () => {
     setSearchTerm("");
+    // Also clear from URL if you want, but syncing with useEffect handles it
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("q");
+    router.push(`/search?${params.toString()}`);
     setActiveDropdown(null);
   };
 
