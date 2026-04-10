@@ -50,14 +50,6 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
       </head>
       <body>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-TMHN7S5P"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
         <ClientWrapper>{children}</ClientWrapper>
         <Analytics />
         <Script
