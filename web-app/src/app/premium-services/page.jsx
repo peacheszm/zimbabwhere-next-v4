@@ -1,6 +1,7 @@
 import SiteSideBar from "@/components/global/Sidebar";
+import BuyButton from "@/components/global/BuyButton";
 
-export default async function PrivacyPolicyPage() {
+export default function PremiumServicesPage() {
   return (
     <div className="page_wrapper content_page advertising_options">
       <div className="container">
@@ -110,13 +111,10 @@ export default async function PrivacyPolicyPage() {
                 can request a heading that we can create for you and have you
                 listed under it.
               </p>
-              <a
-                href="https://admin.zimbabwhere.com"
-                target="_blank"
-                rel="noopener"
-              >
-                Buy Extra Headings
-              </a>
+              <BuyButton
+                title="$35 / Heading / Year"
+                subTitle="Buy Extra Headings"
+              />
             </div>
             <br />
             <br />
@@ -155,13 +153,7 @@ export default async function PrivacyPolicyPage() {
                 you do.
               </p>
 
-              <a
-                href="https://admin.zimbabwhere.com"
-                target="_blank"
-                rel="noopener"
-              >
-                Buy Premium Listing
-              </a>
+              <BuyButton title="$450 / Year" subTitle="Buy Premium Listing" />
             </div>
             <br />
             <br />
@@ -190,13 +182,10 @@ export default async function PrivacyPolicyPage() {
                 and found on our home page.
               </p>
 
-              <a
-                href="https://admin.zimbabwhere.com"
-                target="_blank"
-                rel="noopener"
-              >
-                Buy Home Page Billboard
-              </a>
+              <BuyButton
+                title="$200 / Month"
+                subTitle="Buy Home Page Billboard"
+              />
             </div>{" "}
             <br />
             <br />
@@ -224,13 +213,7 @@ export default async function PrivacyPolicyPage() {
                 contacted.
               </p>
 
-              <a
-                href="https://admin.zimbabwhere.com"
-                target="_blank"
-                rel="noopener"
-              >
-                Buy Home Page Logo
-              </a>
+              <BuyButton title="$10 / Month" subTitle="Buy Home Page Logo" />
             </div>{" "}
             <br />
             <br />
@@ -253,13 +236,7 @@ export default async function PrivacyPolicyPage() {
                 the most exposure we can.
               </p>
 
-              <a
-                href="https://admin.zimbabwhere.com"
-                target="_blank"
-                rel="noopener"
-              >
-                Buy Video Display
-              </a>
+              <BuyButton title="$50 / Month" subTitle="Buy Video Display" />
             </div>{" "}
             <br />
             <br />

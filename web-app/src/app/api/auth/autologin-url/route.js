@@ -8,9 +8,16 @@ export async function GET(request) {
     return NextResponse.json({ error: "Token required" }, { status: 400 });
   }
 
-  const url = `https://admin.zimbabwhere.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${encodeURIComponent(
-    token,
-  )}&AUTH_KEY=${process.env.NEXTAUTH_SECRET}`;
+  const wordpressUrl =
+    process.env.NEXT_PUBLIC_WP_SITE_URL ||
+    "https://stage.justlime.com/zimbabwhere21";
+  const authKey = process.env.NEXTAUTH_SECRET;
 
-  return NextResponse.redirect(url);
+  // Use URL constructor for safer parameter handling and to avoid hardcoding
+  const url = new URL(wordpressUrl);
+  url.searchParams.set("rest_route", "/simple-jwt-login/v1/autologin");
+  url.searchParams.set("JWT", token);
+  url.searchParams.set("AUTH_KEY", authKey);
+
+  return NextResponse.redirect(url.toString());
 }
