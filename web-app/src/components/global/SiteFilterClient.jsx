@@ -330,6 +330,8 @@ export default function SiteFilterClient({ initialData }) {
                     href={
                       item.type === "business"
                         ? `/business/${item.slug}`
+                        : item.type === "quote"
+                        ? `/quotes/${item.slug}`
                         : `/search?category_filter=${item.id}`
                     }
                     className="dropdown_item"
