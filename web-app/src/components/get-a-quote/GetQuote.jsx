@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
@@ -21,6 +21,7 @@ export default function GetQuote({ cats, towns, business }) {
   const bid = searchParams.get("bid");
 
   const { openModal, closeModal } = useModal();
+  const [isManualSubmitting, setIsManualSubmitting] = useState(false);
 
   const decodedCats = useMemo(
     () =>
@@ -68,6 +69,9 @@ export default function GetQuote({ cats, towns, business }) {
   ];
 
   const onSubmit = async (data) => {
+    if (isManualSubmitting) return;
+    setIsManualSubmitting(true);
+
     const formData = new FormData();
 
     // Basic fields
@@ -110,7 +114,9 @@ export default function GetQuote({ cats, towns, business }) {
       formData.append("start_date", data.start_date.toISOString());
     }
 
-    formData.append("quote_expire", data.quote_expire.toISOString());
+    if (data.quote_expire) {
+      formData.append("quote_expire", data.quote_expire.toISOString());
+    }
 
     // Files handling
     if (data.quote_files && data.quote_files.length > 0) {
@@ -122,10 +128,13 @@ export default function GetQuote({ cats, towns, business }) {
     try {
       const result = await createQuote(formData);
       if (result.success) {
+        reset();
         handleOpenModal();
       }
     } catch (error) {
       console.error("Submission failed:", error);
+    } finally {
+      setIsManualSubmitting(false);
     }
   };
 
@@ -338,8 +347,14 @@ export default function GetQuote({ cats, towns, business }) {
           </div>
 
           <div className="form_row btn_group">
-            <button type="submit" className="primary" disabled={isSubmitting}>
-              {isSubmitting ? "Busy sending..." : "Submit"}
+            <button
+              type="submit"
+              className="primary"
+              disabled={isSubmitting || isManualSubmitting}
+            >
+              {isSubmitting || isManualSubmitting
+                ? "Busy sending..."
+                : "Submit"}
             </button>
           </div>
         </div>
