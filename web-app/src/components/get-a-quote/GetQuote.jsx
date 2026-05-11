@@ -22,6 +22,7 @@ export default function GetQuote({ cats, towns, business }) {
 
   const { openModal, closeModal } = useModal();
   const [isManualSubmitting, setIsManualSubmitting] = useState(false);
+  const [categoryInputValue, setCategoryInputValue] = useState("");
 
   const decodedCats = useMemo(
     () =>
@@ -224,6 +225,13 @@ export default function GetQuote({ cats, towns, business }) {
                     {...field}
                     inputId="quote_from_category"
                     isMulti
+                    closeMenuOnSelect={false}
+                    inputValue={categoryInputValue}
+                    onInputChange={(val, { action }) => {
+                      if (action !== "set-value") {
+                        setCategoryInputValue(val);
+                      }
+                    }}
                     options={decodedCats}
                     onChange={(val) => field.onChange(val)}
                     placeholder="Choose multiple headings to reach as many companies as possible…"
