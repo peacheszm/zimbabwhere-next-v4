@@ -5,7 +5,7 @@ import {
   getBusinessCategories,
   getBusinessSuburbs,
 } from "@/lib/endpoints/json/json";
-
+export const dynamic = "force-dynamic";
 export default async function AddNewBusinessPage() {
   const [businessCats, businessSuburbs] = await Promise.all([
     getBusinessCategories(),
