@@ -10,12 +10,12 @@ export async function getBillboardAds() {
     const response = await fetch(`${baseWp}/ads/billboard`);
     if (!response.ok) {
       console.error(`Failed to fetch billboard ads: ${response.statusText}`);
-      return [];
+      return { data: [] };
     }
     return await response.json();
   } catch (error) {
     console.error("Error fetching billboard ads:", error);
-    return [];
+    return { data: [] };
   }
 }
 
@@ -29,12 +29,12 @@ export async function getFeaturedLogoAds() {
     const response = await fetch(`${baseWp}/ads/featured-logos`);
     if (!response.ok) {
       console.error(`Failed to fetch featured logo ads: ${response.statusText}`);
-      return [];
+      return { data: [] };
     }
     return await response.json();
   } catch (error) {
     console.error("Error fetching featured logo ads:", error);
-    return [];
+    return { data: [] };
   }
 }
 
