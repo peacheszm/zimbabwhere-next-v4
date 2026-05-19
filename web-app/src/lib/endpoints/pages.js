@@ -4,7 +4,9 @@ export async function getPagesBySlug(slug) {
   try {
     const response = await fetch(`${baseWp}/pages?_embed&slug=${slug}`);
     if (!response.ok) {
-      console.error(`Failed to fetch page by slug ${slug}: ${response.statusText}`);
+      console.error(
+        `Failed to fetch page by slug ${slug}: ${response.statusText}`,
+      );
       return [];
     }
     return await response.json();

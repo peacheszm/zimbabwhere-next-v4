@@ -1,6 +1,8 @@
 import { getPagesBySlug } from "@/lib/endpoints/pages";
 import SiteSideBar from "@/components/global/Sidebar";
 
+export const dynamic = "force-dynamic";
+
 export default async function PrivacyPolicyPage() {
   const data = await getPagesBySlug("privacy-policy-2");
 
@@ -10,13 +12,13 @@ export default async function PrivacyPolicyPage() {
         <main className="main">
           <h1
             dangerouslySetInnerHTML={{
-              __html: data[0]?.title?.rendered,
+              __html: data[0]?.title?.rendered || "",
             }}
           ></h1>
           <div
             className="body_content"
             dangerouslySetInnerHTML={{
-              __html: data[0]?.content?.rendered,
+              __html: data[0]?.content?.rendered || "",
             }}
           ></div>
         </main>
