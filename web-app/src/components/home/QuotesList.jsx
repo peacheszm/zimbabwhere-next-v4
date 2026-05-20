@@ -43,12 +43,7 @@ export default function QuoteList({ quotes, responsive = false }) {
                     </div>
                     {quote.acf?.page_views || 0} Views
                   </div>
-                  <div className="meta_item">
-                    <div className="icon">
-                      <IconMessageCircle size={16} />
-                    </div>
-                    {quote.ACF?.quote_responses || 0} Responses
-                  </div>
+
                   <div className="meta_item">
                     <div className="icon">
                       <IconCalendar size={16} />
