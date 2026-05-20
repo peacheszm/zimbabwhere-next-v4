@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -22,8 +22,17 @@ export default function RegisterForm() {
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const [callbackUrl, setCallbackUrl] = useState("/my-account");
   const router = useRouter();
   const errorRef = useRef(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const callback = params.get("callbackUrl");
+    if (callback) {
+      setCallbackUrl(callback);
+    }
+  }, []);
 
   const scrollToError = () => {
     setTimeout(() => {
@@ -140,7 +149,7 @@ export default function RegisterForm() {
 
       // Redirect to homepage after a short delay
       setTimeout(() => {
-        window.location.href = "/my-account";
+        window.location.href = callbackUrl;
       }, 1500);
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");
@@ -294,7 +303,7 @@ export default function RegisterForm() {
           <div className="page_actions">
             <span className="breaker">Already have an account?</span>
             <div className="btn_group primary">
-              <Link href="/auth/login">Login</Link>
+              <Link href={`/auth/login${callbackUrl !== "/my-account" ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ""}`}>Login</Link>
             </div>
           </div>
         </div>

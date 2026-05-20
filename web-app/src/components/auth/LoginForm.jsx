@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -12,8 +12,17 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [callbackUrl, setCallbackUrl] = useState("/my-account");
   const router = useRouter();
   const errorRef = useRef(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const callback = params.get("callbackUrl");
+    if (callback) {
+      setCallbackUrl(callback);
+    }
+  }, []);
 
   const scrollToError = () => {
     setTimeout(() => {
@@ -50,7 +59,7 @@ export default function LoginForm() {
         // Check if user is authenticated
         const session = await getSession();
         if (session) {
-          window.location.href = "/my-account";
+          window.location.href = callbackUrl;
         }
       }
     } catch (error) {
@@ -122,7 +131,7 @@ export default function LoginForm() {
           <div className="page_actions">
             <span className="breaker">Don't have an account?</span>
             <div className="btn_group primary">
-              <Link href="/auth/register">Create an account</Link>
+              <Link href={`/auth/register${callbackUrl !== "/my-account" ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ""}`}>Create an account</Link>
             </div>
           </div>
         </div>
