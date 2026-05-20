@@ -351,7 +351,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
             />
             <p className="info_msg">
               Can't find the heading you're looking for?{" "}
-              <Link href="/">Request one here</Link>. (3/3 selected)
+              <Link href="/request-headings">Request one here</Link>. (3/3 selected)
             </p>
             {selectedCategories.length === 3 && (
               <p className="info_msg">

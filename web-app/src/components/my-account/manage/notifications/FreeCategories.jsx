@@ -94,7 +94,7 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
                     Maximum 3 headings reached. Three headings not enough?
                     Upgrade options available after submission.
                     <br /> Can't find the heading you're looking for?{" "}
-                    <a href="/">Request one here.</a>
+                    <Link href="/request-headings">Request one here.</Link>
                   </p>
                 </>
               )}
