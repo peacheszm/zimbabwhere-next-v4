@@ -42,7 +42,7 @@ export default function PremiumServicesPage() {
             </li>
             <li>
               Your Quotes are sent directly to Listed Businesses under the
-              headings you have selected Businesses now have the freedom of
+              headings you have selected. Businesses now have the freedom of
               choice to respond and assist you.
             </li>
           </ul>
