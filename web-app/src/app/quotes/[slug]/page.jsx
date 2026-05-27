@@ -19,8 +19,6 @@ export default async function QuotePage({ params }) {
   const posts = await getQuoteBySlug(slug);
   const post = posts[0];
 
-  
-
   return (
     <div className="page_wrapper">
       <div className="container">
@@ -36,12 +34,7 @@ export default async function QuotePage({ params }) {
                 </div>
                 {post?.acf?.page_views || 0} Views
               </div>
-              <div className="meta_item">
-                <div className="icon">
-                  <IconMessageCircle size={16} />
-                </div>
-                {post?.acf?.quote_responses || 0} Responses
-              </div>
+
               <div className="meta_item">
                 <div className="icon">
                   <IconCalendar size={16} />

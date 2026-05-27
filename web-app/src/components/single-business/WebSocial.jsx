@@ -4,6 +4,7 @@ import {
   IconBrandFacebook,
   IconBrandTwitter,
   IconBrandYoutube,
+  IconBrandInstagram,
   IconFileText,
   IconWorldWww,
 } from "@tabler/icons-react";
@@ -67,6 +68,17 @@ export default function WebSocial({ post }) {
                     rel="noopener noreferrer"
                   >
                     <IconBrandTwitter size={20} />
+                  </a>
+                )}
+              {social.social_platform === "Instagram" &&
+                social.url !== "NULL" && (
+                  <a
+                    className="icon_in"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <IconBrandInstagram size={20} />
                   </a>
                 )}
             </div>
