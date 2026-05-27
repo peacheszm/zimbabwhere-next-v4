@@ -5,12 +5,23 @@ import React from "react";
 import { useModal } from "@/contexts/ModalContext";
 import EditInfo from "@/components/modals/single-business/EditInfo";
 
-export default function Info({ data }) {
+export default function Info({ data, towns = [] }) {
   const { openModal } = useModal();
 
   const handleOpenModal = () => {
-    openModal("EditInfo", data);
+    openModal("EditInfo", { business: data, towns });
   };
+
+  const addressParts = [
+    data?.acf?.street_number,
+    data?.acf?.street_name,
+    data?.acf?.suburb?.name || data?.acf?.suburb?.title || data?.acf?.suburb,
+    data?.acf?.town?.name || data?.acf?.town?.title || data?.acf?.town,
+    data?.acf?.province?.name || data?.acf?.province?.title || data?.acf?.province,
+    data?.acf?.country,
+  ].filter(Boolean);
+
+  const addressString = addressParts.length > 0 ? addressParts.join(" ") : "Not set";
 
   return (
     <div className="manage_section info">
@@ -41,6 +52,10 @@ export default function Info({ data }) {
           <div className="info_item">
             <strong>Website:</strong>{" "}
             <span>{data?.acf?.business_website || "Not set"}</span>
+          </div>
+          <div className="info_item">
+            <strong>Address:</strong>{" "}
+            <span>{addressString}</span>
           </div>
           <div className="info_item">
             <strong>Description:</strong>{" "}

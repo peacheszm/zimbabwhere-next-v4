@@ -12,13 +12,14 @@ import Social from "@/components/my-account/manage/single-business/Social";
 import Videos from "@/components/my-account/manage/single-business/Videos";
 import Gallery from "@/components/my-account/manage/single-business/Gallery";
 
-import { getBusinessCategories } from "@/lib/endpoints/json/json";
+import { getBusinessCategories, getBusinessSuburbs } from "@/lib/endpoints/json/json";
 
 export default async function ManageSingleBusiness({ params }) {
   const { slug } = await params;
-  const [businessData, businessCats] = await Promise.all([
+  const [businessData, businessCats, businessSuburbs] = await Promise.all([
     getBusinessBySlug(slug),
     getBusinessCategories(),
+    getBusinessSuburbs(),
   ]);
   const business = businessData[0];
 
@@ -36,7 +37,7 @@ export default async function ManageSingleBusiness({ params }) {
           <Categories data={business} cats={businessCats} />
           <Banner data={business} />
 
-          <Info data={business} />
+          <Info data={business} towns={businessSuburbs} />
 
           <div className="see_more_links">
             <Link href={`/add-a-business`}>Add New Business</Link>
