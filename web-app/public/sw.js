@@ -1,4 +1,4 @@
-const CACHE_NAME = "zimbabwhere-v1.0.1";
+const CACHE_NAME = "zimbabwhere-v1.0.2";
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.json",
@@ -16,8 +16,19 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  // Use Network First for HTML navigation requests to ensure latest Next.js assets are referenced
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        return caches.match("/", { ignoreSearch: true });
+      })
+    );
+    return;
+  }
+
+  // Use Cache First for all other requests (like images and manifest)
   event.respondWith(
-    caches.match(event.request).then((response) => {
+    caches.match(event.request, { ignoreSearch: true }).then((response) => {
       return response || fetch(event.request);
     }),
   );
