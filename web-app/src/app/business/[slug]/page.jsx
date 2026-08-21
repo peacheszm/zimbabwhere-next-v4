@@ -6,6 +6,7 @@ import {
 import { redirect, notFound } from "next/navigation";
 
 import Title from "@/components/single-business/Title";
+import BusinessViewTracker from "@/components/single-business/BusinessViewTracker";
 import Gallery from "@/components/single-business/Gallery";
 import ContactUs from "@/components/single-business/ContactUs";
 import Overview from "@/components/single-business/Overview";
@@ -88,6 +89,7 @@ export default async function SingleBusiness({ params }) {
 
   return (
     <div className="single_business_page_wrapper">
+      <BusinessViewTracker businessId={post.id} />
       <div className="container">
         <main className="main">
           {/* Business Title */}
