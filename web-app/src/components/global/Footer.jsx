@@ -78,6 +78,10 @@ export default function Footer() {
           <a href="/privacy-policy" className="">
             Privacy Policy
           </a>
+          |
+          <a href="/contact" className="">
+            Contact Us
+          </a>
         </div>
       </div>
       <div className="footer_copyright">

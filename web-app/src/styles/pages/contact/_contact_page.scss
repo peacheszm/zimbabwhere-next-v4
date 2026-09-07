@@ -1,0 +1,29 @@
+.contact_details_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-bottom: 24px;
+
+  .contact_detail_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #fff;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      color: #2cb75f;
+      flex-shrink: 0;
+    }
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #2cb75f;
+      }
+    }
+  }
+}
