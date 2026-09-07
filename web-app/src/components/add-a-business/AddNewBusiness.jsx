@@ -7,9 +7,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import Dropzone from "@/components/ui/Dropzone";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 import { createUsersBusinesses } from "@/lib/endpoints/account";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
+import { COUNTRIES } from "@/lib/utils/countries";
 import NotificationPrompt from "@/components/ui/NotificationPrompt";
+
+const DEFAULT_COUNTRY = COUNTRIES.find((c) => c.value === "Zimbabwe");
 
 export default function AddNewBusiness({ cats = [], towns = [] }) {
   const { data: session } = useSession();
@@ -49,8 +53,12 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
       business_whatsapp: "",
       business_email: "",
       business_website: "",
+      business_country: DEFAULT_COUNTRY,
+      business_address: "",
       street_number: "",
       street_name: "",
+      latitude: "",
+      longitude: "",
       business_suburb: null,
       business_description: "",
       business_overview: "",
@@ -61,6 +69,19 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
 
   const selectedCategories = watch("business_categories") || [];
   const selectedLogo = watch("business_logo") || [];
+  const selectedCountry = watch("business_country");
+
+  const handleAddressSelected = (parsed) => {
+    setValue("street_number", parsed.streetNumber);
+    setValue("street_name", parsed.streetName);
+    if (parsed.lat) setValue("latitude", parsed.lat);
+    if (parsed.lng) setValue("longitude", parsed.lng);
+
+    const matchedCountry = COUNTRIES.find((c) => c.value === parsed.country);
+    if (matchedCountry) {
+      setValue("business_country", matchedCountry);
+    }
+  };
 
   const onSubmit = async (formData) => {
     setSubmitError(null);
@@ -86,12 +107,19 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
         "business_overview",
         formData.business_overview || "",
       );
+      formDataPayload.append("business_address", formData.business_address || "");
       formDataPayload.append("street_number", formData.street_number || "");
-      formDataPayload.append("street_name", formData.street_name || "");
+      formDataPayload.append(
+        "street_name",
+        formData.street_name || formData.business_address || "",
+      );
       formDataPayload.append("suburb", formData.business_suburb?.title || "");
       formDataPayload.append("area", formData.business_suburb?.title || "");
       formDataPayload.append("town", formData.business_suburb?.title || "");
+      formDataPayload.append("country", formData.business_country?.value || "");
       formDataPayload.append("province", "");
+      formDataPayload.append("latitude", formData.latitude || "");
+      formDataPayload.append("longitude", formData.longitude || "");
 
       // Append categories
       if (formData.business_categories) {
@@ -238,28 +266,57 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
 
           {/* Address */}
           <div className="form_row">
-            <label htmlFor="street_number">Street Number *</label>
-            <input
-              id="street_number"
-              type="text"
-              className={errors.street_number ? "error" : ""}
-              {...register("street_number", { required: "Required" })}
+            <label htmlFor="business_country">Country *</label>
+            <Controller
+              name="business_country"
+              control={control}
+              rules={{ required: "Country is required" }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  inputId="business_country"
+                  instanceId="business_country"
+                  options={COUNTRIES}
+                  placeholder="Select country..."
+                  classNamePrefix="react-select"
+                  menuPlacement="top"
+                />
+              )}
             />
-            {errors.street_number && (
-              <span className="error_msg">{errors.street_number.message}</span>
+            {errors.business_country && (
+              <span className="error_msg">
+                {errors.business_country.message}
+              </span>
             )}
           </div>
 
           <div className="form_row">
-            <label htmlFor="street_name">Street Name *</label>
-            <input
-              id="street_name"
-              type="text"
-              className={errors.street_name ? "error" : ""}
-              {...register("street_name", { required: "Required" })}
+            <label htmlFor="business_address">Business Address *</label>
+            <p className="field_desc">
+              Start typing and select your address from the suggestions.
+            </p>
+            <Controller
+              name="business_address"
+              control={control}
+              rules={{ required: "Business address is required" }}
+              render={({ field }) => (
+                <AddressAutocomplete
+                  id="business_address"
+                  className={errors.business_address ? "error" : ""}
+                  value={field.value}
+                  onTextChange={field.onChange}
+                  onPlaceSelected={(parsed) => {
+                    field.onChange(parsed.formattedAddress);
+                    handleAddressSelected(parsed);
+                  }}
+                  countryCode={selectedCountry?.code}
+                />
+              )}
             />
-            {errors.street_name && (
-              <span className="error_msg">{errors.street_name.message}</span>
+            {errors.business_address && (
+              <span className="error_msg">
+                {errors.business_address.message}
+              </span>
             )}
           </div>
 
@@ -275,6 +332,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               render={({ field }) => (
                 <Select
                   {...field}
+                  instanceId="business_suburb"
                   options={decodedTowns}
                   placeholder="Select suburb..."
                   isClearable
@@ -340,6 +398,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               render={({ field }) => (
                 <Select
                   {...field}
+                  instanceId="business_categories"
                   isMulti
                   options={decodedCats}
                   isOptionDisabled={() => selectedCategories.length >= 3}
