@@ -55,6 +55,34 @@ export async function getQuotes(page) {
   }
 }
 
+export async function getAllQuotes() {
+  try {
+    const all = [];
+    let page = 1;
+    let totalPages = 1;
+
+    do {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_WP_API_URL}/quote?per_page=100&page=${page}`,
+        { next: { revalidate: 3600 } },
+      );
+
+      if (!response.ok) break;
+
+      const data = await response.json();
+      all.push(...data);
+
+      totalPages = Number(response.headers.get("x-wp-totalpages")) || 1;
+      page += 1;
+    } while (page <= totalPages);
+
+    return all;
+  } catch (error) {
+    console.error("Error fetching all quotes:", error);
+    return [];
+  }
+}
+
 export async function getQuoteBySlug(slug) {
   try {
     const response = await fetch(
