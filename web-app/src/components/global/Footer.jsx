@@ -29,7 +29,7 @@ export default function Footer() {
                 <li>
                   <p>Chegutu, Zimbabwe</p>
                 </li>
-                <li className="tel_group">
+                {/* <li className="tel_group">
                   <div className="icon_group">
                     <div className="call">
                       <a href="tel:+263773765485">
@@ -58,7 +58,7 @@ export default function Footer() {
                     </div>
                   </div>
                   <a href="tel:+263776404936"> +263 (0)77 6404 936</a>
-                </li>
+                </li> */}
                 <li>
                   <a href="mailto:zimbabadvertising@gmail.com">
                     zimbabadvertising@gmail.com
