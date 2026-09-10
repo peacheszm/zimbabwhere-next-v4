@@ -6,6 +6,13 @@ import {
   getBusinessSuburbs,
 } from "@/lib/endpoints/json/json";
 export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Add A Business | Zimbabwhere",
+  description:
+    "List your business for free on Zimbabwhere and get discovered by customers across Zimbabwe.",
+};
+
 export default async function AddNewBusinessPage() {
   const [businessCats, businessSuburbs] = await Promise.all([
     getBusinessCategories(),

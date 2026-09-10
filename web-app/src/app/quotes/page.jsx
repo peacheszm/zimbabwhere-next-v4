@@ -4,6 +4,12 @@ import PaginationTop from "@/components/home/PaginationTop";
 import PaginationBottom from "@/components/home/PaginationBottom";
 import SiteSideBar from "@/components/global/Sidebar";
 
+export const metadata = {
+  title: "Quote Requests | Zimbabwhere",
+  description:
+    "Browse open quote requests from people looking for products and services across Zimbabwe.",
+};
+
 export default async function QuotesPage({ searchParams }) {
   const params = await searchParams;
   const page = Number(params?.page) || 1;

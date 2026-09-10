@@ -1,6 +1,12 @@
 import SiteSideBar from "@/components/global/Sidebar";
 import BuyButton from "@/components/global/BuyButton";
 
+export const metadata = {
+  title: "Premium Services | Zimbabwhere",
+  description:
+    "Boost your business listing on Zimbabwhere with premium advertising options and get seen by more customers.",
+};
+
 export default function PremiumServicesPage() {
   return (
     <div className="page_wrapper content_page advertising_options">

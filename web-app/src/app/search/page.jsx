@@ -7,6 +7,14 @@ import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 import SiteSideBar from "@/components/global/Sidebar";
 import BusinessCard from "@/components/search/BusinessCard";
+
+export const metadata = {
+  title: "Search Businesses | Zimbabwhere",
+  description:
+    "Search local businesses across Zimbabwe by category, town, or keyword on Zimbabwhere.",
+  robots: { index: false, follow: true },
+};
+
 export default async function SearchPage({ searchParams }) {
   const search = await searchParams;
 

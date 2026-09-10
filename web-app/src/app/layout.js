@@ -12,14 +12,15 @@ export const viewport = {
 };
 
 export const metadata = {
+  metadataBase: new URL(process.env.SITE_URL || "https://zimbabwhere.com"),
   title: "Zimbabwhere",
   description:
-    "We offer Zimbabwe's first free online Quoting Service and free Business Advertising for all local businesses",
+    "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
   authors: [{ name: "Zimbabwhere Team" }],
   openGraph: {
     title: "Zimbabwhere",
     description:
-      "We offer Zimbabwe's first free online Quoting Service and free Business Advertising for all local businesses",
+      "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
     type: "website",
     images: [
       {
@@ -32,7 +33,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Zimbabwhere",
     description:
-      "We offer Zimbabwe's first free online Quoting Service and free Business Advertising for all local businesses",
+      "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
     images: ["img/zimbabwhere-logo.png"],
   },
   manifest: "/manifest.json",

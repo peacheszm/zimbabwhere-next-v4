@@ -7,6 +7,12 @@ import {
 
 import { getBusinessById } from "@/lib/endpoints/business";
 
+export const metadata = {
+  title: "Get A Quote | Zimbabwhere",
+  description:
+    "Request a free quote from local Zimbabwean businesses. Tell us what you need and get responses from suppliers near you.",
+};
+
 export default async function GetAQuotePage({ searchParams }) {
   const params = await searchParams;
   const bid = params?.bid;
