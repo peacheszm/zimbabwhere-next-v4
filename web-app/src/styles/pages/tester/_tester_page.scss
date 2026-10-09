@@ -1,0 +1,105 @@
+.tester_info h2,
+h2.tester_form_title {
+  @include bank(normal, 24, 20px);
+  letter-spacing: -1px;
+  word-spacing: -5px;
+  color: #b9db96;
+  margin-bottom: 12px;
+}
+
+h2.tester_form_title {
+  margin-top: 8px;
+}
+
+.tester_info {
+  margin-top: 24px;
+  margin-bottom: 32px;
+
+  h2:not(:first-child) {
+    margin-top: 28px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+  }
+
+  .tester_steps {
+    counter-reset: tester-step;
+    list-style: none;
+    margin: 0 0 24px 0;
+    padding: 0;
+
+    li {
+      counter-increment: tester-step;
+      position: relative;
+      margin-bottom: 14px;
+      padding-left: 40px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #fff;
+      list-style: none;
+
+      &:before {
+        content: counter(tester-step);
+        position: absolute;
+        left: 0;
+        top: -2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #32cd32;
+        color: #000;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 26px;
+        text-align: center;
+      }
+    }
+  }
+
+  .tester_note {
+    background: #2e2e2e;
+    border-left: 3px solid #32cd32;
+    border-radius: 4px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #fff;
+
+    strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #2cb75f;
+    }
+
+    ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 20px;
+      list-style: disc;
+    }
+  }
+}
+
+// The checkbox sentence is long, so use body text rather than the label font
+.form_wrapper .tester_checkbox label {
+  @include robot(400, 14, 130%);
+  color: #fff;
+}
+
+// Honeypot field: off-screen rather than display:none, as some bots skip
+// fields that are display:none
+.tester_hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
