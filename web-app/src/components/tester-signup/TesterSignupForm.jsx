@@ -18,6 +18,7 @@ export default function TesterSignupForm() {
       email: "",
       confirmEmail: "",
       phone: "",
+      businessName: "",
       isAndroid: false,
       company: "", // honeypot, must stay empty
     },
@@ -145,6 +146,20 @@ export default function TesterSignupForm() {
               Optional. Only used if we need to reach you about the testing.
             </p>
             <input id="phone" type="tel" autoComplete="tel" {...register("phone")} />
+          </div>
+
+          <div className="form_row">
+            <label htmlFor="businessName">Business Name</label>
+            <p className="field_desc">
+              Optional. If you have a business listed on Zimbabwhere, tell us
+              its name so we can link the app to your listing.
+            </p>
+            <input
+              id="businessName"
+              type="text"
+              autoComplete="organization"
+              {...register("businessName")}
+            />
           </div>
 
           {/* Honeypot field: hidden from people, bots tend to fill it in */}

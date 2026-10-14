@@ -42,6 +42,8 @@ export async function POST(req) {
     const name = typeof body?.name === "string" ? body.name.trim() : "";
     const email = typeof body?.email === "string" ? body.email.trim() : "";
     const phone = typeof body?.phone === "string" ? body.phone.trim() : "";
+    const businessName =
+      typeof body?.businessName === "string" ? body.businessName.trim() : "";
 
     // Validate the required fields
     if (!name || !email) {
@@ -58,7 +60,7 @@ export async function POST(req) {
       );
     }
 
-    if (name.length > 100 || phone.length > 40) {
+    if (name.length > 100 || phone.length > 40 || businessName.length > 150) {
       return NextResponse.json(
         { error: "Some of the details you entered are too long." },
         { status: 400 },
@@ -73,6 +75,7 @@ export async function POST(req) {
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
     const safePhone = escapeHtml(phone);
+    const safeBusinessName = escapeHtml(businessName);
 
     // Call Resend to send the email
     const { data, error } = await resend.emails.send({
@@ -100,6 +103,10 @@ export async function POST(req) {
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #2cb75f;">Phone / WhatsApp:</td>
               <td style="padding: 8px 0; color: #ffffff;">${safePhone || "Not provided"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #2cb75f;">Business name:</td>
+              <td style="padding: 8px 0; color: #ffffff;">${safeBusinessName || "Not provided"}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #2cb75f;">Confirmed Android user:</td>
