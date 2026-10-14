@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
@@ -10,6 +11,12 @@ import { useModal } from "@/contexts/ModalContext";
 import { updateCurrentUserBusinesses } from "@/lib/endpoints/account";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 
+const decodeCats = (list) =>
+  list.map((cat) => ({
+    ...cat,
+    label: decodeHtml(cat.label),
+  }));
+
 export default function EditCategories() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -18,23 +25,30 @@ export default function EditCategories() {
   const isOpen = isModalOpen("EditCategories");
   const modalProps = getModalProps("EditCategories");
   const businessData = modalProps?.business;
-  const cats = modalProps?.cats || [];
+  const [submitError, setSubmitError] = useState(null);
 
-  const decodedCats = useMemo(
-    () =>
-      cats.map((cat) => ({
-        ...cat,
-        label: decodeHtml(cat.label),
-      })),
-    [cats],
+  // Full list: used to show the headings the business already has
+  const cats = modalProps?.cats || [];
+  // Parent headings are removed from this one, same as the add business form
+  const selectableCats = modalProps?.selectableCats || cats;
+
+  const decodedSelectableCats = useMemo(
+    () => decodeCats(selectableCats),
+    [selectableCats],
   );
 
   // Map initial categories to react-select values
   const initialCategoryIds = (businessData?.["business_cat"] || []).map((id) =>
     String(id),
   );
-  const initialSelected = cats.filter((cat) =>
-    initialCategoryIds.includes(String(cat.value)),
+  const initialSelected = decodeCats(
+    cats.filter((cat) => initialCategoryIds.includes(String(cat.value))),
+  );
+
+  // Headings the business already has that can no longer be picked (parent headings)
+  const selectableIds = new Set(selectableCats.map((cat) => String(cat.value)));
+  const hasLegacyHeadings = initialSelected.some(
+    (cat) => !selectableIds.has(String(cat.value)),
   );
 
   const {
@@ -53,12 +67,14 @@ export default function EditCategories() {
 
   const handleClose = () => {
     reset();
+    setSubmitError(null);
     closeModal("EditCategories");
   };
 
   const onSubmit = async (data) => {
     if (!session?.jwt || !businessData?.id) return;
 
+    setSubmitError(null);
     try {
       // For categories, we often need to send them as an array of IDs
       const categoryIds = data.categories.map((cat) => cat.value);
@@ -76,7 +92,9 @@ export default function EditCategories() {
       handleClose();
     } catch (error) {
       console.error("Failed to update business categories:", error);
-      alert("Failed to update categories. Please try again.");
+      setSubmitError(
+        error.message || "Failed to update headings. Please try again.",
+      );
     }
   };
 
@@ -95,7 +113,7 @@ export default function EditCategories() {
               name="categories"
               control={control}
               rules={{
-                required: "Select at least one category",
+                required: "Select at least one heading",
                 validate: (val) =>
                   val.length <= 3 || "Maximum 3 headings allowed",
               }}
@@ -103,17 +121,35 @@ export default function EditCategories() {
                 <Select
                   {...field}
                   isMulti
-                  options={decodedCats}
+                  options={decodedSelectableCats}
                   isOptionDisabled={() => selectedCategories.length >= 3}
-                  placeholder="Search/Select Categories"
+                  placeholder="Search/Select Headings"
                   classNamePrefix="react-select"
                 />
               )}
             />
+            <p className="info_msg">
+              Can't find the heading you're looking for?{" "}
+              <Link href="/request-headings">Request one here</Link>.{" "}
+              ({selectedCategories.length}/3 selected)
+            </p>
+            {hasLegacyHeadings && (
+              <p className="info_msg">
+                Some of your headings are general headings that can no longer be
+                chosen. You can keep them, but once removed they can't be added
+                back. Pick the more specific heading instead.
+              </p>
+            )}
             {errors.categories && (
               <span className="error_msg">{errors.categories.message}</span>
             )}
           </div>
+
+          {submitError && (
+            <div className="form_row error_box">
+              <p>{submitError}</p>
+            </div>
+          )}
 
           <div className="form_row btn_group">
             <button type="submit" className="primary" disabled={isSubmitting}>

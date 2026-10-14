@@ -4,6 +4,7 @@ import SiteSideBar from "@/components/global/Sidebar";
 import {
   getBusinessCategories,
   getBusinessSuburbs,
+  getSelectableBusinessCategories,
 } from "@/lib/endpoints/json/json";
 export const dynamic = "force-dynamic";
 
@@ -14,10 +15,12 @@ export const metadata = {
 };
 
 export default async function AddNewBusinessPage() {
-  const [businessCats, businessSuburbs] = await Promise.all([
+  const [allCats, businessSuburbs] = await Promise.all([
     getBusinessCategories(),
     getBusinessSuburbs(),
   ]);
+  // Parent headings are hidden so a business can't pick both a parent and its sub heading
+  const businessCats = await getSelectableBusinessCategories(allCats);
   return (
     <div className="page_wrapper">
       <div className="container">

@@ -5,7 +5,7 @@ import { useModal } from "@/contexts/ModalContext";
 import EditCategories from "@/components/modals/single-business/EditCategories";
 import BuyButton from "@/components/global/BuyButton";
 
-export default function Categories({ data, cats }) {
+export default function Categories({ data, cats, selectableCats }) {
   const { openModal } = useModal();
 
   // Find the category labels from the IDs
@@ -19,7 +19,11 @@ export default function Categories({ data, cats }) {
   });
 
   const handleOpenModal = () => {
-    openModal("EditCategories", { business: data, cats });
+    openModal("EditCategories", {
+      business: data,
+      cats,
+      selectableCats: selectableCats || cats,
+    });
   };
 
   return (

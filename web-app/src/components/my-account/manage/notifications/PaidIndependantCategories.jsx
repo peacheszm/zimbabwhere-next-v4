@@ -6,6 +6,7 @@ import { updateCurrentUserNotifications } from "@/lib/endpoints/account";
 
 export default function PaidIndependantCategories({
   cats = [],
+  allCats,
   userData = {},
   token,
 }) {
@@ -94,13 +95,14 @@ export default function PaidIndependantCategories({
         const expired = isExpired(order.expire_date);
         const limit = parseInt(order.number_of_categories) || 0;
 
-        // Initial values for the select
+        // Initial values for the select. Look up in the full list so a heading
+        // the user already has (e.g. a parent heading) still shows as selected
         const initialValue = (
           Array.isArray(order.paid_categories) ? order.paid_categories : []
         )
           .map((cat) => {
             const catId = typeof cat === "object" ? cat.term_id : cat;
-            return cats.find(
+            return (allCats || cats).find(
               (c) => c.value === catId || c.value === String(catId),
             );
           })

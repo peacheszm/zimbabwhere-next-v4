@@ -8,13 +8,19 @@ import {
   IconChevronDown,
   IconAdjustments,
 } from "@tabler/icons-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 export default function SiteFilterClient({ initialData }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const { categories, towns, searchData } = initialData;
+
+  // On a heading page (/headings/mechanic) the heading comes from the path
+  const headingSlug = pathname?.startsWith("/headings/")
+    ? decodeURIComponent(pathname.split("/")[2] || "")
+    : "";
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState({
@@ -41,7 +47,11 @@ export default function SiteFilterClient({ initialData }) {
   // Sync state with URL search parameters
   useEffect(() => {
     const q = searchParams.get("q") || "";
-    const catId = searchParams.get("category_filter") || "";
+    const headingFromPath = headingSlug
+      ? categories.find((cat) => cat.slug === headingSlug)
+      : null;
+    const catId =
+      searchParams.get("category_filter") || headingFromPath?.id || "";
     const townId = searchParams.get("location_filter") || "";
 
     setSearchTerm(q);
@@ -71,7 +81,7 @@ export default function SiteFilterClient({ initialData }) {
     } else {
       setSelectedTown({ id: "", name: "All Towns" });
     }
-  }, [searchParams, categories, towns]);
+  }, [searchParams, categories, towns, headingSlug]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -138,6 +148,16 @@ export default function SiteFilterClient({ initialData }) {
     catId = selectedCategory.id,
     townId = selectedTown.id
   ) => {
+    // Just a heading selected: go to the heading's own page
+    const heading = catId
+      ? categories.find((cat) => String(cat.id) === String(catId))
+      : null;
+    if (heading?.slug && !term.trim() && !townId) {
+      router.push(`/headings/${heading.slug}`);
+      setActiveDropdown(null);
+      return;
+    }
+
     const params = new URLSearchParams();
     if (term.trim()) params.set("q", term.trim());
     if (catId) params.set("category_filter", catId);
@@ -332,6 +352,8 @@ export default function SiteFilterClient({ initialData }) {
                         ? `/business/${item.slug}`
                         : item.type === "quote"
                         ? `/quotes/${item.slug}`
+                        : item.slug
+                        ? `/headings/${item.slug}`
                         : `/search?category_filter=${item.id}`
                     }
                     className="dropdown_item"

@@ -9,7 +9,11 @@ export default function Categorys({ post }) {
           {post._embedded["wp:term"][0]?.map((cat, ct) => (
             <Link
               key={ct}
-              href={`/search?category_filter=${cat.id}`}
+              href={
+                cat.slug
+                  ? `/headings/${cat.slug}`
+                  : `/search?category_filter=${cat.id}`
+              }
               dangerouslySetInnerHTML={{ __html: cat.name }}
             />
           ))}

@@ -1,5 +1,6 @@
 import { getAllBusinesses } from "@/lib/endpoints/business";
 import { getAllQuotes } from "@/lib/endpoints/quotes";
+import { getHeadingsWithBusinesses } from "@/lib/endpoints/headings";
 
 const BASE_URL = process.env.SITE_URL || "https://zimbabwhere.com";
 
@@ -50,5 +51,19 @@ export default async function sitemap() {
     console.error("Error building quote sitemap entries:", error);
   }
 
-  return [...staticEntries, ...businessEntries, ...quoteEntries];
+  // Only headings with at least one business, to avoid submitting empty pages
+  const headings = await getHeadingsWithBusinesses();
+  const headingEntries = headings
+    .filter((heading) => heading?.slug)
+    .map((heading) => ({
+      url: `${BASE_URL}/headings/${heading.slug}`,
+      lastModified: new Date(),
+    }));
+
+  return [
+    ...staticEntries,
+    ...headingEntries,
+    ...businessEntries,
+    ...quoteEntries,
+  ];
 }

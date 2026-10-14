@@ -393,7 +393,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
               rules={{
                 required: "Select at least one category",
                 validate: (val) =>
-                  val.length <= 3 || "Maximum 3 headingss reached",
+                  val.length <= 3 || "Maximum 3 headings reached",
               }}
               render={({ field }) => (
                 <Select
@@ -410,7 +410,8 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
             />
             <p className="info_msg">
               Can't find the heading you're looking for?{" "}
-              <Link href="/request-headings">Request one here</Link>. (3/3 selected)
+              <Link href="/request-headings">Request one here</Link>.{" "}
+              ({selectedCategories.length}/3 selected)
             </p>
             {selectedCategories.length === 3 && (
               <p className="info_msg">

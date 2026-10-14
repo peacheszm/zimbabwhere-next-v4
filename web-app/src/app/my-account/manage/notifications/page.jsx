@@ -2,7 +2,10 @@ import Link from "next/link";
 import SiteSideBar from "@/components/global/Sidebar";
 
 import { getCurrentUserNotifications } from "@/lib/endpoints/account";
-import { getBusinessCategories } from "@/lib/endpoints/json/json";
+import {
+  getBusinessCategories,
+  getSelectableBusinessCategories,
+} from "@/lib/endpoints/json/json";
 
 import { getCurrentUserBusinesses } from "@/lib/endpoints/account";
 
@@ -30,6 +33,10 @@ export default async function ManageNotifications() {
     getCurrentUserBusinesses(session.jwt),
   ]);
 
+  // Parent headings are hidden from the picker, the full list is kept so
+  // headings the user already has still show up
+  const selectableCats = await getSelectableBusinessCategories(businessCats);
+
   const hasBusiness = userBusiness.data?.length > 0;
   const hasPaidCategories = hasBusiness
     ? userData.data?.additional_business_categories?.length > 0
@@ -46,7 +53,8 @@ export default async function ManageNotifications() {
               </div>
               {/* Free Headings  */}
               <FreeCategories
-                cats={businessCats}
+                cats={selectableCats}
+                allCats={businessCats}
                 userData={userData}
                 token={session.jwt}
               />
@@ -90,7 +98,8 @@ export default async function ManageNotifications() {
               )}
 
               <PaidIndependantCategories
-                cats={businessCats}
+                cats={selectableCats}
+                allCats={businessCats}
                 userData={userData}
                 token={session.jwt}
               />
@@ -110,7 +119,8 @@ export default async function ManageNotifications() {
                 </div>
               )}
               <PaidBusinessCategories
-                cats={businessCats}
+                cats={selectableCats}
+                allCats={businessCats}
                 userData={userData}
                 token={session.jwt}
               />

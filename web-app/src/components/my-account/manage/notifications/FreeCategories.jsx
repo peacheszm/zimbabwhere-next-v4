@@ -4,19 +4,34 @@ import { useForm, Controller } from "react-hook-form";
 import Link from "next/link";
 import Select from "react-select";
 import { updateCurrentUserNotifications } from "@/lib/endpoints/account";
+import { decodeHtml } from "@/lib/utils/decodeHtml";
 
-export default function FreeCategories({ cats = [], userData = {}, token }) {
+const decodeCat = (cat) => ({ ...cat, label: decodeHtml(cat.label) });
+
+export default function FreeCategories({
+  cats = [],
+  allCats,
+  userData = {},
+  token,
+}) {
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // cats = headings that can be picked, allCats = every heading, so a heading
+  // the user already has (e.g. a parent heading) still shows as selected
+  const lookupCats = allCats || cats;
 
   // Initialize selected categories from userData
   const initialCategories = (userData.data?.users_free_categories || [])
     .map((cat) => {
       // Handle both object structure (term_id) and simple ID
       const catId = typeof cat === "object" ? cat.term_id : cat;
-      return cats.find((c) => c.value === catId || c.value === String(catId));
+      return lookupCats.find(
+        (c) => c.value === catId || c.value === String(catId),
+      );
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .map(decodeCat);
 
   const {
     control,
@@ -81,7 +96,7 @@ export default function FreeCategories({ cats = [], userData = {}, token }) {
                   <Select
                     {...field}
                     isMulti
-                    options={cats}
+                    options={cats.map(decodeCat)}
                     isOptionDisabled={() => selectedCategories.length >= 3}
                     placeholder="Search/Select Categories"
                     classNamePrefix="react-select"

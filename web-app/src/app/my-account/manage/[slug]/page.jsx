@@ -12,7 +12,11 @@ import Social from "@/components/my-account/manage/single-business/Social";
 import Videos from "@/components/my-account/manage/single-business/Videos";
 import Gallery from "@/components/my-account/manage/single-business/Gallery";
 
-import { getBusinessCategories, getBusinessSuburbs } from "@/lib/endpoints/json/json";
+import {
+  getBusinessCategories,
+  getBusinessSuburbs,
+  getSelectableBusinessCategories,
+} from "@/lib/endpoints/json/json";
 
 export default async function ManageSingleBusiness({ params }) {
   const { slug } = await params;
@@ -22,6 +26,9 @@ export default async function ManageSingleBusiness({ params }) {
     getBusinessSuburbs(),
   ]);
   const business = businessData[0];
+  // Parent headings are hidden from the picker, but the full list is still
+  // needed to show headings the business already has
+  const selectableCats = await getSelectableBusinessCategories(businessCats);
 
   return (
     <div className="page_wrapper manage_single_business">
@@ -34,7 +41,11 @@ export default async function ManageSingleBusiness({ params }) {
           <Social data={business} />
           <Videos data={business} />
 
-          <Categories data={business} cats={businessCats} />
+          <Categories
+            data={business}
+            cats={businessCats}
+            selectableCats={selectableCats}
+          />
           <Banner data={business} />
 
           <Info data={business} towns={businessSuburbs} />
