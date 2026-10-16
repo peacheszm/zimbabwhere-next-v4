@@ -464,9 +464,9 @@ export default function GetQuote({ cats, towns, business }) {
               className={errors.phone ? "error" : ""}
               placeholder="Whatsapp / Phone Call"
               {...register("phone", {
+                // Must return true (not the value): RHF treats a returned string as an error message
                 validate: (value) =>
-                  value?.trim() ||
-                  getValues("email")?.trim() ||
+                  Boolean(value?.trim() || getValues("email")?.trim()) ||
                   "Please enter a phone / WhatsApp number or an email address",
               })}
             />
