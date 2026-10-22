@@ -50,6 +50,14 @@
     margin-top: 32px;
     margin-bottom: 24px;
 
+    // Same as the section headings on the business pages
+    h4 {
+      @include bank(normal, 24, 20px);
+      letter-spacing: -1px;
+      word-spacing: -5px;
+      color: #b9db96;
+    }
+
     .share_items {
       display: flex;
       align-items: center;
@@ -65,6 +73,12 @@
       height: 40px;
       border-radius: 100%;
       color: #fff;
+
+      // The global svg rule makes it fill the circle
+      svg {
+        width: 22px;
+        height: 22px;
+      }
     }
 
     .icon_w {
