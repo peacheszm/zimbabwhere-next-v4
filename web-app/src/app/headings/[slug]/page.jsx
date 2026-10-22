@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 
 import { getHeadingBySlug } from "@/lib/endpoints/headings";
 import { getBusinessesSearch } from "@/lib/endpoints/search";
-import { headingMetadata, getHeadingPath } from "@/lib/seo/headings";
+import {
+  headingMetadata,
+  getHeadingPath,
+  HEADING_IMAGE_PATH,
+} from "@/lib/seo/headings";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 
 import SiteSideBar from "@/components/global/Sidebar";
@@ -75,6 +79,7 @@ export default async function HeadingPage({ params }) {
         "@id": pageUrl,
         url: pageUrl,
         name: `${name} in Zimbabwe`,
+        image: `${SITE_URL}${HEADING_IMAGE_PATH}`,
         isPartOf: { "@type": "WebSite", name: "Zimbabwhere", url: SITE_URL },
         breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
         ...(total > 0

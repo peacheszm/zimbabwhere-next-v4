@@ -2,6 +2,9 @@
 // /headings/[slug].
 const SITE_URL = process.env.SITE_URL || "https://zimbabwhere.com";
 
+// Headings don't have an image of their own, so they all share the placeholder
+export const HEADING_IMAGE_PATH = "/img/placeholder.png";
+
 export function getHeadingPath(slug) {
   return `/headings/${slug}`;
 }
@@ -21,9 +24,9 @@ export function headingMetadata({ name, slug, count }) {
       : `Looking for ${name} in Zimbabwe? Search local businesses on Zimbabwhere and get a free quote.`;
 
   const image = {
-    url: `/og/heading/${slug}`,
-    width: 1200,
-    height: 630,
+    url: HEADING_IMAGE_PATH,
+    width: 800,
+    height: 600,
     alt: `${name} on Zimbabwhere`,
   };
 
@@ -42,7 +45,8 @@ export function headingMetadata({ name, slug, count }) {
       images: [image],
     },
     twitter: {
-      card: "summary_large_image",
+      // The placeholder is 4:3, the large card would crop the wordmark off
+      card: "summary",
       title,
       description,
       images: [image.url],
