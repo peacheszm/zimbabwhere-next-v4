@@ -46,21 +46,20 @@ export default function NotificationPrompt({
   return (
     <div className="notification_prompt_banner" style={{
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
       background: '#f0fdf4', // subtle green background
       border: '1px solid #bbf7d0',
       borderRadius: '8px',
       padding: '1rem 1.5rem',
       marginBottom: '1.5rem',
       gap: '1rem',
-      flexWrap: 'wrap',
     }}>
       <div className="notification_prompt_content">
         <h4 style={{ margin: '0 0 0.25rem 0', color: '#166534', fontSize: '1.1rem' }}>{title}</h4>
         <p style={{ margin: 0, color: '#15803d', fontSize: '0.9rem' }}>{message}</p>
       </div>
-      <div className="notification_prompt_actions" style={{ display: 'flex', gap: '0.5rem' }}>
+      <div className="notification_prompt_actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
         <button 
           className="primary" 
           onClick={handleSubscribe} 
