@@ -342,6 +342,9 @@ export default function GetQuote({ cats, towns, business }) {
                     inputId="quote_from_category"
                     isMulti
                     closeMenuOnSelect={false}
+                    // On touch devices this defaults to true, which blurs the
+                    // field after each tap and closes the menu anyway
+                    blurInputOnSelect={false}
                     inputValue={categoryInputValue}
                     onInputChange={(val, { action }) => {
                       if (action !== "set-value") {
