@@ -1,56 +1,183 @@
 .contact_method {
   margin-bottom: 24px;
-  background: #2e2e2e;
   padding: 16px;
-  display: flex;
+  background: #2e2e2e;
 
-  .get_a_quote_button {
-    margin-right: auto;
+  h4 {
+    margin-bottom: 12px;
+  }
+
+  .contact_actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .contact_action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #1d1d1d;
+    color: #fff;
+    @include transition($transition-base);
+
+    &:hover {
+      background: #000;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #b9db96;
+      outline-offset: 2px;
+    }
+
+    // A lone last tile fills its row instead of leaving a gap beside it
+    &:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .icon {
+      flex: none;
+      width: 40px;
+      // The global .icon caps its width at 24px, which squashes the circle
+      max-width: none;
+      height: 40px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+
+      // The global svg rule makes it fill its parent
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .label {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #bbb;
+    }
+
+    .value {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // The number is the main thing, so it gets the brand green
+  .phone {
+    background: #32cd32;
+    color: #000;
+
+    &:hover {
+      background: #2cb75f;
+    }
+
+    .icon {
+      background: #000;
+      color: #32cd32;
+    }
+
+    .label {
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .value {
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+
+  .whatsapp .icon {
+    background: #25d366;
+  }
+
+  .email .icon {
+    background: #ea4335;
+  }
+
+  .quote .icon {
+    background: #32cd32;
+    color: #000;
+  }
+}
+
+// Mobile only, see FloatingContact
+.contact_floating {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // Under the open mobile menu (10) and modals (90)
+  z-index: 9;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: #1d1d1d;
+  border-top: 1px solid #333;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition:
+    transform 0.2s ease-in-out,
+    visibility 0.2s;
+
+  &.visible {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: none;
   }
 
   a {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    &:not(.menu_item) {
-      margin-left: 16px;
-      width: 40px;
-      height: 40px;
-      border-radius: 100px;
-      color: #fff;
+    gap: 6px;
+    height: 44px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+    background: #2e2e2e;
+
+    // The global svg rule makes it fill the button
+    svg {
+      flex: none;
+      width: 20px;
+      height: 20px;
     }
   }
 
   .phone {
-    background: #00f;
+    background: #32cd32;
+    color: #000;
   }
 
   .whatsapp {
     background: #25d366;
-  }
-  .email {
-    background: #ff0000;
-  }
-
-  .menu_item {
-    white-space: nowrap;
-    font-family: Roboto;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    color: #fff;
-    background: #32cd32;
-    padding: 6px 15px;
-    border-radius: 6px;
-
-    .icon {
-      height: auto;
-      max-width: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 6px;
-    }
   }
 }

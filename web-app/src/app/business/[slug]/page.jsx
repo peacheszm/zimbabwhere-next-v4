@@ -95,11 +95,11 @@ export default async function SingleBusiness({ params }) {
           {/* Business Title */}
           <Title post={post} />
 
-          {/* Business Gallery */}
-          <Gallery post={post} />
-
           {/* Business Contact */}
           <ContactUs post={post} />
+
+          {/* Business Gallery */}
+          <Gallery post={post} />
 
           {/* Business OverView */}
           <Overview post={post} />
