@@ -1,7 +1,9 @@
 "use client";
 
-import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
+
+import useGoogleMapsLoader from "@/hooks/useGoogleMapsLoader";
 
 const containerStyle = {
   width: "100%",
@@ -11,10 +13,7 @@ const containerStyle = {
 };
 
 export default function Map({ post }) {
-  const { isLoaded, loadError } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  });
+  const { isLoaded, loadError } = useGoogleMapsLoader();
 
   const center = useMemo(() => {
     const lat = parseFloat(post?.acf?.latitude);

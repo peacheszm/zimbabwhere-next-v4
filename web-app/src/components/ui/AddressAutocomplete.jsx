@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
 
-// Static reference so the loader's option object never changes identity.
-const LIBRARIES = ["places"];
+import useGoogleMapsLoader from "@/hooks/useGoogleMapsLoader";
 
 // Pulls the fields the rest of the app cares about out of a Google Place.
 function parsePlace(place) {
@@ -54,11 +53,7 @@ export default function AddressAutocomplete({
 }) {
   const autocompleteRef = useRef(null);
 
-  const { isLoaded, loadError } = useJsApiLoader({
-    id: "google-places-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: LIBRARIES,
-  });
+  const { isLoaded, loadError } = useGoogleMapsLoader();
 
   const handleLoad = useCallback((autocomplete) => {
     autocompleteRef.current = autocomplete;
