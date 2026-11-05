@@ -9,9 +9,11 @@ import {
   HEADING_IMAGE_PATH,
 } from "@/lib/seo/headings";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
+import { groupBusinesses } from "@/lib/utils/groupBusinesses";
 
 import SiteSideBar from "@/components/global/Sidebar";
 import BusinessCard from "@/components/search/BusinessCard";
+import BusinessGroupCard from "@/components/search/BusinessGroupCard";
 import ShareHeading from "@/components/headings/ShareHeading";
 
 const SITE_URL = process.env.SITE_URL || "https://zimbabwhere.com";
@@ -68,6 +70,10 @@ export default async function HeadingPage({ params }) {
   const featuredResults = results?.featured || [];
   const normalResults = results?.normal || [];
   const total = featuredResults.length + normalResults.length;
+
+  // Chains with several branches become one card. Featured listings are left
+  // alone so their gallery and premium badge stay intact.
+  const normalEntries = groupBusinesses(normalResults);
 
   const pageUrl = `${SITE_URL}${getHeadingPath(slug)}`;
 
@@ -153,9 +159,13 @@ export default async function HeadingPage({ params }) {
               <BusinessCard key={item.id} item={item} premium={true} />
             ))}
 
-            {normalResults.map((item) => (
-              <BusinessCard key={item.id} item={item} />
-            ))}
+            {normalEntries.map((entry) =>
+              entry.type === "group" ? (
+                <BusinessGroupCard key={entry.key} group={entry} />
+              ) : (
+                <BusinessCard key={entry.item.id} item={entry.item} />
+              ),
+            )}
           </div>
 
           <ShareHeading title={name} url={pageUrl} />

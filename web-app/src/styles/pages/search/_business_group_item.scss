@@ -1,0 +1,154 @@
+// A chain with several branches, shown as one card (BusinessGroupCard).
+// Builds on .business_listing_item for the frame, logo and title.
+.business_listing_item.business_group {
+  .col_middle {
+    @include media-breakpoint-up(lg) {
+      // No button column, so take the space it would have used
+      max-width: calc(78% - 16px);
+    }
+  }
+
+  // The brand has no page of its own, so the title isn't a link; the base
+  // listing style only targets `h3 a`
+  h3 {
+    letter-spacing: -1px;
+    word-spacing: -5px;
+    color: #2cb75f;
+    font-family: BankGothic;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .branch_count {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #1f1f1f;
+    color: #b9db96;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .branches {
+    width: 100%;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #333;
+
+    summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      list-style: none;
+      color: #b9db96;
+      font-size: 14px;
+      line-height: 20px;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      // Chevron
+      &::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg) translateY(-2px);
+        transition: transform 0.15s ease;
+      }
+    }
+
+    .label_open {
+      display: none;
+    }
+
+    &[open] {
+      summary::after {
+        transform: rotate(-135deg);
+      }
+
+      .label_open {
+        display: inline;
+      }
+
+      .label_closed {
+        display: none;
+      }
+    }
+
+    ul {
+      display: grid;
+      gap: 8px 16px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+
+      @include media-breakpoint-up(lg) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 4px;
+      background: #111;
+    }
+
+    .branch_info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+
+      > a {
+        color: #2cb75f;
+        font-size: 15px;
+        line-height: 20px;
+      }
+    }
+
+    .branch_address {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      color: #b9db96;
+      font-size: 12px;
+      line-height: 16px;
+
+      // The global svg rule makes icons fill their container
+      svg {
+        flex: none;
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .branch_tel {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+      background: #fff;
+      color: #32cd32;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
