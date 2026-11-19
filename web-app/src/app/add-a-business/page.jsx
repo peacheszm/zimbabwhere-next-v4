@@ -1,5 +1,6 @@
 import AddNewBusiness from "@/components/add-a-business/AddNewBusiness";
 import SiteSideBar from "@/components/global/Sidebar";
+import { pageMetadata } from "@/lib/seo/share";
 
 import {
   getBusinessCategories,
@@ -8,11 +9,12 @@ import {
 } from "@/lib/endpoints/json/json";
 export const dynamic = "force-dynamic";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Add A Business | Zimbabwhere",
   description:
     "List your business for free on Zimbabwhere and get discovered by customers across Zimbabwe.",
-};
+  path: "/add-a-business",
+});
 
 export default async function AddNewBusinessPage() {
   const [allCats, businessSuburbs] = await Promise.all([

@@ -17,7 +17,7 @@ import Share from "@/components/single-business/Share";
 import Categorys from "@/components/single-business/Categorys";
 import BusinessReviews from "@/components/single-business/BusinessReviews";
 
-import { yoastToMetadata } from "@/lib/seo/seo";
+import { businessMetadata } from "@/lib/seo/share";
 
 // export async function generateStaticParams() {
 //   const businesses = await getAllBusinesses();
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }) {
 
   if (!page) return {};
 
-  return yoastToMetadata(page.yoast_head_json, `/business/${slug}`);
+  return businessMetadata(page, slug);
 }
 
 export default async function SingleBusiness({ params }) {

@@ -117,6 +117,10 @@ export default function GetQuote({ cats, towns, business }) {
     };
   })();
 
+  // Listings aren't limited to Zimbabwe, so say so before the quote goes out.
+  // Not shown when the quote only goes to the one business the person chose.
+  const showOutsideZimbabweNotice = !business || sendToOthers;
+
   const idealStartOptions = [
     { value: "1", label: "On a specific date" },
     { value: "Whenever", label: "Whenever" },
@@ -528,6 +532,17 @@ export default function GetQuote({ cats, towns, business }) {
               {recipientSummary.text}
             </div>
           </div>
+
+          {showOutsideZimbabweNotice && (
+            <div className="form_row">
+              <div className="outside_zim_notice" role="note">
+                <strong>Please note:</strong> businesses from outside Zimbabwe,
+                for example South Africa, are also listed on Zimbabwhere. Your
+                quote may be sent to them as well as to Zimbabwean businesses,
+                so you could get replies from companies outside Zimbabwe.
+              </div>
+            </div>
+          )}
 
           {submitError && (
             <div className="form_row error_box">

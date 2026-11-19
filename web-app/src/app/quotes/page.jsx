@@ -3,12 +3,14 @@ import QuotesList from "@/components/home/QuotesList";
 import PaginationTop from "@/components/home/PaginationTop";
 import PaginationBottom from "@/components/home/PaginationBottom";
 import SiteSideBar from "@/components/global/Sidebar";
+import { pageMetadata } from "@/lib/seo/share";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Quote Requests | Zimbabwhere",
   description:
     "Browse open quote requests from people looking for products and services across Zimbabwe.",
-};
+  path: "/quotes",
+});
 
 export default async function QuotesPage({ searchParams }) {
   const params = await searchParams;

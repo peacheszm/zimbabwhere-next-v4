@@ -6,6 +6,7 @@ import {
 } from "@/lib/endpoints/json/json";
 import { getHeadingById } from "@/lib/endpoints/headings";
 import { headingMetadata } from "@/lib/seo/headings";
+import { pageMetadata } from "@/lib/seo/share";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 import { groupBusinesses } from "@/lib/utils/groupBusinesses";
 
@@ -38,12 +39,13 @@ export async function generateMetadata({ searchParams }) {
     }
   }
 
-  return {
+  return pageMetadata({
     title: "Search Businesses | Zimbabwhere",
     description:
       "Search local businesses across Zimbabwe by category, town, or keyword on Zimbabwhere.",
+    path: "/search",
     robots: { index: false, follow: true },
-  };
+  });
 }
 
 export default async function SearchPage({ searchParams }) {

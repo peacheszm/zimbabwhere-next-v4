@@ -2,6 +2,10 @@ import { Analytics } from "@vercel/analytics/next";
 import ClientWrapper from "./ClientWrapper";
 import Script from "next/script";
 import "@/styles/main.scss";
+import { DEFAULT_SHARE_IMAGE, SITE_NAME } from "@/lib/seo/share";
+
+const SITE_DESCRIPTION =
+  "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ";
 
 export const viewport = {
   width: "device-width",
@@ -13,28 +17,22 @@ export const viewport = {
 
 export const metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://zimbabwhere.com"),
-  title: "Zimbabwhere",
-  description:
-    "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
   authors: [{ name: "Zimbabwhere Team" }],
   openGraph: {
-    title: "Zimbabwhere",
-    description:
-      "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
     type: "website",
-    images: [
-      {
-        url: "img/zimbabwhere-logo.png",
-        alt: "Zimbabwhere",
-      },
-    ],
+    images: [DEFAULT_SHARE_IMAGE],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Zimbabwhere",
-    description:
-      "We offer a FREE online Quoting Service platform and FREE Advertising for any local business or service provider. Sign up today to get started. ",
-    images: ["img/zimbabwhere-logo.png"],
+    // The card image is 4:3, the large card would crop the wordmark off
+    card: "summary",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_SHARE_IMAGE.url],
   },
   manifest: "/manifest.json",
 };

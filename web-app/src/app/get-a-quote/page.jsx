@@ -6,12 +6,14 @@ import {
 } from "@/lib/endpoints/json/json";
 
 import { getBusinessById } from "@/lib/endpoints/business";
+import { pageMetadata } from "@/lib/seo/share";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Get A Quote | Zimbabwhere",
   description:
     "Request a free quote from local Zimbabwean businesses. Tell us what you need and get responses from suppliers near you.",
-};
+  path: "/get-a-quote",
+});
 
 export default async function GetAQuotePage({ searchParams }) {
   const params = await searchParams;

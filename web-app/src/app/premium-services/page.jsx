@@ -1,12 +1,14 @@
 import SiteSideBar from "@/components/global/Sidebar";
 import BuyButton from "@/components/global/BuyButton";
 import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import { pageMetadata } from "@/lib/seo/share";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Premium Services | Zimbabwhere",
   description:
     "Boost your business listing on Zimbabwhere with premium advertising options and get seen by more customers.",
-};
+  path: "/premium-services",
+});
 
 export default function PremiumServicesPage() {
   return (

@@ -2,14 +2,16 @@ import { IconPhone, IconBrandWhatsapp, IconMail, IconMapPin } from "@tabler/icon
 
 import ContactForm from "@/components/contact/ContactForm";
 import SiteSideBar from "@/components/global/Sidebar";
+import { pageMetadata } from "@/lib/seo/share";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Contact Us | Zimbabwhere",
   description:
     "Get in touch with the Zimbabwhere team. Send us a message and we'll get back to you as soon as possible.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   return (

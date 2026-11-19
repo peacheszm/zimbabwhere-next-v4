@@ -5,6 +5,7 @@ import RespondActions from "@/components/quotes/quotes-single/RespondActions";
 import ShareQuote from "@/components/quotes/quotes-single/ShareQuote";
 import QuoteViewTracker from "@/components/quotes/quotes-single/QuoteViewTracker";
 import SiteSideBar from "@/components/global/Sidebar";
+import { quoteMetadata, cleanText } from "@/lib/seo/share";
 
 import {
   IconEye,
@@ -12,6 +13,23 @@ import {
   IconCalendar,
   IconMapPin,
 } from "@tabler/icons-react";
+
+// Without this a shared quote link only showed the generic "Zimbabwhere" text
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  try {
+    const posts = await getQuoteBySlug(slug);
+    if (posts?.[0]) return quoteMetadata(posts[0], slug);
+  } catch {
+    // Fall through to the not found metadata
+  }
+
+  return {
+    title: "Quote not found | Zimbabwhere",
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function QuotePage({ params }) {
   const { slug } = await params;
@@ -87,7 +105,7 @@ export default async function QuotePage({ params }) {
           </div>
 
           <ShareQuote
-            title={post?.title?.rendered?.replace(/<[^>]+>/g, "") || "Quote"}
+            title={cleanText(post?.title?.rendered, 120) || "Quote"}
           />
         </main>
         <aside className="aside">

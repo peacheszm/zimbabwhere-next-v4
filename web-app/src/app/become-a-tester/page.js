@@ -1,13 +1,15 @@
 import TesterSignupForm from "@/components/tester-signup/TesterSignupForm";
 import SiteSideBar from "@/components/global/Sidebar";
+import { pageMetadata } from "@/lib/seo/share";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Become an App Tester | Zimbabwhere",
   description:
     "Help us launch the Zimbabwhere Android app. Sign up as a tester, get early access and help us get the app onto Google Play.",
+  path: "/become-a-tester",
   // Campaign page for people who got our email, not something to rank in search
   robots: { index: false, follow: true },
-};
+});
 
 export default function BecomeATesterPage() {
   return (
