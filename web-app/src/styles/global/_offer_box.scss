@@ -81,3 +81,64 @@
     }
   }
 }
+
+// Slim "Double Headings" banner above the header on every page
+// (components/global/DoubleUpBar)
+.double_up_bar {
+  background: #32cd32;
+  color: #000;
+
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    // room for the close button so text never runs under it
+    padding-right: 40px;
+    padding-left: 16px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: #000;
+    @include media-breakpoint-up(lg) {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  a {
+    color: #000;
+    font-weight: 700;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+
+  .double_up_bar_close {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

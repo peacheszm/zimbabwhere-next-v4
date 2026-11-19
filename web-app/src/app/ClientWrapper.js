@@ -6,6 +6,7 @@ import { ModalProvider } from "@/contexts/ModalContext";
 import { SearchProvider } from "@/contexts/SearchContext";
 import { UserProvider } from "@/contexts/UserContext";
 
+import DoubleUpBar from "@/components/global/DoubleUpBar";
 import Navigation from "@/components/global/Navigation";
 import Footer from "@/components/global/Footer";
 import CreateBusinessReview from "@/components/modals/CreateBusinessReview";
@@ -36,6 +37,7 @@ export default function ClientWrapper({ children }) {
       <UserProvider>
         <SearchProvider>
           <ModalProvider>
+            <DoubleUpBar />
             <Navigation />
             {children}
             <Footer />
