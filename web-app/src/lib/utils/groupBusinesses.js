@@ -9,6 +9,12 @@ import { decodeHtml } from "@/lib/utils/decodeHtml";
 // is whatever follows it. Requiring two words keeps unrelated businesses that
 // merely start with the same word ("Harare Plumbers", "Harare Auto") apart.
 // Single word brands are deliberately not grouped.
+//
+// Some chains are listed with exactly the same name for every branch (four
+// listings all called "TrenTyre"). Those have no brand prefix to find, so they
+// are grouped when 2+ businesses have an identical title, and each branch is
+// named after the town in its motto ("Best Brands, Best Prices (Harare)") or,
+// failing that, its address.
 
 const MIN_BRAND_WORDS = 2;
 // Separators between brand and branch ("Pizza Inn - Avondale")
@@ -22,6 +28,19 @@ const getWords = (title) =>
     .filter(Boolean);
 
 const sameWord = (a, b) => a.toLowerCase() === b.toLowerCase();
+
+// The town a branch is in, for chains where every branch has the same title
+function getBranchLabel(item, index) {
+  const motto = decodeHtml(item.business_motto || "");
+  const fromMotto = motto.match(/\(([^()]+)\)\s*$/);
+  if (fromMotto) return fromMotto[1].trim();
+
+  const address = decodeHtml(item.address || "")
+    .replace(/\b([\w']+)(\s+\1\b)+/gi, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+  return address || `Branch ${index + 1}`;
+}
 
 function commonPrefixLength(members) {
   const [first, ...rest] = members;
@@ -101,6 +120,31 @@ export function groupBusinesses(businesses) {
     };
 
     for (const { item } of members) groupByItemId.set(item.id, group);
+  }
+
+  // Chains whose branches all have the same title
+  const sameTitleBuckets = new Map();
+  for (const item of businesses) {
+    if (groupByItemId.has(item.id)) continue;
+    const key = getWords(item.title).join(" ").toLowerCase();
+    if (!key) continue;
+    if (!sameTitleBuckets.has(key)) sameTitleBuckets.set(key, []);
+    sameTitleBuckets.get(key).push(item);
+  }
+
+  for (const [key, members] of sameTitleBuckets) {
+    if (members.length < 2) continue;
+
+    const group = {
+      type: "group",
+      key: `group-same-${key}`,
+      name: getWords(members[0].title).join(" "),
+      branches: members
+        .map((item, index) => ({ item, label: getBranchLabel(item, index) }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    };
+
+    for (const item of members) groupByItemId.set(item.id, group);
   }
 
   const entries = [];

@@ -1,47 +1,39 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import OneSignal from 'react-onesignal';
-import { useSession } from 'next-auth/react';
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { initOneSignal, OneSignal } from "@/lib/onesignal";
 
 export default function OneSignalInitializer() {
-  const initialized = useRef(false);
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !initialized.current) {
-      initialized.current = true;
-      OneSignal.init({
-        appId: "01595039-d840-4721-b8bf-96b3e36e7399",
-        notifyButton: {
-          enable: true,
-          size: "medium",
-          theme: "default",
-          position: "bottom-right",
-        },
-        allowLocalhostAsSecureOrigin: true,
-      });
-    }
+    initOneSignal().catch((error) =>
+      console.error("OneSignal init error:", error),
+    );
   }, []);
 
-  // Sync user ID with OneSignal when session changes AFTER initialization
-  // Sync user ID with OneSignal when session changes AFTER initialization
+  // Keep OneSignal's user in step with the logged in user, once it is ready
   useEffect(() => {
-    // Only attempt login if initialized has flipped AND we have a valid session
-    if (initialized.current) {
-        if (status === 'authenticated' && session?.user?.id) {
-            const externalId = 'zw_user_' + session.user.id.toString();
-            // Wrap in a tiny timeout to ensure OneSignal's internal state is fully ready
-            // after the init() promise returns (sometimes there is a race condition)
-            setTimeout(() => {
-                OneSignal.login(externalId).catch(e => console.log('OneSignal Login Error:', e));
-            }, 500);
-        } else if (status === 'unauthenticated') {
-            setTimeout(() => {
-                OneSignal.logout().catch(e => console.log('OneSignal Logout Error:', e));
-            }, 500);
+    if (status === "loading") return;
+
+    let cancelled = false;
+
+    initOneSignal()
+      .then(() => {
+        if (cancelled) return;
+        if (status === "authenticated" && session?.user?.id) {
+          return OneSignal.login("zw_user_" + session.user.id.toString());
         }
-    }
+        if (status === "unauthenticated") {
+          return OneSignal.logout();
+        }
+      })
+      .catch((error) => console.log("OneSignal user sync error:", error));
+
+    return () => {
+      cancelled = true;
+    };
   }, [session, status]);
 
   return null;

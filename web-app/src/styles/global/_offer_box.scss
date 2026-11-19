@@ -1,0 +1,57 @@
+// Promo boxes: the "Double Headings" offer and the Premium Listing upsell
+.double_up_offer,
+.premium_upsell {
+  position: relative;
+  margin: 24px 0;
+  padding: 20px 16px 16px;
+  border: 2px solid #32cd32;
+  border-radius: 8px;
+  background: #1d1d1d;
+  color: #fff;
+
+  .offer_tag {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: #32cd32;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  strong {
+    color: #b9db96;
+  }
+}
+
+.premium_upsell {
+  h4 {
+    margin: 0 0 12px;
+    color: #b9db96;
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  ul {
+    margin: 0 0 16px;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}

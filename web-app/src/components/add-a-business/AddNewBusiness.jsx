@@ -150,10 +150,7 @@ export default function AddNewBusiness({ cats = [], towns = [] }) {
 
   return (
     <div className="add_business_form_container">
-      <NotificationPrompt 
-        title="Stay Updated!" 
-        message="Sign up to get notifications based on your headings and stay alert to new quote requests." 
-      />
+      <NotificationPrompt />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form_wrapper">
           {/* Business Info */}

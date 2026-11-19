@@ -4,6 +4,8 @@ import React from "react";
 // Modal Stuff
 import { useModal } from "@/contexts/ModalContext";
 import EditInfo from "@/components/modals/single-business/EditInfo";
+import { htmlToPlainText } from "@/lib/utils/richText";
+import { cleanWebsiteUrl } from "@/lib/utils/url";
 
 export default function Info({ data, towns = [] }) {
   const { openModal } = useModal();
@@ -51,7 +53,7 @@ export default function Info({ data, towns = [] }) {
           </div>
           <div className="info_item">
             <strong>Website:</strong>{" "}
-            <span>{data?.acf?.business_website || "Not set"}</span>
+            <span>{cleanWebsiteUrl(data?.acf?.business_website) || "Not set"}</span>
           </div>
           <div className="info_item">
             <strong>Address:</strong>{" "}
@@ -59,11 +61,9 @@ export default function Info({ data, towns = [] }) {
           </div>
           <div className="info_item">
             <strong>Description:</strong>{" "}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.acf?.business_description || "Not set",
-              }}
-            ></div>
+            <div style={{ whiteSpace: "pre-line" }}>
+              {htmlToPlainText(data?.acf?.business_description) || "Not set"}
+            </div>
           </div>
         </div>
       </div>

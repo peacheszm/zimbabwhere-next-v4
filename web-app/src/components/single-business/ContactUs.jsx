@@ -4,10 +4,12 @@ import {
   IconBrandWhatsapp,
   IconMail,
   IconFileText,
+  IconWorldWww,
 } from "@tabler/icons-react";
 
 import FloatingContact from "@/components/single-business/FloatingContact";
 import { formatZimPhone, displayZimPhone } from "@/lib/utils/phone";
+import { cleanWebsiteUrl } from "@/lib/utils/url";
 
 export default function ContactUs({ post }) {
   const phone = post.acf?.phone_number;
@@ -15,6 +17,8 @@ export default function ContactUs({ post }) {
   const whatsapp =
     post.acf?.business_whatsapp ||
     (post.acf?.same_as_whatsapp ? post.acf?.phone_number : "");
+
+  const websiteUrl = cleanWebsiteUrl(post.acf?.business_website);
 
   const quoteHref = `/get-a-quote?bid=${post.id}`;
   const phoneHref = phone ? `tel:${formatZimPhone(phone, "tel")}` : null;
@@ -69,6 +73,23 @@ export default function ContactUs({ post }) {
               <span className="text">
                 <span className="label">Email</span>
                 <span className="value">{email}</span>
+              </span>
+            </a>
+          )}
+
+          {websiteUrl && (
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact_action website"
+            >
+              <span className="icon">
+                <IconWorldWww size={22} />
+              </span>
+              <span className="text">
+                <span className="label">Website</span>
+                <span className="value">Visit website</span>
               </span>
             </a>
           )}

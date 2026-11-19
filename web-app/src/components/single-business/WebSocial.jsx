@@ -3,14 +3,23 @@ import Image from "next/image";
 import {
   IconBrandFacebook,
   IconBrandTwitter,
-  IconBrandYoutube,
   IconBrandInstagram,
-  IconFileText,
+  IconPlayerPlayFilled,
   IconWorldWww,
 } from "@tabler/icons-react";
-import { extractVideoId } from "@/lib/utils/youtube";
+import { extractVideoId, getYouTubeThumbnail } from "@/lib/utils/youtube";
+import { cleanWebsiteUrl } from "@/lib/utils/url";
 
 export default function WebSocial({ post }) {
+  const websiteUrl = cleanWebsiteUrl(post.acf?.business_website);
+
+  const videos = (
+    Array.isArray(post.acf?.youtube_videos) ? post.acf.youtube_videos : []
+  )
+    .map((yt) => extractVideoId(yt.video_url))
+    // extractVideoId hands back the original text when it is not a video
+    .filter((id) => /^[\w-]{11}$/.test(id));
+
   return (
     <div className="web_and_social">
       <div className="business_logo">
@@ -37,6 +46,23 @@ export default function WebSocial({ post }) {
           />
         )}
       </div>
+      {/* Visit website */}
+      {websiteUrl && (
+        <div className="business_website btn_group">
+          <a
+            className="btn btn-green"
+            href={websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="icon">
+              <IconWorldWww size={26} />
+            </span>
+            Visit Website
+          </a>
+        </div>
+      )}
+
       <div className="desktop_only">
         <Categorys post={post} />
       </div>
@@ -83,40 +109,33 @@ export default function WebSocial({ post }) {
                 )}
             </div>
           ))}
+      </div>
 
-        {Array.isArray(post.acf?.youtube_videos) &&
-          post.acf.youtube_videos.map((yt, yti) => {
-            const videoId = extractVideoId(yt.video_url);
-            if (!videoId) return null;
-            return (
+      {/* Videos: thumbnails so each one can be told apart */}
+      {videos.length > 0 && (
+        <div className="business_videos">
+          <h4>Videos</h4>
+          <div className="video_grid">
+            {videos.map((videoId, i) => (
               <a
-                key={yti}
+                key={`${videoId}-${i}`}
                 href={`https://www.youtube.com/watch?v=${videoId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="icon_yt"
+                className="video_thumb"
+                aria-label={`Watch video ${i + 1} on YouTube`}
               >
-                <IconBrandYoutube size={20} />
+                <img
+                  src={getYouTubeThumbnail(videoId)}
+                  alt={`Video ${i + 1}`}
+                  loading="lazy"
+                />
+                <span className="play" aria-hidden="true">
+                  <IconPlayerPlayFilled size={22} />
+                </span>
               </a>
-            );
-          })}
-      </div>
-      {/* Visit website */}
-      <br />
-
-      {post.acf?.business_website && (
-        <div className="business_website btn_group">
-          <a
-            className="btn btn-green"
-            href={post.acf.business_website}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="icon">
-              <IconWorldWww size={20} />
-            </span>
-            Visit Website
-          </a>
+            ))}
+          </div>
         </div>
       )}
     </div>

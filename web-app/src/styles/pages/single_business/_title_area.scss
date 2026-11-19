@@ -7,8 +7,10 @@
 
   .col_left {
     width: 100%;
-    max-width: 70px;
-    margin-right: 10px;
+    // Bigger on phones so the logo stands out
+    max-width: 110px;
+    margin-right: 14px;
+    flex: none;
     @include media-breakpoint-up(lg) {
       display: none;
     }

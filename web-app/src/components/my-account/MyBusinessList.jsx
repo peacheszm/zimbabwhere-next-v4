@@ -5,10 +5,7 @@ import NotificationPrompt from "@/components/ui/NotificationPrompt";
 export default function MyBusinessList({ data }) {
   return (
     <div className="my_business_list">
-      <NotificationPrompt 
-        title="Stay Updated!" 
-        message="Sign up to get notifications based on your headings and stay alert to new quote requests." 
-      />
+      <NotificationPrompt />
       <div className="page_title">
         <h1 style={{ marginBottom: "32px" }}>My Businesses</h1>
         <h3 style={{ marginBottom: "16px" }}>

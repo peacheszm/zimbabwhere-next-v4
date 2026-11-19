@@ -1,5 +1,6 @@
 import SiteSideBar from "@/components/global/Sidebar";
 import BuyButton from "@/components/global/BuyButton";
+import DoubleUpOffer from "@/components/global/DoubleUpOffer";
 
 export const metadata = {
   title: "Premium Services | Zimbabwhere",
@@ -38,6 +39,7 @@ export default function PremiumServicesPage() {
             on our platform by adding more headings or promoting your free
             listing please see your options below.
           </p>
+          <DoubleUpOffer />
           <br />
           <br />
           <h3>Free Use of our Quoting System – What you get</h3>
@@ -57,8 +59,16 @@ export default function PremiumServicesPage() {
           </h3>
           <ul>
             <li>
-              3 Free Headings to list your business under with option to pay for
-              more headings.
+              3 Free Headings to list your services without advertising your
+              company publicly, to ensure you only receive relevant quotes
+              under the headings you have chosen, with the option to buy more
+              headings.
+            </li>
+            <li>
+              You are also entitled to the &ldquo;Double Headings offer&rdquo;
+              should you wish to buy more headings: spend $100 or more (not
+              including VAT) and we double the headings you purchase for the
+              year. Please see the Extra Headings section below.
             </li>
           </ul>
           <h3>
@@ -117,6 +127,7 @@ export default function PremiumServicesPage() {
                 can request a heading that we can create for you and have you
                 listed under it.
               </p>
+              <DoubleUpOffer />
               <BuyButton
                 title="$35 / Heading / Year"
                 subTitle="Buy Extra Headings"

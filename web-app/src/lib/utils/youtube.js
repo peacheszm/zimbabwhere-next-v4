@@ -10,7 +10,8 @@
 export const extractVideoId = (url) => {
   if (!url) return "";
   const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    // watch?v=, youtu.be/, /embed/, /shorts/, /live/ and /v/ links
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/(?:embed|shorts|live|v)\/)([^&\n?#/]+)/,
     /youtube\.com\/watch\?.*v=([^&\n?#]+)/,
   ];
   for (const pattern of patterns) {

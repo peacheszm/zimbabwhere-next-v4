@@ -57,6 +57,7 @@ export default function Gallery({ post }) {
     <>
       {Array.isArray(post.acf?.uploads) && post.acf.uploads.length > 0 && (
         <div className="gallery" id="uploads">
+          <h4>Gallery</h4>
           {/* Image Gallery Swiper */}
           {images.length > 0 && (
             <div className="gallery_grid">

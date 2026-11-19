@@ -7,9 +7,11 @@ import {
 import { getHeadingById } from "@/lib/endpoints/headings";
 import { headingMetadata } from "@/lib/seo/headings";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
+import { groupBusinesses } from "@/lib/utils/groupBusinesses";
 
 import SiteSideBar from "@/components/global/Sidebar";
 import BusinessCard from "@/components/search/BusinessCard";
+import BusinessGroupCard from "@/components/search/BusinessGroupCard";
 
 // A link to just a heading (/search?category_filter=123) is the old way of
 // sharing a heading. It redirects to that heading's own page.
@@ -62,6 +64,8 @@ export default async function SearchPage({ searchParams }) {
   const featuredResults = results?.featured || [];
   const normalResults = results?.normal || [];
   const totalResults = featuredResults.length + normalResults.length;
+  // Chains with several branches show as one card, same as on heading pages
+  const normalEntries = groupBusinesses(normalResults);
 
   // Find category name if filtered
   let categoryName = "";
@@ -100,9 +104,13 @@ export default async function SearchPage({ searchParams }) {
               <BusinessCard key={item.id} item={item} premium={true} />
             ))}
 
-            {normalResults.map((item) => (
-              <BusinessCard key={item.id} item={item} />
-            ))}
+            {normalEntries.map((entry) =>
+              entry.type === "group" ? (
+                <BusinessGroupCard key={entry.key} group={entry} />
+              ) : (
+                <BusinessCard key={entry.item.id} item={entry.item} />
+              ),
+            )}
           </div>
         </main>
         <aside className="aside">

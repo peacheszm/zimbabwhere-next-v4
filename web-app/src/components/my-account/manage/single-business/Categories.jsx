@@ -4,6 +4,8 @@
 import { useModal } from "@/contexts/ModalContext";
 import EditCategories from "@/components/modals/single-business/EditCategories";
 import BuyButton from "@/components/global/BuyButton";
+import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import PremiumListingUpsell from "@/components/global/PremiumListingUpsell";
 
 export default function Categories({ data, cats, selectableCats }) {
   const { openModal } = useModal();
@@ -51,6 +53,9 @@ export default function Categories({ data, cats, selectableCats }) {
             <p>No categories selected</p>
           )}
         </div>
+
+        <DoubleUpOffer />
+        <PremiumListingUpsell />
       </div>
 
       <div className="ms_footer">

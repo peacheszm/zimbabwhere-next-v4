@@ -8,8 +8,15 @@ import { IconMapPin, IconPhone } from "@tabler/icons-react";
 // the page HTML for crawlers.
 export default function BusinessGroupCard({ group }) {
   const { name, branches } = group;
-  const lead = branches[0].item;
   const count = branches.length;
+  // Use the first branch that has a logo; the first branch listed may not
+  // have uploaded one, which would show the placeholder for the whole chain
+  const lead =
+    branches.find(({ item }) => item.logo)?.item || branches[0].item;
+
+  // A branch's town in brackets ("... Best Prices (Harare)") is wrong for the
+  // whole chain, so leave it off
+  const motto = (lead.business_motto || "").replace(/\s*\([^()]*\)\s*$/, "");
 
   return (
     <div className="business_listing_item business_group">
@@ -26,9 +33,7 @@ export default function BusinessGroupCard({ group }) {
         <h3>{name}</h3>
         <div className="branch_count">{count} branches</div>
 
-        {lead.business_motto && (
-          <div className="motto">{lead.business_motto}</div>
-        )}
+        {motto && <div className="motto">{motto}</div>}
       </div>
 
       <details className="branches">

@@ -153,6 +153,9 @@ export default function Navigation() {
                     <Link href="/my-account" onClick={closeNav}>
                       My Businesses
                     </Link>
+                    <Link href="/premium-services" onClick={closeNav}>
+                      Buy Advertising
+                    </Link>
                     <Link href="/my-account/manage/adverts" onClick={closeNav}>
                       Manage my Paid for Advertising
                     </Link>

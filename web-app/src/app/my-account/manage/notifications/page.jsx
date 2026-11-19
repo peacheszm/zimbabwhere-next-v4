@@ -16,6 +16,8 @@ import FreeCategories from "@/components/my-account/manage/notifications/FreeCat
 import PaidIndependantCategories from "@/components/my-account/manage/notifications/PaidIndependantCategories";
 import PaidBusinessCategories from "@/components/my-account/manage/notifications/PaidBusinessCategories";
 import BuyButton from "@/components/global/BuyButton";
+import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import PremiumListingUpsell from "@/components/global/PremiumListingUpsell";
 import {
   IconMenu2,
   IconX,
@@ -67,6 +69,8 @@ export default async function ManageNotifications() {
                 />
               </div>
 
+              <DoubleUpOffer />
+
               <div className="upsell_featured" style={{ paddingTop: "25px" }}>
                 <h2>WANT TO BE MORE VISIBLE ON OUR PLATFORM</h2>
                 <p>
@@ -106,6 +110,18 @@ export default async function ManageNotifications() {
             </>
           ) : (
             <>
+              <div className="independant_headings section_title">
+                <h2>Additional Headings</h2>
+
+                <BuyButton
+                  title="$35 / Heading / Year"
+                  subTitle="Buy extra Headings"
+                />
+              </div>
+
+              <DoubleUpOffer />
+              <PremiumListingUpsell />
+
               {hasPaidCategories && (
                 <div className="page_title premium_section_header">
                   <h1>Premium Notification Headings</h1>

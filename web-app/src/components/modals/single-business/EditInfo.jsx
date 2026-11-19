@@ -11,6 +11,8 @@ import { useModal } from "@/contexts/ModalContext";
 import { updateCurrentUserBusinesses } from "@/lib/endpoints/account";
 import { decodeHtml } from "@/lib/utils/decodeHtml";
 import { COUNTRIES } from "@/lib/utils/countries";
+import { htmlToPlainText, plainTextToHtml } from "@/lib/utils/richText";
+import { cleanWebsiteUrl } from "@/lib/utils/url";
 
 export default function EditInfo() {
   const { data: session } = useSession();
@@ -78,12 +80,15 @@ export default function EditInfo() {
         ? decodeHtml(businessData.title.rendered)
         : "",
       business_motto: businessData?.acf?.business_motto || "",
-      business_description: businessData?.acf?.business_description || "",
+      // Saved as HTML, shown as plain text so no <p> tags appear in the box
+      business_description: htmlToPlainText(
+        businessData?.acf?.business_description,
+      ),
       business_overview: businessData?.acf?.business_overview || "",
       email: businessData?.acf?.business_email || "",
       phone: businessData?.acf?.phone_number || "",
       whatsapp: businessData?.acf?.business_whatsapp || "",
-      website: businessData?.acf?.business_website || "",
+      website: cleanWebsiteUrl(businessData?.acf?.business_website),
       country:
         COUNTRIES.find((c) => c.value === businessData?.acf?.country) || null,
       business_address: initialAddress,
@@ -123,12 +128,12 @@ export default function EditInfo() {
     setSubmitError(null);
     try {
       const acf = {
-        business_description: data.business_description,
+        business_description: plainTextToHtml(data.business_description),
         business_overview: data.business_overview,
         business_email: data.email,
         phone_number: data.phone,
         business_whatsapp: data.whatsapp,
-        business_website: data.website,
+        business_website: cleanWebsiteUrl(data.website),
         business_motto: data.business_motto,
       };
 
@@ -246,8 +251,25 @@ export default function EditInfo() {
 
           <div className="form_row">
             <label htmlFor="website">Business Website</label>
-            <p className="field_desc">Link to your website...</p>
-            <input id="website" type="url" {...register("website")} />
+            <p className="field_desc">
+              Link to your website, e.g. www.yourbusiness.co.zw
+            </p>
+            <input
+              id="website"
+              type="text"
+              inputMode="url"
+              autoCapitalize="none"
+              className={errors.website ? "error" : ""}
+              {...register("website", {
+                validate: (value) =>
+                  !value?.trim() ||
+                  Boolean(cleanWebsiteUrl(value)) ||
+                  "Please enter a valid website address",
+              })}
+            />
+            {errors.website && (
+              <span className="error_msg">{errors.website.message}</span>
+            )}
           </div>
 
           <div className="form_row">
@@ -333,7 +355,10 @@ export default function EditInfo() {
 
           <div className="form_row">
             <label htmlFor="business_description">Business Description *</label>
-            <p className="field_desc">Short description for your free listing</p>
+            <p className="field_desc">
+              Short description for your free listing. Just type your text,
+              press Enter for a new line.
+            </p>
             <textarea
               id="business_description"
               rows={3}

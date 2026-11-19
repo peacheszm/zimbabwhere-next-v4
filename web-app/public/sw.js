@@ -1,4 +1,8 @@
-const CACHE_NAME = "zimbabwhere-v1.0.2";
+// Push notifications (OneSignal) and the offline cache share this one worker:
+// a second worker on the same scope would replace this one and break push.
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+
+const CACHE_NAME = "zimbabwhere-v1.0.3";
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.json",
