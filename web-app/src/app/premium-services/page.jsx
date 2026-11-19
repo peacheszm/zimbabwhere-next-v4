@@ -1,6 +1,7 @@
 import SiteSideBar from "@/components/global/Sidebar";
 import BuyButton from "@/components/global/BuyButton";
 import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import DoubleUpPopup from "@/components/global/DoubleUpPopup";
 import { pageMetadata } from "@/lib/seo/share";
 
 export const metadata = pageMetadata({
@@ -13,6 +14,7 @@ export const metadata = pageMetadata({
 export default function PremiumServicesPage() {
   return (
     <div className="page_wrapper content_page advertising_options">
+      <DoubleUpPopup storageKey="double_up_popup_services" />
       <div className="container">
         <main className="main">
           <div className="page_title">

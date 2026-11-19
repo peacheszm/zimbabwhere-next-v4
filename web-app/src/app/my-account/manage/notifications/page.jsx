@@ -17,6 +17,7 @@ import PaidIndependantCategories from "@/components/my-account/manage/notificati
 import PaidBusinessCategories from "@/components/my-account/manage/notifications/PaidBusinessCategories";
 import BuyButton from "@/components/global/BuyButton";
 import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import DoubleUpPopup from "@/components/global/DoubleUpPopup";
 import PremiumListingUpsell from "@/components/global/PremiumListingUpsell";
 import {
   IconMenu2,
@@ -46,6 +47,7 @@ export default async function ManageNotifications() {
 
   return (
     <div className="page_wrapper">
+      <DoubleUpPopup storageKey="double_up_popup_account" />
       <div className="container">
         <main className="main">
           {userBusiness.data?.length === 0 ? (

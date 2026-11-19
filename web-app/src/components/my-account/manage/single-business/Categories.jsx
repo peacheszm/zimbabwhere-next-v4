@@ -5,6 +5,7 @@ import { useModal } from "@/contexts/ModalContext";
 import EditCategories from "@/components/modals/single-business/EditCategories";
 import BuyButton from "@/components/global/BuyButton";
 import DoubleUpOffer from "@/components/global/DoubleUpOffer";
+import DoubleUpPopup from "@/components/global/DoubleUpPopup";
 import PremiumListingUpsell from "@/components/global/PremiumListingUpsell";
 
 export default function Categories({ data, cats, selectableCats }) {
@@ -64,6 +65,7 @@ export default function Categories({ data, cats, selectableCats }) {
       </div>
 
       <EditCategories />
+      <DoubleUpPopup storageKey="double_up_popup_account" />
     </div>
   );
 }

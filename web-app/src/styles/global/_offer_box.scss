@@ -55,3 +55,29 @@
     line-height: 1.5;
   }
 }
+
+// The Double Headings offer shown as a popup (components/global/DoubleUpPopup)
+.double_up_popup {
+  .double_up_offer {
+    margin: 12px 0 20px;
+  }
+
+  .double_up_popup_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    .buy_link_wrapper {
+      margin-top: 0;
+
+      .buy_link {
+        width: 100%;
+      }
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
