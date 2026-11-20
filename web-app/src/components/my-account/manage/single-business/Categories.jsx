@@ -43,25 +43,39 @@ export default function Categories({ data, cats, selectableCats }) {
       </div>
 
       <div className="ms_body">
-        <div className="categories_list">
-          {currentCategories.length > 0 ? (
-            currentCategories.map((name, index) => (
-              <span key={index} className="category_tag">
-                {name}
-              </span>
-            ))
-          ) : (
-            <p>No categories selected</p>
-          )}
+        {/* 1. What they have now, with the button that edits it right beside it */}
+        <div className="headings_block">
+          <h4 className="headings_block_title">Your Headings (Free)</h4>
+          <div className="categories_list">
+            {currentCategories.length > 0 ? (
+              currentCategories.map((name, index) => (
+                <span key={index} className="category_tag">
+                  {name}
+                </span>
+              ))
+            ) : (
+              <p>No categories selected</p>
+            )}
+          </div>
+          <div className="ms_footer">
+            <button onClick={handleOpenModal}>Edit Headings</button>
+          </div>
         </div>
 
-        <DoubleUpOffer />
-        <PremiumListingUpsell />
-      </div>
+        {/* 2. Buying more headings, with the offer that goes with it */}
+        <div className="headings_block more_headings">
+          <h4 className="headings_block_title">Want More Headings?</h4>
+          <DoubleUpOffer />
+          <BuyButton
+            title="$35 / Heading / Year"
+            subTitle="Buy Extra Headings"
+          />
+        </div>
 
-      <div className="ms_footer">
-        <button onClick={handleOpenModal}>Edit Headings</button>
-        <BuyButton title="$35 / Heading / Year" subTitle="Buy Extra Headings" />
+        {/* 3. Premium, which covers every heading above */}
+        <div className="headings_block go_premium">
+          <PremiumListingUpsell headingCount={currentCategories.length} />
+        </div>
       </div>
 
       <EditCategories />

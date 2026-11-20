@@ -2,6 +2,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconMapPin, IconEdit, IconEye, IconPlus } from "@tabler/icons-react";
 import NotificationPrompt from "@/components/ui/NotificationPrompt";
+
+const FALLBACK_LOGO =
+  "https://admin.zimbabwhere.com/wp-content/themes/zimbabwhere/images/placeholder.webp";
+
+// Pick the sharpest image we have. The 150px thumbnail was being stretched to
+// 200px, which made logos look soft, so prefer the larger sizes first.
+function getLogoSrc(meta) {
+  const logo = meta?.logo;
+  if (typeof logo === "string" && logo) return logo;
+  const banner = meta?.business_banner;
+  return (
+    logo?.sizes?.medium ||
+    logo?.url ||
+    logo?.sizes?.thumbnail ||
+    banner?.sizes?.medium ||
+    banner?.sizes?.thumbnail ||
+    FALLBACK_LOGO
+  );
+}
+
 export default function MyBusinessList({ data }) {
   return (
     <div className="my_business_list">
@@ -24,16 +44,11 @@ export default function MyBusinessList({ data }) {
             <div className="card_image">
               <Image
                 decoding="async"
-                src={
-                  typeof business.meta?.logo === "string"
-                    ? business.meta.logo // if it's already a URL
-                    : business.meta?.logo?.sizes?.thumbnail || // if it's an image object
-                      business.meta?.business_banner?.sizes?.thumbnail || // fallback to banner
-                      "https://admin.zimbabwhere.com/wp-content/themes/zimbabwhere/images/placeholder.webp" // final fallback
-                }
+                src={getLogoSrc(business.meta)}
                 alt={business.title || "Business logo"}
-                width={200}
-                height={200}
+                width={240}
+                height={240}
+                sizes="(min-width: 768px) 140px, 100px"
               />
             </div>
 

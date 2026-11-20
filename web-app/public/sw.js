@@ -12,10 +12,19 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener("install", (event) => {
+  // Cache each file on its own. addAll() fails the whole install if a single
+  // file can't be fetched, and a worker that never installs also takes push
+  // notifications (OneSignal) down with it.
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    }),
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        ASSETS_TO_CACHE.map((asset) =>
+          cache.add(asset).catch((err) => {
+            console.warn("sw: couldn't cache", asset, err);
+          }),
+        ),
+      ),
+    ),
   );
 });
 

@@ -1,10 +1,13 @@
+// The softer green used for every promo, matching the WhatsApp green
+$offer_green: #4bc5a0;
+
 // Promo boxes: the "Double Headings" offer and the Premium Listing upsell
 .double_up_offer,
 .premium_upsell {
   position: relative;
   margin: 24px 0;
   padding: 20px 16px 16px;
-  border: 2px solid #32cd32;
+  border: 2px solid $offer_green;
   border-radius: 8px;
   background: #1d1d1d;
   color: #fff;
@@ -15,7 +18,7 @@
     left: 16px;
     padding: 2px 12px;
     border-radius: 999px;
-    background: #32cd32;
+    background: $offer_green;
     color: #000;
     font-size: 12px;
     font-weight: 700;
@@ -32,14 +35,14 @@
   }
 
   strong {
-    color: #b9db96;
+    color: $offer_green;
   }
 }
 
 .premium_upsell {
   h4 {
     margin: 0 0 12px;
-    color: #b9db96;
+    color: $offer_green;
     font-size: 20px;
     line-height: 26px;
   }
@@ -85,7 +88,7 @@
 // Slim "Double Headings" banner above the header on every page
 // (components/global/DoubleUpBar)
 .double_up_bar {
-  background: #32cd32;
+  background: $offer_green;
   color: #000;
 
   .container {

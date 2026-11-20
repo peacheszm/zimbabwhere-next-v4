@@ -40,6 +40,10 @@ export default function FloatingContact({
       className={`contact_floating ${visible ? "visible" : ""}`}
       aria-label="Contact this business"
     >
+      <Link href={quoteHref} className="quote">
+        <IconFileText size={20} />
+        Get a Quote
+      </Link>
       {phoneHref && (
         <a href={phoneHref} className="phone">
           <IconPhone size={20} />
@@ -57,10 +61,6 @@ export default function FloatingContact({
           WhatsApp
         </a>
       )}
-      <Link href={quoteHref} className="quote">
-        <IconFileText size={20} />
-        Get a Quote
-      </Link>
     </div>
   );
 }

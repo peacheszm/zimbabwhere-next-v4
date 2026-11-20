@@ -1,7 +1,12 @@
 import BuyButton from "@/components/global/BuyButton";
 
-// Shown under the headings for business owners, to point them at Premium
-export default function PremiumListingUpsell({ className = "" }) {
+// Shown under the headings for business owners, to point them at Premium.
+// `headingCount` (optional) is how many headings the business has right now,
+// so the link between Premium and headings is spelled out with their number.
+export default function PremiumListingUpsell({
+  className = "",
+  headingCount = 0,
+}) {
   return (
     <div className={`premium_upsell ${className}`.trim()}>
       <div className="offer_tag">Go Premium</div>
@@ -20,6 +25,15 @@ export default function PremiumListingUpsell({ className = "" }) {
           for your business, for the whole year.
         </li>
       </ul>
+      {headingCount > 0 && (
+        <p className="premium_heading_count">
+          Right now that's{" "}
+          <strong>
+            {headingCount} {headingCount === 1 ? "heading" : "headings"}
+          </strong>
+          . Buy extra headings above and Premium covers those too.
+        </p>
+      )}
       <BuyButton title="$450 / Year" subTitle="Buy Premium Listing" />
     </div>
   );

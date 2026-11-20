@@ -103,6 +103,50 @@
       padding: 0 6px;
       font-size: 12px;
     }
+
+    // Headings section is three blocks, each with its own button: your
+    // headings + Edit, buy more + the Double Headings offer, then Premium
+    .headings_block + .headings_block {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #333;
+    }
+
+    .headings_block_title {
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .headings_block .ms_footer {
+      margin-top: 12px;
+    }
+
+    .more_headings,
+    .go_premium {
+      .double_up_offer,
+      .premium_upsell {
+        margin: 20px 0 0;
+      }
+
+      .buy_link_wrapper .buy_link {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          max-width: 360px;
+        }
+      }
+    }
+
+    // The Premium box has its own button inside it, which sits tighter
+    .premium_upsell .buy_link_wrapper {
+      margin-top: 0;
+    }
+
+    .premium_heading_count {
+      margin: 0 0 16px;
+    }
   }
 
   .hours {

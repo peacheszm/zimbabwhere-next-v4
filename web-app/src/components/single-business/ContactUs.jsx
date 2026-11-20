@@ -36,6 +36,17 @@ export default function ContactUs({ post }) {
         <h4 id="business_contact_title">Get in Touch</h4>
 
         <div className="contact_actions">
+          {/* Primary action first, the direct contact options sit below it */}
+          <Link href={quoteHref} className="contact_action quote">
+            <span className="icon">
+              <IconFileText size={22} />
+            </span>
+            <span className="text">
+              <span className="label">Get a Quote</span>
+              <span className="value">Send a request</span>
+            </span>
+          </Link>
+
           {phoneHref && (
             <a href={phoneHref} className="contact_action phone">
               <span className="icon">
@@ -93,16 +104,6 @@ export default function ContactUs({ post }) {
               </span>
             </a>
           )}
-
-          <Link href={quoteHref} className="contact_action quote">
-            <span className="icon">
-              <IconFileText size={22} />
-            </span>
-            <span className="text">
-              <span className="label">Get a Quote</span>
-              <span className="value">Send a request</span>
-            </span>
-          </Link>
         </div>
       </section>
 

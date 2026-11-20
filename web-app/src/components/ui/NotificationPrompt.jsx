@@ -3,12 +3,37 @@
 import { useState, useEffect } from "react";
 import { initOneSignal, OneSignal } from "@/lib/onesignal";
 
+// How long to wait for OneSignal before giving up with a message
+const SETUP_TIMEOUT_MS = 15000;
+
+// Rejects if `promise` hasn't settled in `ms`, so nothing can wait forever
+function withTimeout(promise, ms, label) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(
+      () => reject(new Error(`${label} timed out after ${ms / 1000}s`)),
+      ms,
+    );
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err) => {
+        clearTimeout(timer);
+        reject(err);
+      },
+    );
+  });
+}
+
 export default function NotificationPrompt({
   title = "Stay Updated!",
   message = "Get notified when a potential customer requests a new quote under your business headings.",
 }) {
   const [showPrompt, setShowPrompt] = useState(false);
-  const [isBusy, setIsBusy] = useState(false);
+  // null (idle) | "browser" (waiting for the browser's own Allow/Block
+  // prompt) | "setup" (permission granted, signing up with OneSignal)
+  const [step, setStep] = useState(null);
   const [isDone, setIsDone] = useState(false);
   const [error, setError] = useState(null);
 
@@ -28,7 +53,7 @@ export default function NotificationPrompt({
   }, []);
 
   const handleSubscribe = async () => {
-    if (isBusy) return;
+    if (step === "setup") return;
     setError(null);
 
     if (typeof window === "undefined" || !("Notification" in window)) {
@@ -44,31 +69,51 @@ export default function NotificationPrompt({
       return;
     }
 
-    setIsBusy(true);
+    setStep("browser");
     try {
-      // Wait until OneSignal has finished starting, then ask for permission.
-      // This opens the browser's own "Allow notifications" prompt.
-      await initOneSignal();
-      await OneSignal.Notifications.requestPermission();
+      // 1. Ask the browser straight away, while we are still inside the click.
+      //    Browsers only reliably show their prompt for a real click, and
+      //    waiting for OneSignal to start first could let that moment pass (or
+      //    hang for good). This does not depend on OneSignal at all.
+      let permission = window.Notification.permission;
+      if (permission === "default") {
+        permission = await window.Notification.requestPermission();
+      }
 
-      if (window.Notification.permission === "granted") {
-        await OneSignal.User.PushSubscription.optIn();
-        setIsDone(true);
-        setTimeout(() => setShowPrompt(false), 4000);
-      } else if (window.Notification.permission === "denied") {
+      if (permission === "denied") {
         setError(
           "Notifications were blocked. You can allow them any time from the padlock next to the address bar.",
         );
+        return;
       }
-      // "default" means the browser prompt was dismissed; the button stays
-      // so they can try again
+      if (permission !== "granted") {
+        // The prompt was closed without an answer; the button stays so they
+        // can try again
+        setError(
+          "No problem. Click Allow Notifications again and choose Allow when your browser asks.",
+        );
+        return;
+      }
+
+      // 2. Allowed. Now sign this browser up with OneSignal. Each wait has a
+      //    limit so a stuck connection ends in a message, not a spinner.
+      setStep("setup");
+      await withTimeout(initOneSignal(), SETUP_TIMEOUT_MS, "OneSignal start");
+      await withTimeout(
+        OneSignal.User.PushSubscription.optIn(),
+        SETUP_TIMEOUT_MS,
+        "OneSignal opt in",
+      );
+
+      setIsDone(true);
+      setTimeout(() => setShowPrompt(false), 4000);
     } catch (e) {
-      console.error("OneSignal prompt error:", e);
+      console.error("Notification prompt error:", e);
       setError(
-        "We couldn't turn on notifications. Please reload the page and try again.",
+        "Notifications are allowed, but we couldn't finish setting them up. Please reload the page and click Allow Notifications again.",
       );
     } finally {
-      setIsBusy(false);
+      setStep(null);
     }
   };
 
@@ -104,6 +149,15 @@ export default function NotificationPrompt({
             ? "You'll be notified when a customer requests a quote under your headings."
             : message}
         </p>
+        {step === "browser" && (
+          <p
+            role="status"
+            style={{ margin: "0.5rem 0 0 0", color: "#166534", fontSize: "0.9rem" }}
+          >
+            Your browser is asking for permission. Look near the address bar
+            and choose <strong>Allow</strong>.
+          </p>
+        )}
         {error && (
           <p
             role="alert"
@@ -125,7 +179,7 @@ export default function NotificationPrompt({
           <button
             className="primary"
             onClick={handleSubscribe}
-            disabled={isBusy}
+            disabled={step === "setup"}
             type="button"
             style={{
               padding: "0.5rem 1rem",
@@ -133,12 +187,19 @@ export default function NotificationPrompt({
               border: "none",
               background: "#e63946",
               color: "white",
-              cursor: isBusy ? "wait" : "pointer",
+              // Only the short sign-up step is a real "wait"; while the browser
+              // prompt is open the button stays clickable, so it never traps
+              // anyone behind a spinner
+              cursor: step === "setup" ? "wait" : "pointer",
               fontWeight: 500,
-              opacity: isBusy ? 0.7 : 1,
+              opacity: step ? 0.7 : 1,
             }}
           >
-            {isBusy ? "Please wait..." : "Allow Notifications"}
+            {step === "setup"
+              ? "Turning on..."
+              : step === "browser"
+                ? "Waiting for your browser..."
+                : "Allow Notifications"}
           </button>
           <button
             className="secondary"

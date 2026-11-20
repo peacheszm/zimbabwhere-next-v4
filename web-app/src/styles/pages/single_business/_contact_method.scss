@@ -35,8 +35,9 @@
       outline-offset: 2px;
     }
 
-    // A lone last tile fills its row instead of leaving a gap beside it
-    &:last-child:nth-child(odd) {
+    // The quote tile is always first, so the rest pair up from the second
+    // slot. A lone last tile fills its row instead of leaving a gap beside it
+    &:last-child:nth-child(even) {
       grid-column: 1 / -1;
     }
 
@@ -83,13 +84,19 @@
     }
   }
 
-  // The number is the main thing, so it gets the brand green
-  .phone {
+  // Getting a quote is the main action, so it gets the brand green and
+  // spans the full row. Everything else stays on the dark tiles.
+  .quote {
+    grid-column: 1 / -1;
     background: #32cd32;
     color: #000;
 
     &:hover {
       background: #2cb75f;
+    }
+
+    &:focus-visible {
+      outline-color: #fff;
     }
 
     .icon {
@@ -107,6 +114,10 @@
     }
   }
 
+  .phone .icon {
+    background: #4a4a4a;
+  }
+
   .whatsapp .icon {
     background: #25d366;
   }
@@ -117,11 +128,6 @@
 
   .website .icon {
     background: #2cb75f;
-  }
-
-  .quote .icon {
-    background: #32cd32;
-    color: #000;
   }
 }
 
@@ -176,12 +182,15 @@
     }
   }
 
-  .phone {
+  // Get a Quote leads, so it gets the green and a wider button
+  .quote {
+    flex: 1.6;
     background: #32cd32;
     color: #000;
   }
 
-  .whatsapp {
-    background: #25d366;
+  // Call and WhatsApp stay on the dark button, with only the icon coloured
+  .whatsapp svg {
+    color: #25d366;
   }
 }
